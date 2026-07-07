@@ -1,0 +1,1802 @@
+[
+  {
+    "arrive": "2026-09-02T04:00:00",
+    "currency": "PHP",
+    "depart": "2026-09-01T23:00:00",
+    "dest": "LON",
+    "id": "FL0001",
+    "origin": "MAN",
+    "price": 953.24
+  },
+  {
+    "arrive": "2026-09-09T07:00:00",
+    "currency": "NGN",
+    "depart": "2026-09-09T01:00:00",
+    "dest": "CAI",
+    "id": "FL0002",
+    "origin": "LAG",
+    "price": 763.7
+  },
+  {
+    "arrive": "2026-09-01T08:00:00",
+    "currency": "NZD",
+    "depart": "2026-09-01T05:00:00",
+    "dest": "DU1",
+    "id": "FL0003",
+    "origin": "AUC",
+    "price": 239.21
+  },
+  {
+    "arrive": "2026-09-08T18:00:00",
+    "currency": "PHP",
+    "depart": "2026-09-08T17:00:00",
+    "dest": "SYD",
+    "id": "FL0004",
+    "origin": "MAN",
+    "price": 649.76
+  },
+  {
+    "arrive": "2026-09-07T13:00:00",
+    "currency": "PHP",
+    "depart": "2026-09-07T04:00:00",
+    "dest": "TOK",
+    "id": "FL0005",
+    "origin": "MAN",
+    "price": 1064.71
+  },
+  {
+    "arrive": "2026-09-03T08:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-02T19:00:00",
+    "dest": "WAR",
+    "id": "FL0006",
+    "origin": "ROM",
+    "price": 411.04
+  },
+  {
+    "arrive": "2026-09-04T13:00:00",
+    "currency": "NOK",
+    "depart": "2026-09-04T01:00:00",
+    "dest": "ZUR",
+    "id": "FL0007",
+    "origin": "OSL",
+    "price": 233.72
+  },
+  {
+    "arrive": "2026-09-08T10:00:00",
+    "currency": "JPY",
+    "depart": "2026-09-08T00:00:00",
+    "dest": "AUC",
+    "id": "FL0008",
+    "origin": "TOK",
+    "price": 977.72
+  },
+  {
+    "arrive": "2026-09-04T13:00:00",
+    "currency": "GBP",
+    "depart": "2026-09-04T05:00:00",
+    "dest": "TOK",
+    "id": "FL0009",
+    "origin": "LON",
+    "price": 656.98
+  },
+  {
+    "arrive": "2026-09-05T07:00:00",
+    "currency": "USD",
+    "depart": "2026-09-05T03:00:00",
+    "dest": "DU1",
+    "id": "FL0010",
+    "origin": "LOS",
+    "price": 958.21
+  },
+  {
+    "arrive": "2026-09-03T16:00:00",
+    "currency": "CLP",
+    "depart": "2026-09-03T15:00:00",
+    "dest": "LIS",
+    "id": "FL0011",
+    "origin": "SAN",
+    "price": 1027.59
+  },
+  {
+    "arrive": "2026-09-12T20:00:00",
+    "currency": "NZD",
+    "depart": "2026-09-12T15:00:00",
+    "dest": "RIO",
+    "id": "FL0012",
+    "origin": "AUC",
+    "price": 802.48
+  },
+  {
+    "arrive": "2026-09-04T17:00:00",
+    "currency": "SEK",
+    "depart": "2026-09-04T10:00:00",
+    "dest": "DEL",
+    "id": "FL0013",
+    "origin": "STO",
+    "price": 1194.95
+  },
+  {
+    "arrive": "2026-09-07T12:00:00",
+    "currency": "NGN",
+    "depart": "2026-09-07T06:00:00",
+    "dest": "SYD",
+    "id": "FL0014",
+    "origin": "LAG",
+    "price": 467.62
+  },
+  {
+    "arrive": "2026-09-08T20:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-08T06:00:00",
+    "dest": "VAN",
+    "id": "FL0015",
+    "origin": "PAR",
+    "price": 999.69
+  },
+  {
+    "arrive": "2026-09-09T12:00:00",
+    "currency": "HKD",
+    "depart": "2026-09-09T01:00:00",
+    "dest": "IST",
+    "id": "FL0016",
+    "origin": "HON",
+    "price": 370.44
+  },
+  {
+    "arrive": "2026-09-10T10:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-10T06:00:00",
+    "dest": "DEL",
+    "id": "FL0017",
+    "origin": "ROM",
+    "price": 427.73
+  },
+  {
+    "arrive": "2026-09-10T13:00:00",
+    "currency": "JPY",
+    "depart": "2026-09-10T07:00:00",
+    "dest": "STO",
+    "id": "FL0018",
+    "origin": "TOK",
+    "price": 275.57
+  },
+  {
+    "arrive": "2026-09-04T01:00:00",
+    "currency": "THB",
+    "depart": "2026-09-03T20:00:00",
+    "dest": "SHA",
+    "id": "FL0019",
+    "origin": "BAN",
+    "price": 128.3
+  },
+  {
+    "arrive": "2026-09-12T16:00:00",
+    "currency": "NZD",
+    "depart": "2026-09-12T10:00:00",
+    "dest": "SAO",
+    "id": "FL0020",
+    "origin": "AUC",
+    "price": 142.93
+  },
+  {
+    "arrive": "2026-09-05T06:00:00",
+    "currency": "SEK",
+    "depart": "2026-09-05T05:00:00",
+    "dest": "TOK",
+    "id": "FL0021",
+    "origin": "STO",
+    "price": 925.41
+  },
+  {
+    "arrive": "2026-09-10T11:00:00",
+    "currency": "KRW",
+    "depart": "2026-09-10T05:00:00",
+    "dest": "BUE",
+    "id": "FL0022",
+    "origin": "SEO",
+    "price": 922.4
+  },
+  {
+    "arrive": "2026-09-06T09:00:00",
+    "currency": "TRY",
+    "depart": "2026-09-06T05:00:00",
+    "dest": "BOG",
+    "id": "FL0023",
+    "origin": "IST",
+    "price": 940.21
+  },
+  {
+    "arrive": "2026-09-01T07:00:00",
+    "currency": "SEK",
+    "depart": "2026-09-01T01:00:00",
+    "dest": "DU1",
+    "id": "FL0024",
+    "origin": "STO",
+    "price": 543.93
+  },
+  {
+    "arrive": "2026-09-01T15:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-01T14:00:00",
+    "dest": "MAD",
+    "id": "FL0025",
+    "origin": "LIS",
+    "price": 211.42
+  },
+  {
+    "arrive": "2026-09-11T10:00:00",
+    "currency": "BRL",
+    "depart": "2026-09-11T01:00:00",
+    "dest": "TOR",
+    "id": "FL0026",
+    "origin": "SAO",
+    "price": 473.16
+  },
+  {
+    "arrive": "2026-09-03T17:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-03T15:00:00",
+    "dest": "DU1",
+    "id": "FL0027",
+    "origin": "MAD",
+    "price": 213.98
+  },
+  {
+    "arrive": "2026-09-09T16:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-09T09:00:00",
+    "dest": "JOH",
+    "id": "FL0028",
+    "origin": "ATH",
+    "price": 289.1
+  },
+  {
+    "arrive": "2026-09-14T11:00:00",
+    "currency": "AUD",
+    "depart": "2026-09-14T02:00:00",
+    "dest": "LIM",
+    "id": "FL0029",
+    "origin": "MEL",
+    "price": 1169.54
+  },
+  {
+    "arrive": "2026-09-06T10:00:00",
+    "currency": "NGN",
+    "depart": "2026-09-05T20:00:00",
+    "dest": "IST",
+    "id": "FL0030",
+    "origin": "LAG",
+    "price": 850.03
+  },
+  {
+    "arrive": "2026-09-10T03:00:00",
+    "currency": "MAD",
+    "depart": "2026-09-09T23:00:00",
+    "dest": "CHI",
+    "id": "FL0031",
+    "origin": "CAS",
+    "price": 196.14
+  },
+  {
+    "arrive": "2026-09-10T19:00:00",
+    "currency": "KES",
+    "depart": "2026-09-10T09:00:00",
+    "dest": "CAI",
+    "id": "FL0032",
+    "origin": "NAI",
+    "price": 1005.07
+  },
+  {
+    "arrive": "2026-09-11T02:00:00",
+    "currency": "CNY",
+    "depart": "2026-09-11T00:00:00",
+    "dest": "JOH",
+    "id": "FL0033",
+    "origin": "SHA",
+    "price": 404.12
+  },
+  {
+    "arrive": "2026-09-11T02:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-10T20:00:00",
+    "dest": "IST",
+    "id": "FL0034",
+    "origin": "AMS",
+    "price": 123.3
+  },
+  {
+    "arrive": "2026-09-02T10:00:00",
+    "currency": "USD",
+    "depart": "2026-09-02T02:00:00",
+    "dest": "TOR",
+    "id": "FL0035",
+    "origin": "NEW",
+    "price": 463.11
+  },
+  {
+    "arrive": "2026-09-09T02:00:00",
+    "currency": "HKD",
+    "depart": "2026-09-08T16:00:00",
+    "dest": "LON",
+    "id": "FL0036",
+    "origin": "HON",
+    "price": 811.4
+  },
+  {
+    "arrive": "2026-09-14T21:00:00",
+    "currency": "CLP",
+    "depart": "2026-09-14T17:00:00",
+    "dest": "SIN",
+    "id": "FL0037",
+    "origin": "SAN",
+    "price": 784.39
+  },
+  {
+    "arrive": "2026-09-06T19:00:00",
+    "currency": "IDR",
+    "depart": "2026-09-06T18:00:00",
+    "dest": "JOH",
+    "id": "FL0038",
+    "origin": "JAK",
+    "price": 803.36
+  },
+  {
+    "arrive": "2026-09-03T02:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-02T14:00:00",
+    "dest": "LIS",
+    "id": "FL0039",
+    "origin": "AMS",
+    "price": 800.23
+  },
+  {
+    "arrive": "2026-09-08T19:00:00",
+    "currency": "CAD",
+    "depart": "2026-09-08T08:00:00",
+    "dest": "PAR",
+    "id": "FL0040",
+    "origin": "VAN",
+    "price": 680.7
+  },
+  {
+    "arrive": "2026-09-03T10:00:00",
+    "currency": "PEN",
+    "depart": "2026-09-03T07:00:00",
+    "dest": "ROM",
+    "id": "FL0041",
+    "origin": "LIM",
+    "price": 232.63
+  },
+  {
+    "arrive": "2026-09-02T17:00:00",
+    "currency": "HKD",
+    "depart": "2026-09-02T13:00:00",
+    "dest": "MEL",
+    "id": "FL0042",
+    "origin": "HON",
+    "price": 967.09
+  },
+  {
+    "arrive": "2026-09-11T20:00:00",
+    "currency": "JPY",
+    "depart": "2026-09-11T19:00:00",
+    "dest": "AUC",
+    "id": "FL0043",
+    "origin": "TOK",
+    "price": 1064.58
+  },
+  {
+    "arrive": "2026-09-08T19:00:00",
+    "currency": "PHP",
+    "depart": "2026-09-08T09:00:00",
+    "dest": "LAG",
+    "id": "FL0044",
+    "origin": "MAN",
+    "price": 270.95
+  },
+  {
+    "arrive": "2026-09-01T13:00:00",
+    "currency": "ZAR",
+    "depart": "2026-09-01T08:00:00",
+    "dest": "MEL",
+    "id": "FL0045",
+    "origin": "JOH",
+    "price": 1088.52
+  },
+  {
+    "arrive": "2026-09-01T09:00:00",
+    "currency": "ARS",
+    "depart": "2026-09-01T06:00:00",
+    "dest": "CHI",
+    "id": "FL0046",
+    "origin": "BUE",
+    "price": 90.22
+  },
+  {
+    "arrive": "2026-09-11T01:00:00",
+    "currency": "AED",
+    "depart": "2026-09-10T11:00:00",
+    "dest": "PAR",
+    "id": "FL0047",
+    "origin": "DUB",
+    "price": 1165.32
+  },
+  {
+    "arrive": "2026-09-14T11:00:00",
+    "currency": "AUD",
+    "depart": "2026-09-14T10:00:00",
+    "dest": "ROM",
+    "id": "FL0048",
+    "origin": "MEL",
+    "price": 102.64
+  },
+  {
+    "arrive": "2026-09-11T14:00:00",
+    "currency": "MAD",
+    "depart": "2026-09-11T03:00:00",
+    "dest": "WAR",
+    "id": "FL0049",
+    "origin": "CAS",
+    "price": 1108.45
+  },
+  {
+    "arrive": "2026-09-03T10:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-03T03:00:00",
+    "dest": "LON",
+    "id": "FL0050",
+    "origin": "ATH",
+    "price": 225.19
+  },
+  {
+    "arrive": "2026-09-14T02:00:00",
+    "currency": "PEN",
+    "depart": "2026-09-13T15:00:00",
+    "dest": "ZUR",
+    "id": "FL0051",
+    "origin": "LIM",
+    "price": 236.69
+  },
+  {
+    "arrive": "2026-09-01T16:00:00",
+    "currency": "CLP",
+    "depart": "2026-09-01T07:00:00",
+    "dest": "SIN",
+    "id": "FL0052",
+    "origin": "SAN",
+    "price": 890.21
+  },
+  {
+    "arrive": "2026-09-04T13:00:00",
+    "currency": "GBP",
+    "depart": "2026-09-04T04:00:00",
+    "dest": "ZUR",
+    "id": "FL0053",
+    "origin": "LON",
+    "price": 1153.63
+  },
+  {
+    "arrive": "2026-09-12T05:00:00",
+    "currency": "THB",
+    "depart": "2026-09-11T21:00:00",
+    "dest": "LIM",
+    "id": "FL0054",
+    "origin": "BAN",
+    "price": 193.47
+  },
+  {
+    "arrive": "2026-09-04T14:00:00",
+    "currency": "AUD",
+    "depart": "2026-09-04T13:00:00",
+    "dest": "DU1",
+    "id": "FL0055",
+    "origin": "MEL",
+    "price": 371.92
+  },
+  {
+    "arrive": "2026-09-14T11:00:00",
+    "currency": "NZD",
+    "depart": "2026-09-14T05:00:00",
+    "dest": "BAN",
+    "id": "FL0056",
+    "origin": "AUC",
+    "price": 727.64
+  },
+  {
+    "arrive": "2026-09-13T04:00:00",
+    "currency": "TRY",
+    "depart": "2026-09-12T22:00:00",
+    "dest": "LAG",
+    "id": "FL0057",
+    "origin": "IST",
+    "price": 659.56
+  },
+  {
+    "arrive": "2026-09-12T19:00:00",
+    "currency": "CNY",
+    "depart": "2026-09-12T17:00:00",
+    "dest": "COP",
+    "id": "FL0058",
+    "origin": "SHA",
+    "price": 357.19
+  },
+  {
+    "arrive": "2026-09-12T14:00:00",
+    "currency": "GBP",
+    "depart": "2026-09-12T04:00:00",
+    "dest": "LOS",
+    "id": "FL0059",
+    "origin": "LON",
+    "price": 191.81
+  },
+  {
+    "arrive": "2026-09-12T14:00:00",
+    "currency": "BRL",
+    "depart": "2026-09-12T13:00:00",
+    "dest": "VIE",
+    "id": "FL0060",
+    "origin": "RIO",
+    "price": 579.19
+  },
+  {
+    "arrive": "2026-09-10T17:00:00",
+    "currency": "CLP",
+    "depart": "2026-09-10T09:00:00",
+    "dest": "TOR",
+    "id": "FL0061",
+    "origin": "SAN",
+    "price": 903.98
+  },
+  {
+    "arrive": "2026-09-04T04:00:00",
+    "currency": "JPY",
+    "depart": "2026-09-04T00:00:00",
+    "dest": "DEL",
+    "id": "FL0062",
+    "origin": "TOK",
+    "price": 454.05
+  },
+  {
+    "arrive": "2026-09-01T19:00:00",
+    "currency": "RUB",
+    "depart": "2026-09-01T18:00:00",
+    "dest": "CAI",
+    "id": "FL0063",
+    "origin": "MOS",
+    "price": 191.8
+  },
+  {
+    "arrive": "2026-09-10T13:00:00",
+    "currency": "USD",
+    "depart": "2026-09-10T02:00:00",
+    "dest": "MEL",
+    "id": "FL0064",
+    "origin": "LOS",
+    "price": 1048.19
+  },
+  {
+    "arrive": "2026-09-06T16:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-06T11:00:00",
+    "dest": "COP",
+    "id": "FL0065",
+    "origin": "AMS",
+    "price": 320.32
+  },
+  {
+    "arrive": "2026-09-08T20:00:00",
+    "currency": "SGD",
+    "depart": "2026-09-08T19:00:00",
+    "dest": "LOS",
+    "id": "FL0066",
+    "origin": "SIN",
+    "price": 775.87
+  },
+  {
+    "arrive": "2026-09-14T04:00:00",
+    "currency": "USD",
+    "depart": "2026-09-14T00:00:00",
+    "dest": "NAI",
+    "id": "FL0067",
+    "origin": "LOS",
+    "price": 713.84
+  },
+  {
+    "arrive": "2026-09-05T12:00:00",
+    "currency": "SEK",
+    "depart": "2026-09-04T22:00:00",
+    "dest": "LIS",
+    "id": "FL0068",
+    "origin": "STO",
+    "price": 423.12
+  },
+  {
+    "arrive": "2026-09-13T07:00:00",
+    "currency": "KES",
+    "depart": "2026-09-13T05:00:00",
+    "dest": "CHI",
+    "id": "FL0069",
+    "origin": "NAI",
+    "price": 621.27
+  },
+  {
+    "arrive": "2026-09-08T22:00:00",
+    "currency": "INR",
+    "depart": "2026-09-08T15:00:00",
+    "dest": "BOG",
+    "id": "FL0070",
+    "origin": "DEL",
+    "price": 601.35
+  },
+  {
+    "arrive": "2026-09-08T16:00:00",
+    "currency": "CLP",
+    "depart": "2026-09-08T07:00:00",
+    "dest": "VIE",
+    "id": "FL0071",
+    "origin": "SAN",
+    "price": 481.35
+  },
+  {
+    "arrive": "2026-09-02T22:00:00",
+    "currency": "HKD",
+    "depart": "2026-09-02T13:00:00",
+    "dest": "SAO",
+    "id": "FL0072",
+    "origin": "HON",
+    "price": 1130.84
+  },
+  {
+    "arrive": "2026-09-02T12:00:00",
+    "currency": "CAD",
+    "depart": "2026-09-02T05:00:00",
+    "dest": "AUC",
+    "id": "FL0073",
+    "origin": "TOR",
+    "price": 637.55
+  },
+  {
+    "arrive": "2026-09-13T07:00:00",
+    "currency": "BRL",
+    "depart": "2026-09-13T04:00:00",
+    "dest": "RIO",
+    "id": "FL0074",
+    "origin": "SAO",
+    "price": 971.31
+  },
+  {
+    "arrive": "2026-09-04T00:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-03T17:00:00",
+    "dest": "MOS",
+    "id": "FL0075",
+    "origin": "PAR",
+    "price": 438.04
+  },
+  {
+    "arrive": "2026-09-07T03:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-07T01:00:00",
+    "dest": "JAK",
+    "id": "FL0076",
+    "origin": "PAR",
+    "price": 562.79
+  },
+  {
+    "arrive": "2026-09-06T01:00:00",
+    "currency": "GBP",
+    "depart": "2026-09-05T17:00:00",
+    "dest": "SAO",
+    "id": "FL0077",
+    "origin": "LON",
+    "price": 329.88
+  },
+  {
+    "arrive": "2026-09-04T06:00:00",
+    "currency": "PHP",
+    "depart": "2026-09-04T01:00:00",
+    "dest": "AUC",
+    "id": "FL0078",
+    "origin": "MAN",
+    "price": 796.2
+  },
+  {
+    "arrive": "2026-09-03T02:00:00",
+    "currency": "JPY",
+    "depart": "2026-09-02T18:00:00",
+    "dest": "DUB",
+    "id": "FL0079",
+    "origin": "TOK",
+    "price": 298.93
+  },
+  {
+    "arrive": "2026-09-04T01:00:00",
+    "currency": "USD",
+    "depart": "2026-09-03T13:00:00",
+    "dest": "NAI",
+    "id": "FL0080",
+    "origin": "CHI",
+    "price": 118.83
+  },
+  {
+    "arrive": "2026-09-06T08:00:00",
+    "currency": "USD",
+    "depart": "2026-09-05T21:00:00",
+    "dest": "LON",
+    "id": "FL0081",
+    "origin": "LOS",
+    "price": 360.73
+  },
+  {
+    "arrive": "2026-09-01T07:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-01T06:00:00",
+    "dest": "PAR",
+    "id": "FL0082",
+    "origin": "DU1",
+    "price": 743.65
+  },
+  {
+    "arrive": "2026-09-09T16:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-09T14:00:00",
+    "dest": "COP",
+    "id": "FL0083",
+    "origin": "PAR",
+    "price": 429.09
+  },
+  {
+    "arrive": "2026-09-01T11:00:00",
+    "currency": "MXN",
+    "depart": "2026-09-01T08:00:00",
+    "dest": "CAI",
+    "id": "FL0084",
+    "origin": "MEX",
+    "price": 269.0
+  },
+  {
+    "arrive": "2026-09-14T19:00:00",
+    "currency": "RUB",
+    "depart": "2026-09-14T07:00:00",
+    "dest": "JOH",
+    "id": "FL0085",
+    "origin": "MOS",
+    "price": 626.48
+  },
+  {
+    "arrive": "2026-09-06T17:00:00",
+    "currency": "CHF",
+    "depart": "2026-09-06T09:00:00",
+    "dest": "TOK",
+    "id": "FL0086",
+    "origin": "ZUR",
+    "price": 779.32
+  },
+  {
+    "arrive": "2026-09-09T11:00:00",
+    "currency": "AUD",
+    "depart": "2026-09-09T03:00:00",
+    "dest": "DU1",
+    "id": "FL0087",
+    "origin": "SYD",
+    "price": 312.13
+  },
+  {
+    "arrive": "2026-09-12T05:00:00",
+    "currency": "NGN",
+    "depart": "2026-09-11T15:00:00",
+    "dest": "BAN",
+    "id": "FL0088",
+    "origin": "LAG",
+    "price": 960.5
+  },
+  {
+    "arrive": "2026-09-04T23:00:00",
+    "currency": "AED",
+    "depart": "2026-09-04T09:00:00",
+    "dest": "DEL",
+    "id": "FL0089",
+    "origin": "DUB",
+    "price": 1081.05
+  },
+  {
+    "arrive": "2026-09-13T23:00:00",
+    "currency": "CNY",
+    "depart": "2026-09-13T21:00:00",
+    "dest": "BER",
+    "id": "FL0090",
+    "origin": "BEI",
+    "price": 1114.64
+  },
+  {
+    "arrive": "2026-09-13T01:00:00",
+    "currency": "ARS",
+    "depart": "2026-09-12T23:00:00",
+    "dest": "LIM",
+    "id": "FL0091",
+    "origin": "BUE",
+    "price": 1056.19
+  },
+  {
+    "arrive": "2026-09-15T01:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-14T12:00:00",
+    "dest": "RIO",
+    "id": "FL0092",
+    "origin": "MAD",
+    "price": 837.35
+  },
+  {
+    "arrive": "2026-09-07T11:00:00",
+    "currency": "THB",
+    "depart": "2026-09-07T10:00:00",
+    "dest": "STO",
+    "id": "FL0093",
+    "origin": "BAN",
+    "price": 199.2
+  },
+  {
+    "arrive": "2026-09-06T17:00:00",
+    "currency": "HKD",
+    "depart": "2026-09-06T03:00:00",
+    "dest": "CAI",
+    "id": "FL0094",
+    "origin": "HON",
+    "price": 85.93
+  },
+  {
+    "arrive": "2026-09-07T09:00:00",
+    "currency": "CHF",
+    "depart": "2026-09-07T05:00:00",
+    "dest": "PAR",
+    "id": "FL0095",
+    "origin": "ZUR",
+    "price": 1010.26
+  },
+  {
+    "arrive": "2026-09-09T19:00:00",
+    "currency": "TRY",
+    "depart": "2026-09-09T15:00:00",
+    "dest": "DU1",
+    "id": "FL0096",
+    "origin": "IST",
+    "price": 469.52
+  },
+  {
+    "arrive": "2026-09-13T01:00:00",
+    "currency": "INR",
+    "depart": "2026-09-12T23:00:00",
+    "dest": "LIM",
+    "id": "FL0097",
+    "origin": "DEL",
+    "price": 590.7
+  },
+  {
+    "arrive": "2026-09-09T04:00:00",
+    "currency": "CNY",
+    "depart": "2026-09-08T16:00:00",
+    "dest": "DEL",
+    "id": "FL0098",
+    "origin": "BEI",
+    "price": 1078.86
+  },
+  {
+    "arrive": "2026-09-10T02:00:00",
+    "currency": "SEK",
+    "depart": "2026-09-09T21:00:00",
+    "dest": "TOR",
+    "id": "FL0099",
+    "origin": "STO",
+    "price": 844.26
+  },
+  {
+    "arrive": "2026-09-03T00:00:00",
+    "currency": "ISK",
+    "depart": "2026-09-02T23:00:00",
+    "dest": "JAK",
+    "id": "FL0100",
+    "origin": "REY",
+    "price": 791.82
+  },
+  {
+    "arrive": "2026-09-04T23:00:00",
+    "currency": "TRY",
+    "depart": "2026-09-04T09:00:00",
+    "dest": "NEW",
+    "id": "FL0101",
+    "origin": "IST",
+    "price": 162.3
+  },
+  {
+    "arrive": "2026-09-02T12:00:00",
+    "currency": "GBP",
+    "depart": "2026-09-02T04:00:00",
+    "dest": "BAN",
+    "id": "FL0102",
+    "origin": "LON",
+    "price": 639.44
+  },
+  {
+    "arrive": "2026-09-12T22:00:00",
+    "currency": "TRY",
+    "depart": "2026-09-12T17:00:00",
+    "dest": "VIE",
+    "id": "FL0103",
+    "origin": "IST",
+    "price": 446.06
+  },
+  {
+    "arrive": "2026-09-12T23:00:00",
+    "currency": "DKK",
+    "depart": "2026-09-12T21:00:00",
+    "dest": "DEL",
+    "id": "FL0104",
+    "origin": "COP",
+    "price": 169.17
+  },
+  {
+    "arrive": "2026-09-01T20:00:00",
+    "currency": "SGD",
+    "depart": "2026-09-01T18:00:00",
+    "dest": "SAO",
+    "id": "FL0105",
+    "origin": "SIN",
+    "price": 286.3
+  },
+  {
+    "arrive": "2026-09-01T19:00:00",
+    "currency": "THB",
+    "depart": "2026-09-01T17:00:00",
+    "dest": "LIM",
+    "id": "FL0106",
+    "origin": "BAN",
+    "price": 669.25
+  },
+  {
+    "arrive": "2026-09-07T03:00:00",
+    "currency": "SGD",
+    "depart": "2026-09-06T23:00:00",
+    "dest": "NAI",
+    "id": "FL0107",
+    "origin": "SIN",
+    "price": 797.3
+  },
+  {
+    "arrive": "2026-09-10T14:00:00",
+    "currency": "NZD",
+    "depart": "2026-09-10T13:00:00",
+    "dest": "LIS",
+    "id": "FL0108",
+    "origin": "AUC",
+    "price": 498.54
+  },
+  {
+    "arrive": "2026-09-08T14:00:00",
+    "currency": "INR",
+    "depart": "2026-09-08T00:00:00",
+    "dest": "WAR",
+    "id": "FL0109",
+    "origin": "DEL",
+    "price": 778.55
+  },
+  {
+    "arrive": "2026-09-10T03:00:00",
+    "currency": "AUD",
+    "depart": "2026-09-09T19:00:00",
+    "dest": "BAN",
+    "id": "FL0110",
+    "origin": "SYD",
+    "price": 1074.43
+  },
+  {
+    "arrive": "2026-09-05T20:00:00",
+    "currency": "USD",
+    "depart": "2026-09-05T10:00:00",
+    "dest": "JOH",
+    "id": "FL0111",
+    "origin": "CHI",
+    "price": 596.15
+  },
+  {
+    "arrive": "2026-09-02T00:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-01T10:00:00",
+    "dest": "MEL",
+    "id": "FL0112",
+    "origin": "LIS",
+    "price": 950.93
+  },
+  {
+    "arrive": "2026-09-13T05:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-13T00:00:00",
+    "dest": "STO",
+    "id": "FL0113",
+    "origin": "AMS",
+    "price": 290.97
+  },
+  {
+    "arrive": "2026-09-13T17:00:00",
+    "currency": "BRL",
+    "depart": "2026-09-13T10:00:00",
+    "dest": "PAR",
+    "id": "FL0114",
+    "origin": "RIO",
+    "price": 1003.25
+  },
+  {
+    "arrive": "2026-09-08T14:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-08T08:00:00",
+    "dest": "JOH",
+    "id": "FL0115",
+    "origin": "VIE",
+    "price": 978.08
+  },
+  {
+    "arrive": "2026-09-14T10:00:00",
+    "currency": "ISK",
+    "depart": "2026-09-13T22:00:00",
+    "dest": "VIE",
+    "id": "FL0116",
+    "origin": "REY",
+    "price": 352.96
+  },
+  {
+    "arrive": "2026-09-04T06:00:00",
+    "currency": "THB",
+    "depart": "2026-09-04T02:00:00",
+    "dest": "OSL",
+    "id": "FL0117",
+    "origin": "BAN",
+    "price": 580.22
+  },
+  {
+    "arrive": "2026-09-08T18:00:00",
+    "currency": "SEK",
+    "depart": "2026-09-08T17:00:00",
+    "dest": "ZUR",
+    "id": "FL0118",
+    "origin": "STO",
+    "price": 1050.29
+  },
+  {
+    "arrive": "2026-09-04T20:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-04T16:00:00",
+    "dest": "SYD",
+    "id": "FL0119",
+    "origin": "ATH",
+    "price": 500.44
+  },
+  {
+    "arrive": "2026-09-11T15:00:00",
+    "currency": "CNY",
+    "depart": "2026-09-11T10:00:00",
+    "dest": "TOR",
+    "id": "FL0120",
+    "origin": "BEI",
+    "price": 1143.11
+  },
+  {
+    "arrive": "2026-09-07T10:00:00",
+    "currency": "CHF",
+    "depart": "2026-09-07T00:00:00",
+    "dest": "SYD",
+    "id": "FL0121",
+    "origin": "ZUR",
+    "price": 254.04
+  },
+  {
+    "arrive": "2026-09-08T13:00:00",
+    "currency": "PHP",
+    "depart": "2026-09-08T11:00:00",
+    "dest": "ATH",
+    "id": "FL0122",
+    "origin": "MAN",
+    "price": 106.55
+  },
+  {
+    "arrive": "2026-09-12T09:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-11T19:00:00",
+    "dest": "DUB",
+    "id": "FL0123",
+    "origin": "LIS",
+    "price": 236.35
+  },
+  {
+    "arrive": "2026-09-11T08:00:00",
+    "currency": "USD",
+    "depart": "2026-09-11T07:00:00",
+    "dest": "MOS",
+    "id": "FL0124",
+    "origin": "CHI",
+    "price": 225.67
+  },
+  {
+    "arrive": "2026-09-03T01:00:00",
+    "currency": "MAD",
+    "depart": "2026-09-02T20:00:00",
+    "dest": "LIM",
+    "id": "FL0125",
+    "origin": "CAS",
+    "price": 866.65
+  },
+  {
+    "arrive": "2026-09-14T07:00:00",
+    "currency": "NZD",
+    "depart": "2026-09-13T23:00:00",
+    "dest": "DUB",
+    "id": "FL0126",
+    "origin": "AUC",
+    "price": 263.65
+  },
+  {
+    "arrive": "2026-09-13T02:00:00",
+    "currency": "KES",
+    "depart": "2026-09-12T19:00:00",
+    "dest": "ZUR",
+    "id": "FL0127",
+    "origin": "NAI",
+    "price": 1138.06
+  },
+  {
+    "arrive": "2026-09-15T07:00:00",
+    "currency": "ZAR",
+    "depart": "2026-09-14T20:00:00",
+    "dest": "NAI",
+    "id": "FL0128",
+    "origin": "JOH",
+    "price": 418.16
+  },
+  {
+    "arrive": "2026-09-11T18:00:00",
+    "currency": "INR",
+    "depart": "2026-09-11T06:00:00",
+    "dest": "WAR",
+    "id": "FL0129",
+    "origin": "MUM",
+    "price": 766.67
+  },
+  {
+    "arrive": "2026-09-14T23:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-14T13:00:00",
+    "dest": "JOH",
+    "id": "FL0130",
+    "origin": "AMS",
+    "price": 458.71
+  },
+  {
+    "arrive": "2026-09-03T01:00:00",
+    "currency": "CHF",
+    "depart": "2026-09-02T16:00:00",
+    "dest": "WAR",
+    "id": "FL0131",
+    "origin": "ZUR",
+    "price": 180.31
+  },
+  {
+    "arrive": "2026-09-08T10:00:00",
+    "currency": "MAD",
+    "depart": "2026-09-07T20:00:00",
+    "dest": "MUM",
+    "id": "FL0132",
+    "origin": "CAS",
+    "price": 552.23
+  },
+  {
+    "arrive": "2026-09-13T00:00:00",
+    "currency": "GBP",
+    "depart": "2026-09-12T16:00:00",
+    "dest": "JOH",
+    "id": "FL0133",
+    "origin": "LON",
+    "price": 828.19
+  },
+  {
+    "arrive": "2026-09-07T22:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-07T18:00:00",
+    "dest": "JOH",
+    "id": "FL0134",
+    "origin": "VIE",
+    "price": 439.87
+  },
+  {
+    "arrive": "2026-09-11T23:00:00",
+    "currency": "CAD",
+    "depart": "2026-09-11T09:00:00",
+    "dest": "SIN",
+    "id": "FL0135",
+    "origin": "VAN",
+    "price": 405.01
+  },
+  {
+    "arrive": "2026-09-13T11:00:00",
+    "currency": "CAD",
+    "depart": "2026-09-13T05:00:00",
+    "dest": "MUM",
+    "id": "FL0136",
+    "origin": "TOR",
+    "price": 133.22
+  },
+  {
+    "arrive": "2026-09-04T12:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-04T11:00:00",
+    "dest": "ROM",
+    "id": "FL0137",
+    "origin": "BER",
+    "price": 260.57
+  },
+  {
+    "arrive": "2026-09-15T04:00:00",
+    "currency": "KES",
+    "depart": "2026-09-14T19:00:00",
+    "dest": "MAD",
+    "id": "FL0138",
+    "origin": "NAI",
+    "price": 1008.28
+  },
+  {
+    "arrive": "2026-09-02T23:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-02T15:00:00",
+    "dest": "JAK",
+    "id": "FL0139",
+    "origin": "DU1",
+    "price": 453.77
+  },
+  {
+    "arrive": "2026-09-08T08:00:00",
+    "currency": "ISK",
+    "depart": "2026-09-07T23:00:00",
+    "dest": "ATH",
+    "id": "FL0140",
+    "origin": "REY",
+    "price": 690.06
+  },
+  {
+    "arrive": "2026-09-05T08:00:00",
+    "currency": "NOK",
+    "depart": "2026-09-04T23:00:00",
+    "dest": "CHI",
+    "id": "FL0141",
+    "origin": "OSL",
+    "price": 469.86
+  },
+  {
+    "arrive": "2026-09-13T10:00:00",
+    "currency": "HKD",
+    "depart": "2026-09-13T06:00:00",
+    "dest": "VAN",
+    "id": "FL0142",
+    "origin": "HON",
+    "price": 1108.26
+  },
+  {
+    "arrive": "2026-09-05T07:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-04T20:00:00",
+    "dest": "MOS",
+    "id": "FL0143",
+    "origin": "PAR",
+    "price": 309.86
+  },
+  {
+    "arrive": "2026-09-15T08:00:00",
+    "currency": "CAD",
+    "depart": "2026-09-14T23:00:00",
+    "dest": "BER",
+    "id": "FL0144",
+    "origin": "VAN",
+    "price": 849.7
+  },
+  {
+    "arrive": "2026-09-14T17:00:00",
+    "currency": "KRW",
+    "depart": "2026-09-14T07:00:00",
+    "dest": "ROM",
+    "id": "FL0145",
+    "origin": "SEO",
+    "price": 263.77
+  },
+  {
+    "arrive": "2026-09-15T01:00:00",
+    "currency": "DKK",
+    "depart": "2026-09-14T20:00:00",
+    "dest": "VAN",
+    "id": "FL0146",
+    "origin": "COP",
+    "price": 960.34
+  },
+  {
+    "arrive": "2026-09-04T00:00:00",
+    "currency": "CHF",
+    "depart": "2026-09-03T16:00:00",
+    "dest": "ATH",
+    "id": "FL0147",
+    "origin": "ZUR",
+    "price": 217.64
+  },
+  {
+    "arrive": "2026-09-06T08:00:00",
+    "currency": "DKK",
+    "depart": "2026-09-05T23:00:00",
+    "dest": "HON",
+    "id": "FL0148",
+    "origin": "COP",
+    "price": 621.92
+  },
+  {
+    "arrive": "2026-09-06T23:00:00",
+    "currency": "PEN",
+    "depart": "2026-09-06T19:00:00",
+    "dest": "MUM",
+    "id": "FL0149",
+    "origin": "LIM",
+    "price": 186.84
+  },
+  {
+    "arrive": "2026-09-03T05:00:00",
+    "currency": "USD",
+    "depart": "2026-09-02T19:00:00",
+    "dest": "DU1",
+    "id": "FL0150",
+    "origin": "NEW",
+    "price": 255.4
+  },
+  {
+    "arrive": "2026-09-08T01:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-07T22:00:00",
+    "dest": "BAN",
+    "id": "FL0151",
+    "origin": "LIS",
+    "price": 862.28
+  },
+  {
+    "arrive": "2026-09-11T16:00:00",
+    "currency": "IDR",
+    "depart": "2026-09-11T03:00:00",
+    "dest": "MEL",
+    "id": "FL0152",
+    "origin": "JAK",
+    "price": 826.31
+  },
+  {
+    "arrive": "2026-09-13T22:00:00",
+    "currency": "NOK",
+    "depart": "2026-09-13T08:00:00",
+    "dest": "DUB",
+    "id": "FL0153",
+    "origin": "OSL",
+    "price": 648.13
+  },
+  {
+    "arrive": "2026-09-04T04:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-03T20:00:00",
+    "dest": "BER",
+    "id": "FL0154",
+    "origin": "PAR",
+    "price": 238.57
+  },
+  {
+    "arrive": "2026-09-01T08:00:00",
+    "currency": "COP",
+    "depart": "2026-09-01T07:00:00",
+    "dest": "MAN",
+    "id": "FL0155",
+    "origin": "BOG",
+    "price": 382.49
+  },
+  {
+    "arrive": "2026-09-11T07:00:00",
+    "currency": "KES",
+    "depart": "2026-09-10T17:00:00",
+    "dest": "HON",
+    "id": "FL0156",
+    "origin": "NAI",
+    "price": 954.63
+  },
+  {
+    "arrive": "2026-09-08T00:00:00",
+    "currency": "PLN",
+    "depart": "2026-09-07T10:00:00",
+    "dest": "SYD",
+    "id": "FL0157",
+    "origin": "WAR",
+    "price": 458.1
+  },
+  {
+    "arrive": "2026-09-07T02:00:00",
+    "currency": "NOK",
+    "depart": "2026-09-06T23:00:00",
+    "dest": "RIO",
+    "id": "FL0158",
+    "origin": "OSL",
+    "price": 815.99
+  },
+  {
+    "arrive": "2026-09-10T07:00:00",
+    "currency": "AUD",
+    "depart": "2026-09-10T04:00:00",
+    "dest": "TOK",
+    "id": "FL0159",
+    "origin": "SYD",
+    "price": 83.22
+  },
+  {
+    "arrive": "2026-09-09T23:00:00",
+    "currency": "HKD",
+    "depart": "2026-09-09T10:00:00",
+    "dest": "ATH",
+    "id": "FL0160",
+    "origin": "HON",
+    "price": 608.99
+  },
+  {
+    "arrive": "2026-09-08T04:00:00",
+    "currency": "CNY",
+    "depart": "2026-09-08T03:00:00",
+    "dest": "MAD",
+    "id": "FL0161",
+    "origin": "SHA",
+    "price": 539.82
+  },
+  {
+    "arrive": "2026-09-08T10:00:00",
+    "currency": "JPY",
+    "depart": "2026-09-08T03:00:00",
+    "dest": "SAN",
+    "id": "FL0162",
+    "origin": "TOK",
+    "price": 234.67
+  },
+  {
+    "arrive": "2026-09-10T05:00:00",
+    "currency": "CAD",
+    "depart": "2026-09-09T16:00:00",
+    "dest": "BER",
+    "id": "FL0163",
+    "origin": "TOR",
+    "price": 842.92
+  },
+  {
+    "arrive": "2026-09-12T18:00:00",
+    "currency": "INR",
+    "depart": "2026-09-12T14:00:00",
+    "dest": "SHA",
+    "id": "FL0164",
+    "origin": "DEL",
+    "price": 1156.63
+  },
+  {
+    "arrive": "2026-09-13T06:00:00",
+    "currency": "TRY",
+    "depart": "2026-09-12T23:00:00",
+    "dest": "LIM",
+    "id": "FL0165",
+    "origin": "IST",
+    "price": 836.13
+  },
+  {
+    "arrive": "2026-09-11T21:00:00",
+    "currency": "SGD",
+    "depart": "2026-09-11T13:00:00",
+    "dest": "LIS",
+    "id": "FL0166",
+    "origin": "SIN",
+    "price": 600.54
+  },
+  {
+    "arrive": "2026-09-13T17:00:00",
+    "currency": "CNY",
+    "depart": "2026-09-13T03:00:00",
+    "dest": "LOS",
+    "id": "FL0167",
+    "origin": "BEI",
+    "price": 954.0
+  },
+  {
+    "arrive": "2026-09-12T01:00:00",
+    "currency": "GBP",
+    "depart": "2026-09-12T00:00:00",
+    "dest": "OSL",
+    "id": "FL0168",
+    "origin": "LON",
+    "price": 545.42
+  },
+  {
+    "arrive": "2026-09-11T09:00:00",
+    "currency": "AUD",
+    "depart": "2026-09-11T01:00:00",
+    "dest": "DEL",
+    "id": "FL0169",
+    "origin": "SYD",
+    "price": 859.01
+  },
+  {
+    "arrive": "2026-09-04T09:00:00",
+    "currency": "SGD",
+    "depart": "2026-09-04T01:00:00",
+    "dest": "VAN",
+    "id": "FL0170",
+    "origin": "SIN",
+    "price": 1059.31
+  },
+  {
+    "arrive": "2026-09-05T13:00:00",
+    "currency": "SGD",
+    "depart": "2026-09-05T06:00:00",
+    "dest": "SHA",
+    "id": "FL0171",
+    "origin": "SIN",
+    "price": 1124.26
+  },
+  {
+    "arrive": "2026-09-13T12:00:00",
+    "currency": "MAD",
+    "depart": "2026-09-12T23:00:00",
+    "dest": "AMS",
+    "id": "FL0172",
+    "origin": "CAS",
+    "price": 474.33
+  },
+  {
+    "arrive": "2026-09-03T15:00:00",
+    "currency": "PEN",
+    "depart": "2026-09-03T10:00:00",
+    "dest": "STO",
+    "id": "FL0173",
+    "origin": "LIM",
+    "price": 911.04
+  },
+  {
+    "arrive": "2026-09-12T15:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-12T02:00:00",
+    "dest": "SAN",
+    "id": "FL0174",
+    "origin": "VIE",
+    "price": 314.31
+  },
+  {
+    "arrive": "2026-09-10T21:00:00",
+    "currency": "USD",
+    "depart": "2026-09-10T18:00:00",
+    "dest": "DU1",
+    "id": "FL0175",
+    "origin": "NEW",
+    "price": 651.38
+  },
+  {
+    "arrive": "2026-09-14T22:00:00",
+    "currency": "AUD",
+    "depart": "2026-09-14T16:00:00",
+    "dest": "COP",
+    "id": "FL0176",
+    "origin": "SYD",
+    "price": 161.64
+  },
+  {
+    "arrive": "2026-09-05T21:00:00",
+    "currency": "NZD",
+    "depart": "2026-09-05T11:00:00",
+    "dest": "OSL",
+    "id": "FL0177",
+    "origin": "AUC",
+    "price": 940.94
+  },
+  {
+    "arrive": "2026-09-08T01:00:00",
+    "currency": "AED",
+    "depart": "2026-09-07T15:00:00",
+    "dest": "ZUR",
+    "id": "FL0178",
+    "origin": "DUB",
+    "price": 636.57
+  },
+  {
+    "arrive": "2026-09-09T14:00:00",
+    "currency": "RUB",
+    "depart": "2026-09-09T05:00:00",
+    "dest": "LAG",
+    "id": "FL0179",
+    "origin": "MOS",
+    "price": 1153.51
+  },
+  {
+    "arrive": "2026-09-08T15:00:00",
+    "currency": "EUR",
+    "depart": "2026-09-08T09:00:00",
+    "dest": "STO",
+    "id": "FL0180",
+    "origin": "VIE",
+    "price": 101.22
+  },
+  {
+    "arrive": "2026-09-14T06:00:00",
+    "currency": "THB",
+    "depart": "2026-09-14T04:00:00",
+    "dest": "WAR",
+    "id": "FL0181",
+    "origin": "BAN",
+    "price": 921.71
+  },
+  {
+    "arrive": "2026-09-10T07:00:00",
+    "currency": "CNY",
+    "depart": "2026-09-10T00:00:00",
+    "dest": "MUM",
+    "id": "FL0182",
+    "origin": "BEI",
+    "price": 756.6
+  },
+  {
+    "arrive": "2026-09-01T20:00:00",
+    "currency": "IDR",
+    "depart": "2026-09-01T06:00:00",
+    "dest": "LON",
+    "id": "FL0183",
+    "origin": "JAK",
+    "price": 432.1
+  },
+  {
+    "arrive": "2026-09-14T12:00:00",
+    "currency": "CNY",
+    "depart": "2026-09-13T23:00:00",
+    "dest": "TOR",
+    "id": "FL0184",
+    "origin": "BEI",
+    "price": 996.41
+  },
+  {
+    "arrive": "2026-09-04T09:00:00",
+    "currency": "ISK",
+    "depart": "2026-09-04T02:00:00",
+    "dest": "LOS",
+    "id": "FL0185",
+    "origin": "REY",
+    "price": 672.09
+  },
+  {
+    "arrive": "2026-09-11T11:00:00",
+    "currency": "ISK",
+    "depart": "2026-09-10T22:00:00",
+    "dest": "LIM",
+    "id": "FL0186",
+    "origin": "REY",
+    "price": 708.37
+  },
+  {
+    "arrive": "2026-09-08T17:00:00",
+    "currency": "AED",
+    "depart": "2026-09-08T14:00:00",
+    "dest": "OSL",
+    "id": "FL0187",
+    "origin": "DUB",
+    "price": 1027.83
+  },
+  {
+    "arrive": "2026-09-03T21:00:00",
+    "currency": "ZAR",
+    "depart": "2026-09-03T11:00:00",
+    "dest": "ZUR",
+    "id": "FL0188",
+    "origin": "JOH",
+    "price": 937.71
+  },
+  {
+    "arrive": "2026-09-04T06:00:00",
+    "currency": "CAD",
+    "depart": "2026-09-04T01:00:00",
+    "dest": "MEX",
+    "id": "FL0189",
+    "origin": "VAN",
+    "price": 583.98
+  },
+  {
+    "arrive": "2026-09-14T02:00:00",
+    "currency": "KRW",
+    "depart": "2026-09-13T16:00:00",
+    "dest": "REY",
+    "id": "FL0190",
+    "origin": "SEO",
+    "price": 653.24
+  },
+  {
+    "arrive": "2026-09-12T02:00:00",
+    "currency": "DKK",
+    "depart": "2026-09-11T18:00:00",
+    "dest": "REY",
+    "id": "FL0191",
+    "origin": "COP",
+    "price": 970.65
+  },
+  {
+    "arrive": "2026-09-02T08:00:00",
+    "currency": "INR",
+    "depart": "2026-09-01T23:00:00",
+    "dest": "VIE",
+    "id": "FL0192",
+    "origin": "DEL",
+    "price": 433.32
+  },
+  {
+    "arrive": "2026-09-07T00:00:00",
+    "currency": "CAD",
+    "depart": "2026-09-06T11:00:00",
+    "dest": "ATH",
+    "id": "FL0193",
+    "origin": "TOR",
+    "price": 223.11
+  },
+  {
+    "arrive": "2026-09-03T03:00:00",
+    "currency": "AUD",
+    "depart": "2026-09-02T22:00:00",
+    "dest": "OSL",
+    "id": "FL0194",
+    "origin": "MEL",
+    "price": 274.25
+  },
+  {
+    "arrive": "2026-09-07T15:00:00",
+    "currency": "ISK",
+    "depart": "2026-09-07T10:00:00",
+    "dest": "LIS",
+    "id": "FL0195",
+    "origin": "REY",
+    "price": 840.61
+  },
+  {
+    "arrive": "2026-09-15T02:00:00",
+    "currency": "USD",
+    "depart": "2026-09-14T17:00:00",
+    "dest": "LOS",
+    "id": "FL0196",
+    "origin": "NEW",
+    "price": 638.43
+  },
+  {
+    "arrive": "2026-09-13T10:00:00",
+    "currency": "CLP",
+    "depart": "2026-09-13T04:00:00",
+    "dest": "REY",
+    "id": "FL0197",
+    "origin": "SAN",
+    "price": 317.65
+  },
+  {
+    "arrive": "2026-09-06T20:00:00",
+    "currency": "ARS",
+    "depart": "2026-09-06T18:00:00",
+    "dest": "JOH",
+    "id": "FL0198",
+    "origin": "BUE",
+    "price": 902.78
+  },
+  {
+    "arrive": "2026-09-11T19:00:00",
+    "currency": "BRL",
+    "depart": "2026-09-11T11:00:00",
+    "dest": "LIS",
+    "id": "FL0199",
+    "origin": "RIO",
+    "price": 162.27
+  },
+  {
+    "arrive": "2026-09-03T06:00:00",
+    "currency": "BRL",
+    "depart": "2026-09-02T20:00:00",
+    "dest": "MEX",
+    "id": "FL0200",
+    "origin": "SAO",
+    "price": 331.96
+  }
+]

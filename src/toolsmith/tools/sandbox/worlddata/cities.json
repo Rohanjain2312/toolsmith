@@ -1,0 +1,452 @@
+[
+  {
+    "climate": "temperate",
+    "code": "PAR",
+    "country": "France",
+    "lat": 48.8566,
+    "lon": 2.3522,
+    "name": "Paris",
+    "timezone": "Europe/Paris"
+  },
+  {
+    "climate": "temperate",
+    "code": "TOK",
+    "country": "Japan",
+    "lat": 35.6762,
+    "lon": 139.6503,
+    "name": "Tokyo",
+    "timezone": "Asia/Tokyo"
+  },
+  {
+    "climate": "temperate",
+    "code": "NEW",
+    "country": "United States",
+    "lat": 40.7128,
+    "lon": -74.006,
+    "name": "New York",
+    "timezone": "America/New_York"
+  },
+  {
+    "climate": "temperate",
+    "code": "LON",
+    "country": "United Kingdom",
+    "lat": 51.5074,
+    "lon": -0.1278,
+    "name": "London",
+    "timezone": "Europe/London"
+  },
+  {
+    "climate": "desert",
+    "code": "SYD",
+    "country": "Australia",
+    "lat": -33.8688,
+    "lon": 151.2093,
+    "name": "Sydney",
+    "timezone": "Australia/Sydney"
+  },
+  {
+    "climate": "desert",
+    "code": "CAI",
+    "country": "Egypt",
+    "lat": 30.0444,
+    "lon": 31.2357,
+    "name": "Cairo",
+    "timezone": "Africa/Cairo"
+  },
+  {
+    "climate": "desert",
+    "code": "RIO",
+    "country": "Brazil",
+    "lat": -22.9068,
+    "lon": -43.1729,
+    "name": "Rio de Janeiro",
+    "timezone": "America/Sao_Paulo"
+  },
+  {
+    "climate": "cold",
+    "code": "REY",
+    "country": "Iceland",
+    "lat": 64.1466,
+    "lon": -21.9426,
+    "name": "Reykjavik",
+    "timezone": "Atlantic/Reykjavik"
+  },
+  {
+    "climate": "temperate",
+    "code": "BER",
+    "country": "Germany",
+    "lat": 52.52,
+    "lon": 13.405,
+    "name": "Berlin",
+    "timezone": "Europe/Berlin"
+  },
+  {
+    "climate": "temperate",
+    "code": "ROM",
+    "country": "Italy",
+    "lat": 41.9028,
+    "lon": 12.4964,
+    "name": "Rome",
+    "timezone": "Europe/Rome"
+  },
+  {
+    "climate": "temperate",
+    "code": "MAD",
+    "country": "Spain",
+    "lat": 40.4168,
+    "lon": -3.7038,
+    "name": "Madrid",
+    "timezone": "Europe/Madrid"
+  },
+  {
+    "climate": "temperate",
+    "code": "AMS",
+    "country": "Netherlands",
+    "lat": 52.3676,
+    "lon": 4.9041,
+    "name": "Amsterdam",
+    "timezone": "Europe/Amsterdam"
+  },
+  {
+    "climate": "temperate",
+    "code": "TOR",
+    "country": "Canada",
+    "lat": 43.6532,
+    "lon": -79.3832,
+    "name": "Toronto",
+    "timezone": "America/Toronto"
+  },
+  {
+    "climate": "desert",
+    "code": "LOS",
+    "country": "United States",
+    "lat": 34.0522,
+    "lon": -118.2437,
+    "name": "Los Angeles",
+    "timezone": "America/Los_Angeles"
+  },
+  {
+    "climate": "temperate",
+    "code": "CHI",
+    "country": "United States",
+    "lat": 41.8781,
+    "lon": -87.6298,
+    "name": "Chicago",
+    "timezone": "America/Chicago"
+  },
+  {
+    "climate": "desert",
+    "code": "MEX",
+    "country": "Mexico",
+    "lat": 19.4326,
+    "lon": -99.1332,
+    "name": "Mexico City",
+    "timezone": "America/Mexico_City"
+  },
+  {
+    "climate": "desert",
+    "code": "SAO",
+    "country": "Brazil",
+    "lat": -23.5505,
+    "lon": -46.6333,
+    "name": "Sao Paulo",
+    "timezone": "America/Sao_Paulo"
+  },
+  {
+    "climate": "desert",
+    "code": "BUE",
+    "country": "Argentina",
+    "lat": -34.6037,
+    "lon": -58.3816,
+    "name": "Buenos Aires",
+    "timezone": "America/Argentina/Buenos_Aires"
+  },
+  {
+    "climate": "tropical",
+    "code": "LAG",
+    "country": "Nigeria",
+    "lat": 6.5244,
+    "lon": 3.3792,
+    "name": "Lagos",
+    "timezone": "Africa/Lagos"
+  },
+  {
+    "climate": "tropical",
+    "code": "NAI",
+    "country": "Kenya",
+    "lat": -1.2921,
+    "lon": 36.8219,
+    "name": "Nairobi",
+    "timezone": "Africa/Nairobi"
+  },
+  {
+    "climate": "desert",
+    "code": "JOH",
+    "country": "South Africa",
+    "lat": -26.2041,
+    "lon": 28.0473,
+    "name": "Johannesburg",
+    "timezone": "Africa/Johannesburg"
+  },
+  {
+    "climate": "desert",
+    "code": "DUB",
+    "country": "United Arab Emirates",
+    "lat": 25.2048,
+    "lon": 55.2708,
+    "name": "Dubai",
+    "timezone": "Asia/Dubai"
+  },
+  {
+    "climate": "temperate",
+    "code": "IST",
+    "country": "Turkey",
+    "lat": 41.0082,
+    "lon": 28.9784,
+    "name": "Istanbul",
+    "timezone": "Europe/Istanbul"
+  },
+  {
+    "climate": "cold",
+    "code": "MOS",
+    "country": "Russia",
+    "lat": 55.7558,
+    "lon": 37.6173,
+    "name": "Moscow",
+    "timezone": "Europe/Moscow"
+  },
+  {
+    "climate": "desert",
+    "code": "DEL",
+    "country": "India",
+    "lat": 28.7041,
+    "lon": 77.1025,
+    "name": "Delhi",
+    "timezone": "Asia/Kolkata"
+  },
+  {
+    "climate": "desert",
+    "code": "MUM",
+    "country": "India",
+    "lat": 19.076,
+    "lon": 72.8777,
+    "name": "Mumbai",
+    "timezone": "Asia/Kolkata"
+  },
+  {
+    "climate": "tropical",
+    "code": "BAN",
+    "country": "Thailand",
+    "lat": 13.7563,
+    "lon": 100.5018,
+    "name": "Bangkok",
+    "timezone": "Asia/Bangkok"
+  },
+  {
+    "climate": "tropical",
+    "code": "SIN",
+    "country": "Singapore",
+    "lat": 1.3521,
+    "lon": 103.8198,
+    "name": "Singapore",
+    "timezone": "Asia/Singapore"
+  },
+  {
+    "climate": "desert",
+    "code": "HON",
+    "country": "Hong Kong",
+    "lat": 22.3193,
+    "lon": 114.1694,
+    "name": "Hong Kong",
+    "timezone": "Asia/Hong_Kong"
+  },
+  {
+    "climate": "temperate",
+    "code": "SEO",
+    "country": "South Korea",
+    "lat": 37.5665,
+    "lon": 126.978,
+    "name": "Seoul",
+    "timezone": "Asia/Seoul"
+  },
+  {
+    "climate": "temperate",
+    "code": "BEI",
+    "country": "China",
+    "lat": 39.9042,
+    "lon": 116.4074,
+    "name": "Beijing",
+    "timezone": "Asia/Shanghai"
+  },
+  {
+    "climate": "desert",
+    "code": "SHA",
+    "country": "China",
+    "lat": 31.2304,
+    "lon": 121.4737,
+    "name": "Shanghai",
+    "timezone": "Asia/Shanghai"
+  },
+  {
+    "climate": "tropical",
+    "code": "JAK",
+    "country": "Indonesia",
+    "lat": -6.2088,
+    "lon": 106.8456,
+    "name": "Jakarta",
+    "timezone": "Asia/Jakarta"
+  },
+  {
+    "climate": "tropical",
+    "code": "MAN",
+    "country": "Philippines",
+    "lat": 14.5995,
+    "lon": 120.9842,
+    "name": "Manila",
+    "timezone": "Asia/Manila"
+  },
+  {
+    "climate": "temperate",
+    "code": "AUC",
+    "country": "New Zealand",
+    "lat": -36.8485,
+    "lon": 174.7633,
+    "name": "Auckland",
+    "timezone": "Pacific/Auckland"
+  },
+  {
+    "climate": "temperate",
+    "code": "MEL",
+    "country": "Australia",
+    "lat": -37.8136,
+    "lon": 144.9631,
+    "name": "Melbourne",
+    "timezone": "Australia/Melbourne"
+  },
+  {
+    "climate": "temperate",
+    "code": "VIE",
+    "country": "Austria",
+    "lat": 48.2082,
+    "lon": 16.3738,
+    "name": "Vienna",
+    "timezone": "Europe/Vienna"
+  },
+  {
+    "climate": "temperate",
+    "code": "ZUR",
+    "country": "Switzerland",
+    "lat": 47.3769,
+    "lon": 8.5417,
+    "name": "Zurich",
+    "timezone": "Europe/Zurich"
+  },
+  {
+    "climate": "cold",
+    "code": "STO",
+    "country": "Sweden",
+    "lat": 59.3293,
+    "lon": 18.0686,
+    "name": "Stockholm",
+    "timezone": "Europe/Stockholm"
+  },
+  {
+    "climate": "cold",
+    "code": "OSL",
+    "country": "Norway",
+    "lat": 59.9139,
+    "lon": 10.7522,
+    "name": "Oslo",
+    "timezone": "Europe/Oslo"
+  },
+  {
+    "climate": "cold",
+    "code": "COP",
+    "country": "Denmark",
+    "lat": 55.6761,
+    "lon": 12.5683,
+    "name": "Copenhagen",
+    "timezone": "Europe/Copenhagen"
+  },
+  {
+    "climate": "temperate",
+    "code": "WAR",
+    "country": "Poland",
+    "lat": 52.2297,
+    "lon": 21.0122,
+    "name": "Warsaw",
+    "timezone": "Europe/Warsaw"
+  },
+  {
+    "climate": "temperate",
+    "code": "ATH",
+    "country": "Greece",
+    "lat": 37.9838,
+    "lon": 23.7275,
+    "name": "Athens",
+    "timezone": "Europe/Athens"
+  },
+  {
+    "climate": "temperate",
+    "code": "LIS",
+    "country": "Portugal",
+    "lat": 38.7223,
+    "lon": -9.1393,
+    "name": "Lisbon",
+    "timezone": "Europe/Lisbon"
+  },
+  {
+    "climate": "temperate",
+    "code": "DU1",
+    "country": "Ireland",
+    "lat": 53.3498,
+    "lon": -6.2603,
+    "name": "Dublin",
+    "timezone": "Europe/Dublin"
+  },
+  {
+    "climate": "temperate",
+    "code": "VAN",
+    "country": "Canada",
+    "lat": 49.2827,
+    "lon": -123.1207,
+    "name": "Vancouver",
+    "timezone": "America/Vancouver"
+  },
+  {
+    "climate": "desert",
+    "code": "SAN",
+    "country": "Chile",
+    "lat": -33.4489,
+    "lon": -70.6693,
+    "name": "Santiago",
+    "timezone": "America/Santiago"
+  },
+  {
+    "climate": "tropical",
+    "code": "LIM",
+    "country": "Peru",
+    "lat": -12.0464,
+    "lon": -77.0428,
+    "name": "Lima",
+    "timezone": "America/Lima"
+  },
+  {
+    "climate": "tropical",
+    "code": "BOG",
+    "country": "Colombia",
+    "lat": 4.711,
+    "lon": -74.0721,
+    "name": "Bogota",
+    "timezone": "America/Bogota"
+  },
+  {
+    "climate": "desert",
+    "code": "CAS",
+    "country": "Morocco",
+    "lat": 33.5731,
+    "lon": -7.5898,
+    "name": "Casablanca",
+    "timezone": "Africa/Casablanca"
+  }
+]

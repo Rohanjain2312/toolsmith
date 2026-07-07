@@ -1,0 +1,2902 @@
+{
+  "Amsterdam": [
+    {
+      "summary": "Sunny",
+      "temp_c": 28.5
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 30.2
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 30.7
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.9
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.1
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 18.2
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.2
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.8
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -2.3
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.9
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 18.9
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.4
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 17.7
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.1
+    }
+  ],
+  "Athens": [
+    {
+      "summary": "Windy",
+      "temp_c": 20.6
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.7
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.3
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.3
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 27.7
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 27.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 27.3
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 19.6
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 18.7
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.2
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.2
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.5
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 19.3
+    }
+  ],
+  "Auckland": [
+    {
+      "summary": "Light snow",
+      "temp_c": -4.1
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 23.3
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.8
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.4
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.2
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.4
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.7
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 18.7
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.5
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.2
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.5
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 18.9
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 22.1
+    }
+  ],
+  "Bangkok": [
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.6
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 18.5
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -2.1
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.7
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 19.9
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 19.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.7
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 18.4
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 15.5
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 25.4
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 15.4
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.1
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.4
+    }
+  ],
+  "Beijing": [
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.2
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 20.1
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 20.2
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 19.7
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 25.0
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.5
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.6
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.8
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.4
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 17.2
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.1
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.9
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 20.9
+    }
+  ],
+  "Berlin": [
+    {
+      "summary": "Light snow",
+      "temp_c": 0.0
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 16.9
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.9
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.2
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.7
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.1
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": 0.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 27.3
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.2
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.0
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.6
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.0
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 30.4
+    }
+  ],
+  "Bogota": [
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.7
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 20.6
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.5
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.7
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.7
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 17.9
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.5
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.3
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.9
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.0
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 23.6
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": 0.7
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.7
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.6
+    }
+  ],
+  "Buenos Aires": [
+    {
+      "summary": "Clear skies",
+      "temp_c": 27.7
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.6
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 28.8
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.7
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 27.6
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.2
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 23.6
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 18.0
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 27.8
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.6
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 19.9
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.4
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.4
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.6
+    }
+  ],
+  "Cairo": [
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 19.6
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.0
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 18.6
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.0
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.4
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.9
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -2.9
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 20.8
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.4
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 27.3
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 18.9
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.9
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.8
+    }
+  ],
+  "Casablanca": [
+    {
+      "summary": "Sunny",
+      "temp_c": 30.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 18.7
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.2
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.0
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 20.3
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.8
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": 0.1
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.2
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 27.4
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 28.4
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 15.8
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.7
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.0
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 22.5
+    }
+  ],
+  "Chicago": [
+    {
+      "summary": "Windy",
+      "temp_c": 22.2
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 17.5
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.0
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 30.5
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 25.3
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.1
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 18.5
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.7
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.6
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.8
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.1
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.8
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.2
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.0
+    }
+  ],
+  "Copenhagen": [
+    {
+      "summary": "Overcast",
+      "temp_c": 19.3
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 27.8
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.5
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.3
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.9
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -2.6
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.7
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 24.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 27.2
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.0
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.5
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 23.1
+    }
+  ],
+  "Delhi": [
+    {
+      "summary": "Sunny",
+      "temp_c": 30.0
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.4
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.6
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 22.5
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.7
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.2
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 19.7
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.0
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.1
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.1
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 19.2
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.6
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 20.7
+    }
+  ],
+  "Dubai": [
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.0
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -2.8
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.8
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 25.0
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.6
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 27.2
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.7
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.4
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 18.7
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.5
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 18.1
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.5
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 18.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 24.2
+    }
+  ],
+  "Dublin": [
+    {
+      "summary": "Light snow",
+      "temp_c": 0.2
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.3
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.1
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.1
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 18.0
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.7
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.6
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.6
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.6
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.9
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.2
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.1
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 19.1
+    }
+  ],
+  "Hong Kong": [
+    {
+      "summary": "Windy",
+      "temp_c": 21.7
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.0
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 25.3
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -2.6
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.6
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.3
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 15.5
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.8
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 16.6
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": 0.4
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 25.1
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.9
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.9
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 17.3
+    }
+  ],
+  "Istanbul": [
+    {
+      "summary": "Overcast",
+      "temp_c": 18.9
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 19.9
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.6
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.4
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 27.2
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.7
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.2
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.6
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.2
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -2.2
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 19.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.4
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.9
+    }
+  ],
+  "Jakarta": [
+    {
+      "summary": "Sunny",
+      "temp_c": 25.8
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.7
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.4
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.7
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.6
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.0
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 22.3
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.9
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 18.5
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.9
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.5
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.5
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.6
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.0
+    }
+  ],
+  "Johannesburg": [
+    {
+      "summary": "Windy",
+      "temp_c": 22.2
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 19.8
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 16.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.0
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.6
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.6
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 23.2
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.4
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 18.4
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 16.9
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 18.2
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.1
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.4
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.2
+    }
+  ],
+  "Lagos": [
+    {
+      "summary": "Light snow",
+      "temp_c": -0.2
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 18.7
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.9
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 18.3
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.0
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.8
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.8
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.2
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.9
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 16.8
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.8
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.5
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 18.8
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.0
+    }
+  ],
+  "Lima": [
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 19.9
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 18.0
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.3
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.2
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.3
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.9
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.9
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 25.9
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 25.0
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.4
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.2
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -2.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 24.2
+    }
+  ],
+  "Lisbon": [
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 25.0
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.0
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 17.7
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": 0.5
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.3
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 27.8
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 25.0
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": 0.5
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.2
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.1
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.5
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 27.1
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.9
+    }
+  ],
+  "London": [
+    {
+      "summary": "Light snow",
+      "temp_c": -0.6
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 28.1
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.3
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.9
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.8
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 23.0
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.3
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.9
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.4
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 18.3
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.9
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.9
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.6
+    }
+  ],
+  "Los Angeles": [
+    {
+      "summary": "Windy",
+      "temp_c": 22.1
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 19.1
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 22.2
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 19.3
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.7
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.5
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.1
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.0
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 23.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.1
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.9
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.7
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 17.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.3
+    }
+  ],
+  "Madrid": [
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.9
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.3
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.4
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 23.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 17.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 30.5
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 24.3
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.9
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 30.5
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 25.4
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.9
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.6
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.5
+    }
+  ],
+  "Manila": [
+    {
+      "summary": "Overcast",
+      "temp_c": 19.7
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.2
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.2
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.6
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.6
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.5
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.4
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.2
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 22.1
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.9
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.1
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.6
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 17.7
+    }
+  ],
+  "Melbourne": [
+    {
+      "summary": "Sunny",
+      "temp_c": 25.6
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 20.0
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 24.0
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 27.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.2
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 28.5
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 27.1
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.4
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.3
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.5
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 25.0
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 17.3
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 28.8
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.4
+    }
+  ],
+  "Mexico City": [
+    {
+      "summary": "Windy",
+      "temp_c": 20.8
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.5
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.2
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.3
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 16.8
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.5
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.2
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 23.0
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.3
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 16.5
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.1
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.4
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.1
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 19.1
+    }
+  ],
+  "Moscow": [
+    {
+      "summary": "Light snow",
+      "temp_c": -2.6
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 19.0
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.8
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.3
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 22.4
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 25.1
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.9
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.6
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 17.7
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 18.0
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.4
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.4
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.1
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.0
+    }
+  ],
+  "Mumbai": [
+    {
+      "summary": "Sunny",
+      "temp_c": 26.1
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 24.4
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.8
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -2.6
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 25.6
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.0
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.9
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.9
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 24.9
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.1
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.8
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.6
+    }
+  ],
+  "Nairobi": [
+    {
+      "summary": "Windy",
+      "temp_c": 17.6
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 27.6
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 28.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.2
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.5
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.2
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.9
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 27.4
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 16.6
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 25.2
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 28.7
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.6
+    }
+  ],
+  "New York": [
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.1
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.9
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.6
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.5
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.8
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.8
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.2
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.8
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.8
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.6
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 22.5
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.7
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.6
+    }
+  ],
+  "Oslo": [
+    {
+      "summary": "Light snow",
+      "temp_c": -2.0
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.5
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.5
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.3
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.0
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.4
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 30.6
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.4
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 27.8
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.2
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.5
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.3
+    }
+  ],
+  "Paris": [
+    {
+      "summary": "Light snow",
+      "temp_c": -2.2
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -2.0
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 19.7
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 18.6
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.0
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 19.0
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 27.2
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.5
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 19.2
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.2
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.2
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.5
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 28.4
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.3
+    }
+  ],
+  "Reykjavik": [
+    {
+      "summary": "Overcast",
+      "temp_c": 18.4
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 23.7
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.2
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 23.1
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.0
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.3
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 25.1
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.8
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.7
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.9
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.4
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": 0.8
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 19.9
+    }
+  ],
+  "Rio de Janeiro": [
+    {
+      "summary": "Sunny",
+      "temp_c": 27.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 28.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.6
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.0
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.5
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 25.5
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 19.7
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.9
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.6
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 25.3
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.0
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.0
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.2
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.4
+    }
+  ],
+  "Rome": [
+    {
+      "summary": "Windy",
+      "temp_c": 19.4
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 27.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.3
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.9
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.3
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 20.9
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.7
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 24.8
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 18.0
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.5
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.4
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.9
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.9
+    }
+  ],
+  "Santiago": [
+    {
+      "summary": "Windy",
+      "temp_c": 17.1
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.7
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 15.6
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.2
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.7
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.1
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 25.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.5
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 27.6
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 19.0
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.9
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 18.0
+    }
+  ],
+  "Sao Paulo": [
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.4
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.4
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 18.0
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.2
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 15.6
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 19.8
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.8
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.2
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.1
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 28.1
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.5
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.4
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -2.9
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.9
+    }
+  ],
+  "Seoul": [
+    {
+      "summary": "Light snow",
+      "temp_c": -2.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 25.0
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 22.7
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.8
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.6
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.6
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.3
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.3
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 17.4
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 19.5
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 19.4
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.8
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 19.0
+    }
+  ],
+  "Shanghai": [
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.4
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 27.0
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 18.9
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.3
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.8
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.0
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.1
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.1
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.7
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 18.4
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 20.4
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 15.2
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 19.9
+    }
+  ],
+  "Singapore": [
+    {
+      "summary": "Rain showers",
+      "temp_c": 15.2
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 21.0
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.9
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 30.2
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.2
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 25.5
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.1
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 25.9
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.7
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.1
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 19.2
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.0
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 25.9
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -5.0
+    }
+  ],
+  "Stockholm": [
+    {
+      "summary": "Light snow",
+      "temp_c": 0.9
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 16.9
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 22.0
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 18.9
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.6
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.4
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 30.6
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.6
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.3
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 28.4
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.4
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 22.6
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.0
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 22.5
+    }
+  ],
+  "Sydney": [
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 23.0
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.4
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 17.7
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 15.6
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.4
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 24.7
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 18.1
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 20.5
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.3
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.1
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 29.0
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.2
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 30.4
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -2.8
+    }
+  ],
+  "Tokyo": [
+    {
+      "summary": "Overcast",
+      "temp_c": 20.7
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -5.0
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.2
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 28.6
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.7
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 24.3
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 18.8
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.4
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 18.3
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.7
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": 0.4
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 27.4
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": 0.7
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 30.3
+    }
+  ],
+  "Toronto": [
+    {
+      "summary": "Sunny",
+      "temp_c": 27.6
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 18.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.1
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 24.7
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 18.4
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 21.5
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.6
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.5
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.7
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.1
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 25.4
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 22.7
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.8
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.5
+    }
+  ],
+  "Vancouver": [
+    {
+      "summary": "Sunny",
+      "temp_c": 25.5
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 23.3
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 28.8
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.4
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.2
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.8
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 25.0
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 27.0
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.2
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 30.8
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 18.1
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 17.8
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.4
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -1.8
+    }
+  ],
+  "Vienna": [
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.9
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 18.3
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": 0.8
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 26.0
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 17.2
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.7
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": 0.5
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.1
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.7
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 27.7
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": 0.2
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.5
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 20.2
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 21.7
+    }
+  ],
+  "Warsaw": [
+    {
+      "summary": "Sunny",
+      "temp_c": 29.4
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.1
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 24.1
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 19.6
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 28.9
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.5
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.9
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 19.9
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 19.5
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 21.1
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 18.4
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.2
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 20.0
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -4.2
+    }
+  ],
+  "Zurich": [
+    {
+      "summary": "Windy",
+      "temp_c": 21.5
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 17.4
+    },
+    {
+      "summary": "Clear skies",
+      "temp_c": 26.7
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 20.3
+    },
+    {
+      "summary": "Windy",
+      "temp_c": 17.7
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -3.9
+    },
+    {
+      "summary": "Sunny",
+      "temp_c": 27.4
+    },
+    {
+      "summary": "Rain showers",
+      "temp_c": 16.6
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -0.7
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": 0.1
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 18.7
+    },
+    {
+      "summary": "Partly cloudy",
+      "temp_c": 20.5
+    },
+    {
+      "summary": "Light snow",
+      "temp_c": -2.4
+    },
+    {
+      "summary": "Overcast",
+      "temp_c": 22.8
+    }
+  ]
+}

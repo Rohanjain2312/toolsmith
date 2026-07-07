@@ -1,0 +1,1238 @@
+[
+  {
+    "category": "temple",
+    "lat": 48.8838,
+    "lon": 2.3155,
+    "name": "Paris Temple 1"
+  },
+  {
+    "category": "landmark",
+    "lat": 48.8364,
+    "lon": 2.3739,
+    "name": "Paris Landmark 2"
+  },
+  {
+    "category": "restaurant",
+    "lat": 48.8673,
+    "lon": 2.3251,
+    "name": "Paris Restaurant 3"
+  },
+  {
+    "category": "market",
+    "lat": 48.8602,
+    "lon": 2.3112,
+    "name": "Paris Market 4"
+  },
+  {
+    "category": "landmark",
+    "lat": 35.7009,
+    "lon": 139.6807,
+    "name": "Tokyo Landmark 5"
+  },
+  {
+    "category": "landmark",
+    "lat": 35.7139,
+    "lon": 139.6365,
+    "name": "Tokyo Landmark 6"
+  },
+  {
+    "category": "museum",
+    "lat": 35.6316,
+    "lon": 139.6198,
+    "name": "Tokyo Museum 7"
+  },
+  {
+    "category": "park",
+    "lat": 40.7053,
+    "lon": -74.0307,
+    "name": "New York Park 8"
+  },
+  {
+    "category": "restaurant",
+    "lat": 40.7072,
+    "lon": -74.0123,
+    "name": "New York Restaurant 9"
+  },
+  {
+    "category": "restaurant",
+    "lat": 40.7123,
+    "lon": -74.0532,
+    "name": "New York Restaurant 10"
+  },
+  {
+    "category": "museum",
+    "lat": 40.7291,
+    "lon": -74.0234,
+    "name": "New York Museum 11"
+  },
+  {
+    "category": "temple",
+    "lat": 40.6715,
+    "lon": -73.9823,
+    "name": "New York Temple 12"
+  },
+  {
+    "category": "restaurant",
+    "lat": 51.481,
+    "lon": -0.0962,
+    "name": "London Restaurant 13"
+  },
+  {
+    "category": "restaurant",
+    "lat": 51.487,
+    "lon": -0.1597,
+    "name": "London Restaurant 14"
+  },
+  {
+    "category": "temple",
+    "lat": 51.4789,
+    "lon": -0.0929,
+    "name": "London Temple 15"
+  },
+  {
+    "category": "landmark",
+    "lat": 51.5338,
+    "lon": -0.0827,
+    "name": "London Landmark 16"
+  },
+  {
+    "category": "park",
+    "lat": 51.5358,
+    "lon": -0.0991,
+    "name": "London Park 17"
+  },
+  {
+    "category": "restaurant",
+    "lat": -33.8375,
+    "lon": 151.2028,
+    "name": "Sydney Restaurant 18"
+  },
+  {
+    "category": "temple",
+    "lat": -33.8875,
+    "lon": 151.1994,
+    "name": "Sydney Temple 19"
+  },
+  {
+    "category": "temple",
+    "lat": -33.8289,
+    "lon": 151.1719,
+    "name": "Sydney Temple 20"
+  },
+  {
+    "category": "temple",
+    "lat": -33.87,
+    "lon": 151.1739,
+    "name": "Sydney Temple 21"
+  },
+  {
+    "category": "restaurant",
+    "lat": 30.0169,
+    "lon": 31.2028,
+    "name": "Cairo Restaurant 22"
+  },
+  {
+    "category": "landmark",
+    "lat": 30.0165,
+    "lon": 31.2327,
+    "name": "Cairo Landmark 23"
+  },
+  {
+    "category": "restaurant",
+    "lat": 30.0472,
+    "lon": 31.2605,
+    "name": "Cairo Restaurant 24"
+  },
+  {
+    "category": "market",
+    "lat": 30.073,
+    "lon": 31.2204,
+    "name": "Cairo Market 25"
+  },
+  {
+    "category": "landmark",
+    "lat": 30.0871,
+    "lon": 31.2723,
+    "name": "Cairo Landmark 26"
+  },
+  {
+    "category": "park",
+    "lat": -22.9352,
+    "lon": -43.1466,
+    "name": "Rio de Janeiro Park 27"
+  },
+  {
+    "category": "temple",
+    "lat": -22.8852,
+    "lon": -43.1939,
+    "name": "Rio de Janeiro Temple 28"
+  },
+  {
+    "category": "park",
+    "lat": -22.9473,
+    "lon": -43.1671,
+    "name": "Rio de Janeiro Park 29"
+  },
+  {
+    "category": "restaurant",
+    "lat": -22.9457,
+    "lon": -43.1908,
+    "name": "Rio de Janeiro Restaurant 30"
+  },
+  {
+    "category": "restaurant",
+    "lat": 64.1201,
+    "lon": -21.9276,
+    "name": "Reykjavik Restaurant 31"
+  },
+  {
+    "category": "temple",
+    "lat": 64.179,
+    "lon": -21.9314,
+    "name": "Reykjavik Temple 32"
+  },
+  {
+    "category": "restaurant",
+    "lat": 64.1563,
+    "lon": -21.9389,
+    "name": "Reykjavik Restaurant 33"
+  },
+  {
+    "category": "landmark",
+    "lat": 64.1494,
+    "lon": -21.9199,
+    "name": "Reykjavik Landmark 34"
+  },
+  {
+    "category": "restaurant",
+    "lat": 64.1442,
+    "lon": -21.8947,
+    "name": "Reykjavik Restaurant 35"
+  },
+  {
+    "category": "landmark",
+    "lat": 52.5213,
+    "lon": 13.4065,
+    "name": "Berlin Landmark 36"
+  },
+  {
+    "category": "landmark",
+    "lat": 52.4837,
+    "lon": 13.359,
+    "name": "Berlin Landmark 37"
+  },
+  {
+    "category": "temple",
+    "lat": 52.5341,
+    "lon": 13.4114,
+    "name": "Berlin Temple 38"
+  },
+  {
+    "category": "temple",
+    "lat": 41.8728,
+    "lon": 12.4736,
+    "name": "Rome Temple 39"
+  },
+  {
+    "category": "landmark",
+    "lat": 41.9386,
+    "lon": 12.4592,
+    "name": "Rome Landmark 40"
+  },
+  {
+    "category": "museum",
+    "lat": 41.8874,
+    "lon": 12.5322,
+    "name": "Rome Museum 41"
+  },
+  {
+    "category": "temple",
+    "lat": 40.4115,
+    "lon": -3.7354,
+    "name": "Madrid Temple 42"
+  },
+  {
+    "category": "park",
+    "lat": 40.4414,
+    "lon": -3.6768,
+    "name": "Madrid Park 43"
+  },
+  {
+    "category": "temple",
+    "lat": 40.4218,
+    "lon": -3.6606,
+    "name": "Madrid Temple 44"
+  },
+  {
+    "category": "landmark",
+    "lat": 40.4451,
+    "lon": -3.6682,
+    "name": "Madrid Landmark 45"
+  },
+  {
+    "category": "landmark",
+    "lat": 40.4033,
+    "lon": -3.6937,
+    "name": "Madrid Landmark 46"
+  },
+  {
+    "category": "temple",
+    "lat": 52.3807,
+    "lon": 4.9539,
+    "name": "Amsterdam Temple 47"
+  },
+  {
+    "category": "temple",
+    "lat": 52.3841,
+    "lon": 4.9454,
+    "name": "Amsterdam Temple 48"
+  },
+  {
+    "category": "landmark",
+    "lat": 52.3762,
+    "lon": 4.8922,
+    "name": "Amsterdam Landmark 49"
+  },
+  {
+    "category": "landmark",
+    "lat": 52.3266,
+    "lon": 4.9361,
+    "name": "Amsterdam Landmark 50"
+  },
+  {
+    "category": "museum",
+    "lat": 52.3462,
+    "lon": 4.9136,
+    "name": "Amsterdam Museum 51"
+  },
+  {
+    "category": "market",
+    "lat": 43.6872,
+    "lon": -79.4023,
+    "name": "Toronto Market 52"
+  },
+  {
+    "category": "restaurant",
+    "lat": 43.617,
+    "lon": -79.3392,
+    "name": "Toronto Restaurant 53"
+  },
+  {
+    "category": "park",
+    "lat": 43.6553,
+    "lon": -79.3742,
+    "name": "Toronto Park 54"
+  },
+  {
+    "category": "restaurant",
+    "lat": 43.6731,
+    "lon": -79.3396,
+    "name": "Toronto Restaurant 55"
+  },
+  {
+    "category": "restaurant",
+    "lat": 43.6339,
+    "lon": -79.3922,
+    "name": "Toronto Restaurant 56"
+  },
+  {
+    "category": "landmark",
+    "lat": 34.0493,
+    "lon": -118.2425,
+    "name": "Los Angeles Landmark 57"
+  },
+  {
+    "category": "park",
+    "lat": 34.0398,
+    "lon": -118.265,
+    "name": "Los Angeles Park 58"
+  },
+  {
+    "category": "restaurant",
+    "lat": 34.0459,
+    "lon": -118.1964,
+    "name": "Los Angeles Restaurant 59"
+  },
+  {
+    "category": "market",
+    "lat": 41.9142,
+    "lon": -87.5944,
+    "name": "Chicago Market 60"
+  },
+  {
+    "category": "restaurant",
+    "lat": 41.8968,
+    "lon": -87.652,
+    "name": "Chicago Restaurant 61"
+  },
+  {
+    "category": "market",
+    "lat": 41.8448,
+    "lon": -87.6325,
+    "name": "Chicago Market 62"
+  },
+  {
+    "category": "museum",
+    "lat": 19.3964,
+    "lon": -99.1168,
+    "name": "Mexico City Museum 63"
+  },
+  {
+    "category": "restaurant",
+    "lat": 19.3913,
+    "lon": -99.0977,
+    "name": "Mexico City Restaurant 64"
+  },
+  {
+    "category": "market",
+    "lat": 19.4158,
+    "lon": -99.0895,
+    "name": "Mexico City Market 65"
+  },
+  {
+    "category": "market",
+    "lat": 19.4482,
+    "lon": -99.1003,
+    "name": "Mexico City Market 66"
+  },
+  {
+    "category": "restaurant",
+    "lat": 19.4565,
+    "lon": -99.1397,
+    "name": "Mexico City Restaurant 67"
+  },
+  {
+    "category": "market",
+    "lat": -23.5576,
+    "lon": -46.6781,
+    "name": "Sao Paulo Market 68"
+  },
+  {
+    "category": "restaurant",
+    "lat": -23.527,
+    "lon": -46.6433,
+    "name": "Sao Paulo Restaurant 69"
+  },
+  {
+    "category": "restaurant",
+    "lat": -23.5341,
+    "lon": -46.6575,
+    "name": "Sao Paulo Restaurant 70"
+  },
+  {
+    "category": "market",
+    "lat": -23.5347,
+    "lon": -46.613,
+    "name": "Sao Paulo Market 71"
+  },
+  {
+    "category": "temple",
+    "lat": -34.5567,
+    "lon": -58.3482,
+    "name": "Buenos Aires Temple 72"
+  },
+  {
+    "category": "restaurant",
+    "lat": -34.6444,
+    "lon": -58.3767,
+    "name": "Buenos Aires Restaurant 73"
+  },
+  {
+    "category": "restaurant",
+    "lat": -34.5777,
+    "lon": -58.3721,
+    "name": "Buenos Aires Restaurant 74"
+  },
+  {
+    "category": "temple",
+    "lat": 6.5007,
+    "lon": 3.3786,
+    "name": "Lagos Temple 75"
+  },
+  {
+    "category": "market",
+    "lat": 6.4832,
+    "lon": 3.3607,
+    "name": "Lagos Market 76"
+  },
+  {
+    "category": "museum",
+    "lat": 6.4948,
+    "lon": 3.42,
+    "name": "Lagos Museum 77"
+  },
+  {
+    "category": "museum",
+    "lat": -1.3016,
+    "lon": 36.8398,
+    "name": "Nairobi Museum 78"
+  },
+  {
+    "category": "temple",
+    "lat": -1.2723,
+    "lon": 36.8454,
+    "name": "Nairobi Temple 79"
+  },
+  {
+    "category": "restaurant",
+    "lat": -1.2659,
+    "lon": 36.8033,
+    "name": "Nairobi Restaurant 80"
+  },
+  {
+    "category": "park",
+    "lat": -1.32,
+    "lon": 36.8109,
+    "name": "Nairobi Park 81"
+  },
+  {
+    "category": "park",
+    "lat": -1.2696,
+    "lon": 36.7832,
+    "name": "Nairobi Park 82"
+  },
+  {
+    "category": "museum",
+    "lat": -26.1763,
+    "lon": 28.0004,
+    "name": "Johannesburg Museum 83"
+  },
+  {
+    "category": "market",
+    "lat": -26.1895,
+    "lon": 28.0484,
+    "name": "Johannesburg Market 84"
+  },
+  {
+    "category": "park",
+    "lat": -26.1725,
+    "lon": 28.0305,
+    "name": "Johannesburg Park 85"
+  },
+  {
+    "category": "restaurant",
+    "lat": -26.2109,
+    "lon": 28.0778,
+    "name": "Johannesburg Restaurant 86"
+  },
+  {
+    "category": "restaurant",
+    "lat": -26.2331,
+    "lon": 28.0221,
+    "name": "Johannesburg Restaurant 87"
+  },
+  {
+    "category": "landmark",
+    "lat": 25.2116,
+    "lon": 55.2506,
+    "name": "Dubai Landmark 88"
+  },
+  {
+    "category": "landmark",
+    "lat": 25.1711,
+    "lon": 55.2774,
+    "name": "Dubai Landmark 89"
+  },
+  {
+    "category": "landmark",
+    "lat": 25.1965,
+    "lon": 55.2632,
+    "name": "Dubai Landmark 90"
+  },
+  {
+    "category": "restaurant",
+    "lat": 25.253,
+    "lon": 55.2536,
+    "name": "Dubai Restaurant 91"
+  },
+  {
+    "category": "market",
+    "lat": 41.0528,
+    "lon": 28.966,
+    "name": "Istanbul Market 92"
+  },
+  {
+    "category": "landmark",
+    "lat": 40.9832,
+    "lon": 29.0178,
+    "name": "Istanbul Landmark 93"
+  },
+  {
+    "category": "museum",
+    "lat": 40.9969,
+    "lon": 28.9585,
+    "name": "Istanbul Museum 94"
+  },
+  {
+    "category": "market",
+    "lat": 40.9666,
+    "lon": 28.9857,
+    "name": "Istanbul Market 95"
+  },
+  {
+    "category": "landmark",
+    "lat": 41.0492,
+    "lon": 28.9768,
+    "name": "Istanbul Landmark 96"
+  },
+  {
+    "category": "market",
+    "lat": 55.7114,
+    "lon": 37.6614,
+    "name": "Moscow Market 97"
+  },
+  {
+    "category": "museum",
+    "lat": 55.7719,
+    "lon": 37.6047,
+    "name": "Moscow Museum 98"
+  },
+  {
+    "category": "museum",
+    "lat": 55.765,
+    "lon": 37.5969,
+    "name": "Moscow Museum 99"
+  },
+  {
+    "category": "museum",
+    "lat": 55.7479,
+    "lon": 37.6292,
+    "name": "Moscow Museum 100"
+  },
+  {
+    "category": "park",
+    "lat": 28.7184,
+    "lon": 77.0997,
+    "name": "Delhi Park 101"
+  },
+  {
+    "category": "temple",
+    "lat": 28.7093,
+    "lon": 77.1464,
+    "name": "Delhi Temple 102"
+  },
+  {
+    "category": "museum",
+    "lat": 28.7008,
+    "lon": 77.0676,
+    "name": "Delhi Museum 103"
+  },
+  {
+    "category": "temple",
+    "lat": 28.7422,
+    "lon": 77.0804,
+    "name": "Delhi Temple 104"
+  },
+  {
+    "category": "museum",
+    "lat": 28.6818,
+    "lon": 77.1129,
+    "name": "Delhi Museum 105"
+  },
+  {
+    "category": "temple",
+    "lat": 19.1161,
+    "lon": 72.914,
+    "name": "Mumbai Temple 106"
+  },
+  {
+    "category": "restaurant",
+    "lat": 19.0551,
+    "lon": 72.8891,
+    "name": "Mumbai Restaurant 107"
+  },
+  {
+    "category": "restaurant",
+    "lat": 19.1203,
+    "lon": 72.8499,
+    "name": "Mumbai Restaurant 108"
+  },
+  {
+    "category": "park",
+    "lat": 19.0998,
+    "lon": 72.9144,
+    "name": "Mumbai Park 109"
+  },
+  {
+    "category": "market",
+    "lat": 19.0661,
+    "lon": 72.8425,
+    "name": "Mumbai Market 110"
+  },
+  {
+    "category": "landmark",
+    "lat": 13.7982,
+    "lon": 100.4938,
+    "name": "Bangkok Landmark 111"
+  },
+  {
+    "category": "temple",
+    "lat": 13.7908,
+    "lon": 100.4535,
+    "name": "Bangkok Temple 112"
+  },
+  {
+    "category": "restaurant",
+    "lat": 13.7331,
+    "lon": 100.4644,
+    "name": "Bangkok Restaurant 113"
+  },
+  {
+    "category": "temple",
+    "lat": 13.7313,
+    "lon": 100.5004,
+    "name": "Bangkok Temple 114"
+  },
+  {
+    "category": "temple",
+    "lat": 1.4002,
+    "lon": 103.8083,
+    "name": "Singapore Temple 115"
+  },
+  {
+    "category": "park",
+    "lat": 1.3324,
+    "lon": 103.8558,
+    "name": "Singapore Park 116"
+  },
+  {
+    "category": "park",
+    "lat": 1.3326,
+    "lon": 103.8625,
+    "name": "Singapore Park 117"
+  },
+  {
+    "category": "park",
+    "lat": 22.2716,
+    "lon": 114.199,
+    "name": "Hong Kong Park 118"
+  },
+  {
+    "category": "park",
+    "lat": 22.3332,
+    "lon": 114.1423,
+    "name": "Hong Kong Park 119"
+  },
+  {
+    "category": "museum",
+    "lat": 22.3292,
+    "lon": 114.1869,
+    "name": "Hong Kong Museum 120"
+  },
+  {
+    "category": "market",
+    "lat": 22.328,
+    "lon": 114.1295,
+    "name": "Hong Kong Market 121"
+  },
+  {
+    "category": "park",
+    "lat": 37.554,
+    "lon": 126.9666,
+    "name": "Seoul Park 122"
+  },
+  {
+    "category": "temple",
+    "lat": 37.5736,
+    "lon": 126.939,
+    "name": "Seoul Temple 123"
+  },
+  {
+    "category": "temple",
+    "lat": 37.5926,
+    "lon": 126.9541,
+    "name": "Seoul Temple 124"
+  },
+  {
+    "category": "temple",
+    "lat": 37.5772,
+    "lon": 127.0119,
+    "name": "Seoul Temple 125"
+  },
+  {
+    "category": "museum",
+    "lat": 37.5538,
+    "lon": 126.948,
+    "name": "Seoul Museum 126"
+  },
+  {
+    "category": "restaurant",
+    "lat": 39.9211,
+    "lon": 116.3816,
+    "name": "Beijing Restaurant 127"
+  },
+  {
+    "category": "park",
+    "lat": 39.9001,
+    "lon": 116.4168,
+    "name": "Beijing Park 128"
+  },
+  {
+    "category": "landmark",
+    "lat": 39.9307,
+    "lon": 116.4482,
+    "name": "Beijing Landmark 129"
+  },
+  {
+    "category": "landmark",
+    "lat": 39.8637,
+    "lon": 116.3961,
+    "name": "Beijing Landmark 130"
+  },
+  {
+    "category": "park",
+    "lat": 39.939,
+    "lon": 116.4179,
+    "name": "Beijing Park 131"
+  },
+  {
+    "category": "park",
+    "lat": 31.242,
+    "lon": 121.5169,
+    "name": "Shanghai Park 132"
+  },
+  {
+    "category": "market",
+    "lat": 31.2101,
+    "lon": 121.4595,
+    "name": "Shanghai Market 133"
+  },
+  {
+    "category": "temple",
+    "lat": 31.2661,
+    "lon": 121.5005,
+    "name": "Shanghai Temple 134"
+  },
+  {
+    "category": "museum",
+    "lat": 31.2472,
+    "lon": 121.5157,
+    "name": "Shanghai Museum 135"
+  },
+  {
+    "category": "market",
+    "lat": 31.2187,
+    "lon": 121.4883,
+    "name": "Shanghai Market 136"
+  },
+  {
+    "category": "restaurant",
+    "lat": -6.2044,
+    "lon": 106.8938,
+    "name": "Jakarta Restaurant 137"
+  },
+  {
+    "category": "market",
+    "lat": -6.1718,
+    "lon": 106.8458,
+    "name": "Jakarta Market 138"
+  },
+  {
+    "category": "park",
+    "lat": -6.2565,
+    "lon": 106.8486,
+    "name": "Jakarta Park 139"
+  },
+  {
+    "category": "restaurant",
+    "lat": 14.6162,
+    "lon": 120.9937,
+    "name": "Manila Restaurant 140"
+  },
+  {
+    "category": "park",
+    "lat": 14.6368,
+    "lon": 120.9851,
+    "name": "Manila Park 141"
+  },
+  {
+    "category": "park",
+    "lat": 14.5584,
+    "lon": 121.0066,
+    "name": "Manila Park 142"
+  },
+  {
+    "category": "temple",
+    "lat": 14.5924,
+    "lon": 120.9909,
+    "name": "Manila Temple 143"
+  },
+  {
+    "category": "park",
+    "lat": -36.8959,
+    "lon": 174.7428,
+    "name": "Auckland Park 144"
+  },
+  {
+    "category": "park",
+    "lat": -36.8274,
+    "lon": 174.7837,
+    "name": "Auckland Park 145"
+  },
+  {
+    "category": "restaurant",
+    "lat": -36.82,
+    "lon": 174.7273,
+    "name": "Auckland Restaurant 146"
+  },
+  {
+    "category": "museum",
+    "lat": -36.8874,
+    "lon": 174.7875,
+    "name": "Auckland Museum 147"
+  },
+  {
+    "category": "landmark",
+    "lat": -37.8293,
+    "lon": 144.996,
+    "name": "Melbourne Landmark 148"
+  },
+  {
+    "category": "restaurant",
+    "lat": -37.8222,
+    "lon": 144.9627,
+    "name": "Melbourne Restaurant 149"
+  },
+  {
+    "category": "museum",
+    "lat": -37.791,
+    "lon": 144.961,
+    "name": "Melbourne Museum 150"
+  },
+  {
+    "category": "temple",
+    "lat": -37.8102,
+    "lon": 145.0099,
+    "name": "Melbourne Temple 151"
+  },
+  {
+    "category": "park",
+    "lat": 48.1662,
+    "lon": 16.3818,
+    "name": "Vienna Park 152"
+  },
+  {
+    "category": "park",
+    "lat": 48.1934,
+    "lon": 16.388,
+    "name": "Vienna Park 153"
+  },
+  {
+    "category": "park",
+    "lat": 48.2257,
+    "lon": 16.3698,
+    "name": "Vienna Park 154"
+  },
+  {
+    "category": "market",
+    "lat": 47.3973,
+    "lon": 8.561,
+    "name": "Zurich Market 155"
+  },
+  {
+    "category": "market",
+    "lat": 47.423,
+    "lon": 8.5267,
+    "name": "Zurich Market 156"
+  },
+  {
+    "category": "park",
+    "lat": 47.3602,
+    "lon": 8.5823,
+    "name": "Zurich Park 157"
+  },
+  {
+    "category": "market",
+    "lat": 59.2909,
+    "lon": 18.1146,
+    "name": "Stockholm Market 158"
+  },
+  {
+    "category": "temple",
+    "lat": 59.3718,
+    "lon": 18.0871,
+    "name": "Stockholm Temple 159"
+  },
+  {
+    "category": "park",
+    "lat": 59.3129,
+    "lon": 18.0791,
+    "name": "Stockholm Park 160"
+  },
+  {
+    "category": "park",
+    "lat": 59.8756,
+    "lon": 10.7439,
+    "name": "Oslo Park 161"
+  },
+  {
+    "category": "restaurant",
+    "lat": 59.8795,
+    "lon": 10.7254,
+    "name": "Oslo Restaurant 162"
+  },
+  {
+    "category": "museum",
+    "lat": 59.8901,
+    "lon": 10.7716,
+    "name": "Oslo Museum 163"
+  },
+  {
+    "category": "restaurant",
+    "lat": 55.6587,
+    "lon": 12.5497,
+    "name": "Copenhagen Restaurant 164"
+  },
+  {
+    "category": "market",
+    "lat": 55.6334,
+    "lon": 12.6168,
+    "name": "Copenhagen Market 165"
+  },
+  {
+    "category": "market",
+    "lat": 55.7142,
+    "lon": 12.554,
+    "name": "Copenhagen Market 166"
+  },
+  {
+    "category": "temple",
+    "lat": 55.685,
+    "lon": 12.6118,
+    "name": "Copenhagen Temple 167"
+  },
+  {
+    "category": "park",
+    "lat": 52.2506,
+    "lon": 21.0087,
+    "name": "Warsaw Park 168"
+  },
+  {
+    "category": "temple",
+    "lat": 52.2032,
+    "lon": 21.0211,
+    "name": "Warsaw Temple 169"
+  },
+  {
+    "category": "landmark",
+    "lat": 52.2611,
+    "lon": 20.9696,
+    "name": "Warsaw Landmark 170"
+  },
+  {
+    "category": "temple",
+    "lat": 52.2173,
+    "lon": 21.0155,
+    "name": "Warsaw Temple 171"
+  },
+  {
+    "category": "restaurant",
+    "lat": 37.9816,
+    "lon": 23.7513,
+    "name": "Athens Restaurant 172"
+  },
+  {
+    "category": "market",
+    "lat": 37.9799,
+    "lon": 23.7294,
+    "name": "Athens Market 173"
+  },
+  {
+    "category": "temple",
+    "lat": 38.0176,
+    "lon": 23.7502,
+    "name": "Athens Temple 174"
+  },
+  {
+    "category": "landmark",
+    "lat": 38.7173,
+    "lon": -9.1184,
+    "name": "Lisbon Landmark 175"
+  },
+  {
+    "category": "restaurant",
+    "lat": 38.7294,
+    "lon": -9.1141,
+    "name": "Lisbon Restaurant 176"
+  },
+  {
+    "category": "temple",
+    "lat": 38.7424,
+    "lon": -9.1767,
+    "name": "Lisbon Temple 177"
+  },
+  {
+    "category": "temple",
+    "lat": 38.7637,
+    "lon": -9.1553,
+    "name": "Lisbon Temple 178"
+  },
+  {
+    "category": "landmark",
+    "lat": 53.3468,
+    "lon": -6.281,
+    "name": "Dublin Landmark 179"
+  },
+  {
+    "category": "park",
+    "lat": 53.3438,
+    "lon": -6.2404,
+    "name": "Dublin Park 180"
+  },
+  {
+    "category": "temple",
+    "lat": 53.3474,
+    "lon": -6.2325,
+    "name": "Dublin Temple 181"
+  },
+  {
+    "category": "museum",
+    "lat": 53.3898,
+    "lon": -6.2819,
+    "name": "Dublin Museum 182"
+  },
+  {
+    "category": "restaurant",
+    "lat": 53.3976,
+    "lon": -6.31,
+    "name": "Dublin Restaurant 183"
+  },
+  {
+    "category": "temple",
+    "lat": 49.2395,
+    "lon": -123.0782,
+    "name": "Vancouver Temple 184"
+  },
+  {
+    "category": "temple",
+    "lat": 49.2462,
+    "lon": -123.1609,
+    "name": "Vancouver Temple 185"
+  },
+  {
+    "category": "park",
+    "lat": 49.3077,
+    "lon": -123.1286,
+    "name": "Vancouver Park 186"
+  },
+  {
+    "category": "park",
+    "lat": 49.2868,
+    "lon": -123.0791,
+    "name": "Vancouver Park 187"
+  },
+  {
+    "category": "park",
+    "lat": 49.3163,
+    "lon": -123.1103,
+    "name": "Vancouver Park 188"
+  },
+  {
+    "category": "temple",
+    "lat": -33.4554,
+    "lon": -70.6471,
+    "name": "Santiago Temple 189"
+  },
+  {
+    "category": "market",
+    "lat": -33.447,
+    "lon": -70.7039,
+    "name": "Santiago Market 190"
+  },
+  {
+    "category": "temple",
+    "lat": -33.4348,
+    "lon": -70.6958,
+    "name": "Santiago Temple 191"
+  },
+  {
+    "category": "temple",
+    "lat": -33.463,
+    "lon": -70.6937,
+    "name": "Santiago Temple 192"
+  },
+  {
+    "category": "market",
+    "lat": -33.4223,
+    "lon": -70.684,
+    "name": "Santiago Market 193"
+  },
+  {
+    "category": "market",
+    "lat": -12.0523,
+    "lon": -77.0918,
+    "name": "Lima Market 194"
+  },
+  {
+    "category": "restaurant",
+    "lat": -12.084,
+    "lon": -77.0281,
+    "name": "Lima Restaurant 195"
+  },
+  {
+    "category": "market",
+    "lat": -12.0814,
+    "lon": -77.0833,
+    "name": "Lima Market 196"
+  },
+  {
+    "category": "landmark",
+    "lat": -12.0033,
+    "lon": -77.0261,
+    "name": "Lima Landmark 197"
+  },
+  {
+    "category": "temple",
+    "lat": -12.0255,
+    "lon": -77.0591,
+    "name": "Lima Temple 198"
+  },
+  {
+    "category": "restaurant",
+    "lat": 4.7118,
+    "lon": -74.024,
+    "name": "Bogota Restaurant 199"
+  },
+  {
+    "category": "museum",
+    "lat": 4.6903,
+    "lon": -74.0353,
+    "name": "Bogota Museum 200"
+  },
+  {
+    "category": "restaurant",
+    "lat": 4.6685,
+    "lon": -74.0744,
+    "name": "Bogota Restaurant 201"
+  },
+  {
+    "category": "park",
+    "lat": 4.7221,
+    "lon": -74.1137,
+    "name": "Bogota Park 202"
+  },
+  {
+    "category": "restaurant",
+    "lat": 33.6129,
+    "lon": -7.631,
+    "name": "Casablanca Restaurant 203"
+  },
+  {
+    "category": "park",
+    "lat": 33.5538,
+    "lon": -7.5467,
+    "name": "Casablanca Park 204"
+  },
+  {
+    "category": "museum",
+    "lat": 33.6026,
+    "lon": -7.6047,
+    "name": "Casablanca Museum 205"
+  },
+  {
+    "category": "restaurant",
+    "lat": 33.5369,
+    "lon": -7.5944,
+    "name": "Casablanca Restaurant 206"
+  }
+]
