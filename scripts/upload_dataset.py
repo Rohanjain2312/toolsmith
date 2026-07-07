@@ -12,6 +12,8 @@ from pathlib import Path
 
 DATASET_REPO = "rohanjain2312/toolsmith-tasks"
 TASKS_PATH = Path("results/tasks.jsonl")
+# Human step: copy src/toolsmith/data/dataset_card_template.md to this path, fill in its
+# {PLACEHOLDER} fields with real counts, then this script will push it as the repo README.
 DATASET_CARD_PATH = Path("results/dataset_card.md")
 
 
