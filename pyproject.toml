@@ -19,6 +19,7 @@ packages = ["src/toolsmith"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]
 markers = ["allow_network: permit real network calls in this test (reserved, unused)"]
 
 [tool.ruff]

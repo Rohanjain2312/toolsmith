@@ -26,7 +26,7 @@ ToolSmith: post-trained small-LLM tool-calling agent. Qwen3-4B-Instruct-2507 + L
 ## Commands
 - Tests: `uv run pytest -x`
 - Lint: `uv run ruff check --fix`
-- Single episode: `uv run python -m toolsmith.env --task <path> --mode sandbox`
+- Single episode: `PYTHONPATH=src uv run python -m toolsmith.env --task <path> --mode sandbox` (see Known environment quirks)
 - Notebook convert (human runs): `uvx jupytext --to ipynb notebooks/src/<file>.py`
 
 ## Hard rules
@@ -41,6 +41,9 @@ ToolSmith: post-trained small-LLM tool-calling agent. Qwen3-4B-Instruct-2507 + L
 9. Uncertain external API (TRL, Unsloth, FastMCP, Gradio, BFCL, Duffel)? STOP and ask human for current docs snippet. Do not guess from memory.
 10. One-line purpose docstring per module. Type hints on public functions.
 11. No TODO/FIXME in committed code.
+
+## Known environment quirks
+- macOS (this machine) tags `uv`-generated `.venv` `.pth` files with the Gatekeeper "hidden" chflag on every editable-install rebuild. CPython's `site.py` silently skips hidden `.pth` files, so `import toolsmith` fails outside pytest even though the package is "installed." Fixed permanently for tests via `pythonpath = ["src"]` in `[tool.pytest.ini_options]` (pyproject.toml) — do not remove it. For ad-hoc CLI runs outside pytest, prefix with `PYTHONPATH=src`, e.g. `PYTHONPATH=src uv run python -m toolsmith.env --task <path> --mode sandbox`. If direct imports still fail, run `chflags nohidden .venv/lib/python3.11/site-packages/*.pth`.
 
 ## HF Hub operations
 `hf` CLI installed + authenticated. Official HF CLI agent skill available. Prefer `hf` CLI (or huggingface_hub library) for: dataset uploads, model pushes, Space file pushes, repo creation checks. Never embed HF_TOKEN in code — CLI auth + env var handle it.
