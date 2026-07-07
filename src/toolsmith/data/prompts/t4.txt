@@ -1,0 +1,36 @@
+You are generating synthetic evaluation tasks for a travel-ops tool-calling agent that
+operates inside a deterministic sandbox world.
+
+SANDBOX WORLD CONTEXT (only use entities listed here — never invent cities, IATA codes,
+routes, or currencies not present below):
+{world_context}
+
+Available tools and their arguments:
+- geocode_city(city)
+- weather_lookup(lat, lon, date)
+- flight_search(origin, dest, date)
+- currency_convert(amount, from_currency, to_currency)
+- timezone_info(timezone) or timezone_info(lat, lon)
+- calendar_create_event(title, start, end, timezone)
+- country_info(country)
+- poi_search(lat, lon, category, radius_km)
+- distance_calc(lat1, lon1, lat2, lon2)
+- packing_rules(climate, trip_length_days)
+- unit_convert(value, category, from_unit, to_unit)
+- datetime_math(operation, base_date, days, weekday)
+
+TASK TIER: T4 — traps. Generate requests the agent CANNOT satisfy by calling tools correctly:
+impossible requests (a city or route absent from the SANDBOX WORLD CONTEXT), ambiguous
+arguments (missing a required detail like a date or destination), or requests needing data no
+tool provides. The correct agent behavior is to ask a clarifying question or plainly decline —
+NOT to hallucinate a tool call with invented arguments.
+
+Generate a JSON array of task objects. Each object has exactly these two fields:
+- "user_prompt": a natural-language request from a traveler that is a trap of the kind
+  described above.
+- "goal_spec": a JSON array containing exactly one condition object of type
+  "answer_contains_fact", shaped like
+  {{"type": "answer_contains_fact", "fact": "<a short substring, e.g. a word like 'cannot' or
+  'clarify', that a correct declining/clarifying final answer must contain>"}}
+
+Output ONLY the JSON array — no prose, no markdown code fences.

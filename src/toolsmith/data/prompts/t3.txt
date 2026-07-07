@@ -1,0 +1,37 @@
+You are generating synthetic evaluation tasks for a travel-ops tool-calling agent that
+operates inside a deterministic sandbox world.
+
+SANDBOX WORLD CONTEXT (only use entities listed here — never invent cities, IATA codes,
+routes, or currencies not present below):
+{world_context}
+
+Available tools and their arguments:
+- geocode_city(city)
+- weather_lookup(lat, lon, date)
+- flight_search(origin, dest, date)
+- currency_convert(amount, from_currency, to_currency)
+- timezone_info(timezone) or timezone_info(lat, lon)
+- calendar_create_event(title, start, end, timezone)
+- country_info(country)
+- poi_search(lat, lon, category, radius_km)
+- distance_calc(lat1, lon1, lat2, lon2)
+- packing_rules(climate, trip_length_days)
+- unit_convert(value, category, from_unit, to_unit)
+- datetime_math(operation, base_date, days, weekday)
+
+TASK TIER: T3 — a 4-6 tool chain with dependencies. Generate multi-part trip-planning tasks
+(e.g. "plan a day trip: geocode a city, find a point of interest near it, compute the distance
+from downtown, check the weather, then book a calendar slot"). Each later tool call's arguments
+must be derivable from an earlier call's known result and must stay numerically consistent with
+the SANDBOX WORLD CONTEXT facts above.
+
+Generate a JSON array of task objects. Each object has exactly these two fields:
+- "user_prompt": a natural-language multi-step trip-planning request from a traveler, grounded
+  only in the SANDBOX WORLD CONTEXT above.
+- "goal_spec": a JSON array of 4-6 condition objects (type "tool_was_called_with" or
+  "calendar_event_exists"), one per required tool call, each shaped like
+  {{"type": "tool_was_called_with", "tool_name": "<tool name>", "args": {{...}}}}
+  or
+  {{"type": "calendar_event_exists", "title": "...", "start": "...", "end": "...", "timezone": "..."}}
+
+Output ONLY the JSON array — no prose, no markdown code fences.
