@@ -2,20 +2,21 @@
 
 from __future__ import annotations
 
+import functools
+import json
+from pathlib import Path
+
 from pydantic import BaseModel, Field
 
 from toolsmith.tools.schemas import ToolSpec, registry
 
-# Fixed FX rate table anchored to USD; replaced by loading
-# src/toolsmith/tools/sandbox/worlddata/fx_rates.json in task P1-T14.
-_FX_RATES: dict[str, float] = {
-    "USD": 1.0,
-    "EUR": 0.92,
-    "GBP": 0.79,
-    "JPY": 149.5,
-    "INR": 83.1,
-    "AUD": 1.52,
-}
+_WORLDDATA_DIR = Path(__file__).parent / "worlddata"
+
+
+@functools.cache
+def _load_fx_rates() -> dict[str, float]:
+    """Load and cache the generated fixed FX rate table (anchored to USD)."""
+    return json.loads((_WORLDDATA_DIR / "fx_rates.json").read_text())
 
 
 class CurrencyNotFoundError(ValueError):
@@ -42,9 +43,10 @@ class CurrencyConvertResult(BaseModel):
 
 def currency_convert(args: CurrencyConvertArgs) -> CurrencyConvertResult:
     """Convert an amount between two currencies using the fixed sandbox FX rate table."""
-    if args.from_currency not in _FX_RATES:
+    fx_rates = _load_fx_rates()
+    if args.from_currency not in fx_rates:
         raise CurrencyNotFoundError(f"unknown currency: {args.from_currency}")
-    if args.to_currency not in _FX_RATES:
+    if args.to_currency not in fx_rates:
         raise CurrencyNotFoundError(f"unknown currency: {args.to_currency}")
 
     if args.from_currency == args.to_currency:
@@ -56,7 +58,7 @@ def currency_convert(args: CurrencyConvertArgs) -> CurrencyConvertResult:
             rate=1.0,
         )
 
-    rate = _FX_RATES[args.to_currency] / _FX_RATES[args.from_currency]
+    rate = fx_rates[args.to_currency] / fx_rates[args.from_currency]
     converted = args.amount * rate
 
     return CurrencyConvertResult(
