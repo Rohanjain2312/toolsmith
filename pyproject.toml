@@ -19,7 +19,6 @@ packages = ["src/toolsmith"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--disable-socket"
 markers = ["allow_network: permit real network calls in this test (reserved, unused)"]
 
 [tool.ruff]
