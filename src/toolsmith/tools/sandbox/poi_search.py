@@ -2,13 +2,17 @@
 
 from __future__ import annotations
 
+import functools
+import json
 import math
+from pathlib import Path
 
 from pydantic import BaseModel, Field
 
 from toolsmith.tools.schemas import ToolSpec, registry
 
 EARTH_RADIUS_KM = 6371.0
+_WORLDDATA_DIR = Path(__file__).parent / "worlddata"
 
 
 class PoiSearchArgs(BaseModel):
@@ -49,32 +53,29 @@ def _haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return EARTH_RADIUS_KM * c
 
 
-# Fixed synthetic fixture of ~10 POIs near a handful of reference cities; replaced
-# by loading src/toolsmith/tools/sandbox/worlddata/pois.json in task P1-T14.
-_POIS: list[tuple[str, float, float, str]] = [
-    ("Louvre Museum", 48.8606, 2.3376, "museum"),
-    ("Jardin du Luxembourg", 48.8462, 2.3372, "park"),
-    ("Le Petit Bistro", 48.8530, 2.3499, "restaurant"),
-    ("Senso-ji Temple", 35.7148, 139.7967, "temple"),
-    ("Tsukiji Market", 35.6654, 139.7707, "market"),
-    ("Central Park", 40.7829, -73.9654, "park"),
-    ("Statue of Liberty", 40.6892, -74.0445, "landmark"),
-    ("British Museum", 51.5194, -0.1270, "museum"),
-    ("Hyde Park", 51.5073, -0.1657, "park"),
-    ("Colosseum", 41.8902, 12.4922, "landmark"),
-]
+@functools.cache
+def _load_pois() -> list[dict[str, object]]:
+    """Load and cache the generated POI list."""
+    return json.loads((_WORLDDATA_DIR / "pois.json").read_text())
 
 
 def poi_search(args: PoiSearchArgs) -> PoiSearchResult:
-    """Return fixture POIs matching category within radius_km, sorted by distance."""
+    """Return world-data POIs matching category within radius_km, sorted by distance."""
     matches: list[Poi] = []
-    for name, lat, lon, category in _POIS:
-        if category.lower() != args.category.lower():
+    for entry in _load_pois():
+        if str(entry["category"]).lower() != args.category.lower():
             continue
+        lat, lon = float(entry["lat"]), float(entry["lon"])
         distance_km = _haversine_km(args.lat, args.lon, lat, lon)
         if distance_km <= args.radius_km:
             matches.append(
-                Poi(name=name, lat=lat, lon=lon, category=category, distance_km=distance_km)
+                Poi(
+                    name=str(entry["name"]),
+                    lat=lat,
+                    lon=lon,
+                    category=str(entry["category"]),
+                    distance_km=distance_km,
+                )
             )
 
     matches.sort(key=lambda poi: poi.distance_km)

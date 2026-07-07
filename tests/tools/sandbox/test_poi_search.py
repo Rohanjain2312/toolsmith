@@ -1,5 +1,9 @@
 """Tests for the poi_search sandbox tool."""
 
+import json
+from collections import defaultdict
+from pathlib import Path
+
 import pytest
 from pydantic import ValidationError
 
@@ -9,45 +13,61 @@ from toolsmith.tools.sandbox.poi_search import (
     poi_search,
 )
 
-LOUVRE = (48.8606, 2.3376)
-BRITISH_MUSEUM = (51.5194, -0.1270)
+_POIS = json.loads(Path("src/toolsmith/tools/sandbox/worlddata/pois.json").read_text())
+
+
+def _two_pois_same_category() -> tuple[dict[str, object], dict[str, object]]:
+    """Find two distinct POIs sharing a category, for boundary-distance tests."""
+    by_category: dict[str, list[dict[str, object]]] = defaultdict(list)
+    for poi in _POIS:
+        by_category[poi["category"]].append(poi)
+    for pois in by_category.values():
+        if len(pois) >= 2:
+            return pois[0], pois[1]
+    raise AssertionError("expected at least one category with 2+ generated POIs")
+
+
+POI_A, POI_B = _two_pois_same_category()
 
 
 def test_happy_path_finds_known_poi_nearby() -> None:
-    lat, lon = LOUVRE
-    args = PoiSearchArgs(lat=lat, lon=lon, category="museum", radius_km=5.0)
+    args = PoiSearchArgs(
+        lat=POI_A["lat"], lon=POI_A["lon"], category=POI_A["category"], radius_km=1.0
+    )
     result = poi_search(args)
     names = [poi.name for poi in result.pois]
-    assert "Louvre Museum" in names
+    assert POI_A["name"] in names
 
 
 def test_category_filter_excludes_non_matching_pois() -> None:
-    lat, lon = LOUVRE
-    args = PoiSearchArgs(lat=lat, lon=lon, category="restaurant", radius_km=5.0)
+    other_category = next(p["category"] for p in _POIS if p["category"] != POI_A["category"])
+    args = PoiSearchArgs(
+        lat=POI_A["lat"], lon=POI_A["lon"], category=other_category, radius_km=5000.0
+    )
     result = poi_search(args)
     names = [poi.name for poi in result.pois]
-    assert "Le Petit Bistro" in names
-    # Louvre Museum is at distance 0 but wrong category, so must be excluded.
-    assert "Louvre Museum" not in names
+    assert POI_A["name"] not in names
 
 
 def test_boundary_poi_just_outside_radius_excluded() -> None:
-    distance = _haversine_km(*LOUVRE, *BRITISH_MUSEUM)
-    lat, lon = LOUVRE
-    args = PoiSearchArgs(lat=lat, lon=lon, category="museum", radius_km=distance - 0.5)
+    distance = _haversine_km(POI_A["lat"], POI_A["lon"], POI_B["lat"], POI_B["lon"])
+    args = PoiSearchArgs(
+        lat=POI_A["lat"], lon=POI_A["lon"], category=POI_A["category"], radius_km=distance - 0.5
+    )
     result = poi_search(args)
     names = [poi.name for poi in result.pois]
-    assert "British Museum" not in names
-    assert "Louvre Museum" in names
+    assert POI_B["name"] not in names
+    assert POI_A["name"] in names
 
 
 def test_boundary_poi_just_inside_radius_included() -> None:
-    distance = _haversine_km(*LOUVRE, *BRITISH_MUSEUM)
-    lat, lon = LOUVRE
-    args = PoiSearchArgs(lat=lat, lon=lon, category="museum", radius_km=distance + 0.5)
+    distance = _haversine_km(POI_A["lat"], POI_A["lon"], POI_B["lat"], POI_B["lon"])
+    args = PoiSearchArgs(
+        lat=POI_A["lat"], lon=POI_A["lon"], category=POI_A["category"], radius_km=distance + 0.5
+    )
     result = poi_search(args)
     names = [poi.name for poi in result.pois]
-    assert "British Museum" in names
+    assert POI_B["name"] in names
 
 
 def test_invalid_lat_raises_validation_error() -> None:
@@ -61,14 +81,15 @@ def test_zero_radius_raises_validation_error() -> None:
 
 
 def test_empty_matches_returns_empty_list_not_error() -> None:
-    args = PoiSearchArgs(lat=0.0, lon=0.0, category="museum", radius_km=1.0)
+    args = PoiSearchArgs(lat=0.0, lon=0.0, category="nonexistent-category", radius_km=1.0)
     result = poi_search(args)
     assert result.pois == []
 
 
 def test_deterministic_repeated_calls_match() -> None:
-    lat, lon = LOUVRE
-    args = PoiSearchArgs(lat=lat, lon=lon, category="park", radius_km=5000.0)
+    args = PoiSearchArgs(
+        lat=POI_A["lat"], lon=POI_A["lon"], category=POI_A["category"], radius_km=5000.0
+    )
     result_a = poi_search(args)
     result_b = poi_search(args)
     assert result_a == result_b

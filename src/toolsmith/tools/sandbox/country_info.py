@@ -27,8 +27,8 @@ class CountryNotFoundError(ValueError):
     """Raised when the requested country is not present in the sandbox fixture."""
 
 
-# Inline fixture; replaced by loading
-# src/toolsmith/tools/sandbox/worlddata/countries.json in task P1-T14.
+# Inline fixture. P1-T14's world generator covers cities/weather/flights/FX/POIs only
+# (per the build spec) — country data is intentionally out of scope, kept as a fixture.
 _COUNTRY_FIXTURE: dict[str, dict[str, str | list[str]]] = {
     "france": {
         "country": "France",
