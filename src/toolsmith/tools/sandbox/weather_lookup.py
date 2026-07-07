@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
+import functools
+import json
+import math
 from datetime import date, timedelta
+from pathlib import Path
 
 from pydantic import BaseModel, Field
 
@@ -10,15 +14,8 @@ from toolsmith.tools.schemas import ToolSpec, registry
 
 SANDBOX_TODAY = date(2026, 9, 1)
 FORECAST_WINDOW_DAYS = 13
-
-# Fixed synthetic climate patterns: (summary, temp_c).
-_CLIMATE_PATTERNS: list[tuple[str, float]] = [
-    ("Sunny", 28.0),
-    ("Partly cloudy", 22.5),
-    ("Rain showers", 18.0),
-    ("Overcast", 20.0),
-    ("Clear skies", 25.0),
-]
+_EARTH_RADIUS_KM = 6371.0
+_WORLDDATA_DIR = Path(__file__).parent / "worlddata"
 
 
 class WeatherLookupOutOfRangeError(ValueError):
@@ -43,6 +40,26 @@ class WeatherLookupResult(BaseModel):
     temp_c: float
 
 
+@functools.cache
+def _load_world() -> tuple[list[dict[str, object]], dict[str, list[dict[str, object]]]]:
+    """Load and cache the generated cities table and per-city weather table."""
+    cities = json.loads((_WORLDDATA_DIR / "cities.json").read_text())
+    weather = json.loads((_WORLDDATA_DIR / "weather.json").read_text())
+    return cities, weather
+
+
+def _haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
+    phi1, phi2 = math.radians(lat1), math.radians(lat2)
+    d_phi = math.radians(lat2 - lat1)
+    d_lambda = math.radians(lon2 - lon1)
+    a = math.sin(d_phi / 2) ** 2 + math.cos(phi1) * math.cos(phi2) * math.sin(d_lambda / 2) ** 2
+    return 2 * _EARTH_RADIUS_KM * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+
+def _nearest_city(lat: float, lon: float, cities: list[dict[str, object]]) -> dict[str, object]:
+    return min(cities, key=lambda c: _haversine_km(lat, lon, c["lat"], c["lon"]))
+
+
 def weather_lookup(args: WeatherLookupArgs) -> WeatherLookupResult:
     """Return deterministic synthetic weather for a lat/lon and date within the sandbox window."""
     window_end = SANDBOX_TODAY + timedelta(days=FORECAST_WINDOW_DAYS)
@@ -52,18 +69,17 @@ def weather_lookup(args: WeatherLookupArgs) -> WeatherLookupResult:
             f"[{SANDBOX_TODAY}, {window_end}]"
         )
 
-    # Deterministic index from lat/lon/day-offset; replaced by loading
-    # src/toolsmith/tools/sandbox/worlddata/weather.json in task P1-T14.
+    cities, weather = _load_world()
+    nearest = _nearest_city(args.lat, args.lon, cities)
     offset = (args.date - SANDBOX_TODAY).days
-    index = (round(args.lat) + round(args.lon) + offset) % len(_CLIMATE_PATTERNS)
-    summary, temp_c = _CLIMATE_PATTERNS[index]
+    day = weather[nearest["name"]][offset]
 
     return WeatherLookupResult(
         lat=args.lat,
         lon=args.lon,
         date=args.date,
-        summary=summary,
-        temp_c=temp_c,
+        summary=day["summary"],
+        temp_c=day["temp_c"],
     )
 
 
