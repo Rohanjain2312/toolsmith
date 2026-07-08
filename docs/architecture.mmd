@@ -1,0 +1,34 @@
+graph TD
+    subgraph sandbox["Sandbox Environment (Phase 1)"]
+        Tools["12-Tool Registry<br/>sandbox + real impls"]
+        Parser["Tool-call Parser"]
+        Runner["Episode Runner<br/>generate -> parse -> execute"]
+        Tools --> Runner
+        Parser --> Runner
+    end
+
+    subgraph data["Task Data (Phase 2)"]
+        Gen["Claude-generated Tasks"] --> Solver["BFS Solver<br/>proves solvability"]
+        Solver --> Dataset["toolsmith-tasks<br/>HF Dataset"]
+    end
+
+    subgraph training["Training (Phases 3-4)"]
+        Dataset --> SFT["SFT Warm-Start<br/>LoRA, Unsloth"]
+        SFT --> Decision["Decision-Point<br/>Extractor"]
+        Decision --> GRPO["Step-Level GRPO<br/>TRL GRPOTrainer"]
+        Reward["Composite Reward<br/>R1-R6 + penalties"] --> GRPO
+        Runner --> Reward
+    end
+
+    subgraph evaluation["Evaluation (Phase 5)"]
+        GRPO --> Eval["Eval Runner<br/>4-way comparison"]
+        Eval --> BFCL["BFCL AST subsets"]
+        Eval --> Judge["LLM Judge"]
+        Eval --> Stats["Bootstrap CIs + Plots"]
+    end
+
+    subgraph serving["Serving + Demo (Phase 7)"]
+        GRPO --> GGUF["GGUF Export<br/>Q4_K_M"]
+        GGUF --> MCP["FastMCP Server"]
+        GGUF --> Space["Gradio Space<br/>Replay + Live tabs"]
+    end
