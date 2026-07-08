@@ -42,7 +42,7 @@
 
 # %%
 # Colab-only install cell. Skip if the environment already has these.
-# %pip install -q "unsloth @ git+https://github.com/unslothai/unsloth.git" trl vllm wandb datasets
+# %pip install -q "unsloth @ git+https://github.com/unslothai/unsloth.git" unsloth_zoo trl vllm wandb datasets bitsandbytes
 
 # %%
 import json

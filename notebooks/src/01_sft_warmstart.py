@@ -36,7 +36,7 @@
 
 # %%
 # Colab-only install cell. Skip if the environment already has these.
-# %pip install -q "unsloth @ git+https://github.com/unslothai/unsloth.git" trl wandb datasets bitsandbytes
+# %pip install -q "unsloth @ git+https://github.com/unslothai/unsloth.git" unsloth_zoo trl wandb datasets bitsandbytes
 
 # %%
 import os

@@ -28,7 +28,7 @@
 
 # %%
 # Colab-only install cell. Skip if the environment already has these.
-# %pip install -q "unsloth @ git+https://github.com/unslothai/unsloth.git"
+# %pip install -q "unsloth @ git+https://github.com/unslothai/unsloth.git" unsloth_zoo bitsandbytes
 
 # %%
 import os
