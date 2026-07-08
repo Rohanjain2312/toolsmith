@@ -1,13 +1,21 @@
-"""ToolSmith Gradio Space: two-tab demo shell (Replay default, Live second).
+"""ToolSmith Gradio Space: two-tab demo (Replay default, Live second).
 
-No inference wiring yet — that lands in replay_tab.py / live_tab.py. This file just builds the
-layout: theme, expectation banner, and tab order (Replay first = default landing tab, so a
+Layout: theme, expectation banner, and tab order (Replay first = default landing tab, so a
 recruiter sees curated results in seconds; Live second, since the free-CPU Space is slow).
+Tab bodies are wired in from replay_tab.py / live_tab.py.
 """
 
 from __future__ import annotations
 
 import gradio as gr
+
+try:
+    # Flat layout: how this file actually runs once pushed as an HF Space repo root
+    # (app.py, replay_tab.py, live_tab.py all sit side by side there, no "space" package).
+    from replay_tab import build_replay_tab
+except ImportError:
+    # Package layout: how it runs inside THIS repo (pytest, `python -m space.app`).
+    from space.replay_tab import build_replay_tab
 
 COLAB_LINK = (
     "https://colab.research.google.com/github/Rohanjain2312/toolsmith/blob/main/"
@@ -26,7 +34,7 @@ def build_app() -> gr.Blocks:
 
         with gr.Tabs():
             with gr.Tab("Replay (instant)"):  # first tab = default landing tab
-                gr.Markdown("Curated SFT vs GRPO trajectory comparisons — coming in P7-T05.")
+                build_replay_tab()
             with gr.Tab("Live"):
                 gr.Markdown("Run a live task against the model (sandbox mode) — coming in P7-T06.")
 
