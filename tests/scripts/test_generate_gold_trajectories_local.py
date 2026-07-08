@@ -7,6 +7,7 @@ from scripts.generate_gold_trajectories_local import (
     _final_answer,
     build_gold_trajectories,
     build_scripted_responses,
+    load_train_tasks_stratified,
 )
 
 import toolsmith.tools.sandbox  # noqa: F401  (registers all 12 sandbox tools)
@@ -108,6 +109,34 @@ def test_build_scripted_responses_multi_step_chain() -> None:
     responses = build_scripted_responses(spec)
 
     assert len(responses) == 3
+
+
+def test_load_train_tasks_stratified_covers_all_tiers_even_when_file_is_tier_grouped(
+    tmp_path,
+) -> None:
+    # Regression test: scripts/generate_tasks_local.py writes one tier's tasks at a time (all
+    # T1, then all T2, ...), so a plain "first N in file order" cap would silently produce zero
+    # T3/T4 examples. This must spread the cap evenly across tiers instead.
+    path = tmp_path / "tasks.jsonl"
+    goal_spec = [ToolWasCalledWithCondition(tool_name="geocode_city", args={"city": "Paris"})]
+    specs = [
+        TaskSpec(
+            id=f"{tier.lower()}-{i}",
+            tier=tier,
+            user_prompt="x",
+            goal_spec=goal_spec,
+            min_steps=1,
+            split="train",
+        )
+        for tier in ("T1", "T2", "T3", "T4")
+        for i in range(30)
+    ]
+    path.write_text("\n".join(s.model_dump_json() for s in specs) + "\n")
+
+    selected = load_train_tasks_stratified(path, count=20)
+
+    assert {s.tier for s in selected} == {"T1", "T2", "T3", "T4"}
+    assert len(selected) == 20
 
 
 def test_decline_answer_contains_the_required_fact() -> None:

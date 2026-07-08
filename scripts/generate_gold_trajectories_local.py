@@ -24,17 +24,41 @@ from scripts.generate_gold_trajectories import (
     GOLD_SFT_OUTPUT_PATH,
     GOLD_TRAJECTORY_DIR,
     generate_gold_trajectory,
-    load_train_tasks,
     write_gold_sft_rows,
 )
 from toolsmith.data.taskspec import (
     AnswerContainsFactCondition,
     TaskSpec,
+    Tier,
     ToolWasCalledWithCondition,
 )
 from toolsmith.env.executor import execute_tool_call
 from toolsmith.env.model import StubModel
 from toolsmith.env.state import EpisodeState
+
+_TIERS: tuple[Tier, ...] = ("T1", "T2", "T3", "T4")
+
+
+def load_train_tasks_stratified(path: Path, count: int = 200) -> list[TaskSpec]:
+    """Load up to `count` train-split TaskSpecs, spread evenly across all four tiers.
+
+    scripts.generate_gold_trajectories.load_train_tasks takes the first `count` train tasks in
+    file order -- fine for API-generated data where tiers are interleaved, but this repo's local
+    generator (scripts/generate_tasks_local.py) writes one tier's tasks at a time, so a plain
+    file-order cap would silently produce zero T3/T4 examples: exactly the multi-step and
+    trap/refusal behavior most worth distilling into the gold SFT set.
+    """
+    by_tier: dict[str, list[TaskSpec]] = {tier: [] for tier in _TIERS}
+    for line in path.read_text().splitlines():
+        if not line.strip():
+            continue
+        spec = TaskSpec.model_validate_json(line)
+        if spec.split == "train":
+            by_tier[spec.tier].append(spec)
+
+    per_tier = count // len(_TIERS)
+    selected = [spec for tier in _TIERS for spec in by_tier[tier][:per_tier]]
+    return selected[:count]
 
 
 def _final_answer(tool_name: str, result: dict) -> str:
@@ -167,7 +191,7 @@ def build_gold_trajectories(specs: list[TaskSpec], trajectory_dir: Path) -> list
 def main() -> int:
     tasks_path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("results/tasks.jsonl")
     output_path = Path(sys.argv[2]) if len(sys.argv) > 2 else GOLD_SFT_OUTPUT_PATH
-    specs = load_train_tasks(tasks_path)
+    specs = load_train_tasks_stratified(tasks_path)
 
     states = build_gold_trajectories(specs, GOLD_TRAJECTORY_DIR)
     write_gold_sft_rows(states, output_path)
