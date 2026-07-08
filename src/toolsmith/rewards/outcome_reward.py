@@ -81,6 +81,8 @@ def _build_continuation_state(
     task_id: str, prefix: list[dict[str, Any]], raw_text: str, frozen_model: Model
 ) -> EpisodeState:
     """Execute the candidate action, then roll the episode to completion with a frozen policy."""
+    import toolsmith.tools.sandbox  # noqa: F401  (registers all 12 sandbox tools)
+
     elapsed_turns = sum(1 for m in prefix if m["role"] == "assistant")
     messages = [*prefix, {"role": "assistant", "content": raw_text}]
 
