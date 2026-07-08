@@ -45,6 +45,18 @@ against the ToolSmith deterministic 12-tool sandbox.
 - `numeric_within_tolerance` — a number from the final answer or a tool result must be near
   an expected value
 
+## How This Dataset Is Used
+
+- **SFT** (`notebooks/src/01_sft_warmstart.py`): `train`-split tasks are replayed through the
+  Anthropic API inside the episode runner; trajectories whose goal spec passes become gold SFT
+  rows (`scripts/generate_gold_trajectories.py`).
+- **GRPO** (`notebooks/src/02_grpo_training.py`): `goal_spec` feeds the R5 outcome reward
+  (`src/toolsmith/rewards/outcome_reward.py`) directly — every candidate action is scored by
+  executing it in the sandbox and checking these same conditions. `min_steps` feeds the R6
+  efficiency bonus.
+- **Eval** (`src/toolsmith/eval/runner.py`): the `test` split is the held-out 4-way comparison
+  suite ({TEST_TASK_COUNT} tasks); see the model card's evaluation table for results.
+
 ## Contamination Controls
 
 SFT gold trajectories are drawn only from the `train` split; `test` never touches training.
