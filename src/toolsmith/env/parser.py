@@ -25,8 +25,12 @@ class ToolCallParseError(Exception):
     """Raised when text looks like a tool-call attempt but fails to parse."""
 
 
-def _find_balanced_brace_spans(text: str) -> list[str]:
-    """Return substrings of `text` for each top-level balanced `{...}` span."""
+def find_balanced_brace_spans(text: str) -> list[str]:
+    """Return substrings of `text` for each top-level balanced `{...}` span.
+
+    Public: also reused by eval/bfcl_adapter.py, which (unlike parse_model_output) needs ALL
+    spans in a response, not just the first, to support BFCL's "parallel" multi-call category.
+    """
     spans: list[str] = []
     depth = 0
     start = -1
@@ -74,7 +78,7 @@ def parse_model_output(text: str) -> ParsedToolCall | ParsedFinalAnswer:
     if "{" not in stripped:
         return ParsedFinalAnswer(text=stripped)
 
-    candidates = _find_balanced_brace_spans(stripped)
+    candidates = find_balanced_brace_spans(stripped)
     looked_like_attempt = False
 
     for candidate in candidates:
