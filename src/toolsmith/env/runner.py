@@ -15,6 +15,7 @@ from toolsmith.env.parser import (
     ToolCallParseError,
     parse_model_output,
 )
+from toolsmith.env.prompts import load_system_prompt_template
 from toolsmith.env.state import EpisodeState, EpisodeStatus, ToolCallLogEntry
 from toolsmith.env.truncation import truncate_tool_result
 
@@ -24,11 +25,7 @@ DEFAULT_TRAJECTORY_DIR = Path("results/trajectories")
 
 def build_system_prompt(tools: list[dict]) -> str:
     """Assemble a system prompt describing the tool-call protocol and available tools."""
-    lines = [
-        "You are a travel-ops assistant. Respond with EITHER a single JSON tool call "
-        '(e.g. {"tool": "<name>", "args": {...}}) OR a plain-text final answer.',
-        "Available tools:",
-    ]
+    lines = [load_system_prompt_template()]
     for tool in tools:
         fn = tool["function"]
         lines.append(f"- {fn['name']}: {fn['description']}")
