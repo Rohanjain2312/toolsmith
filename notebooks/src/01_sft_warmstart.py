@@ -37,7 +37,7 @@
 # %%
 # Colab-only install cell. Skip if the environment already has these.
 # %pip install -q "unsloth @ git+https://github.com/unslothai/unsloth.git" unsloth_zoo
-# %pip install -q trl wandb datasets bitsandbytes
+# %pip install -q "trl==0.24.0" wandb datasets bitsandbytes
 
 # %%
 import os
@@ -157,12 +157,12 @@ wandb.login(key=os.environ["WANDB_API_KEY"])
 
 trainer = SFTTrainer(
     model=model,
-    tokenizer=tokenizer,
+    processing_class=tokenizer,
     train_dataset=dataset,
-    dataset_text_field="text",
-    max_seq_length=MAX_SEQ_LENGTH,
-    packing=False,
     args=SFTConfig(
+        dataset_text_field="text",
+        max_length=MAX_SEQ_LENGTH,
+        packing=False,
         output_dir=DRIVE_CHECKPOINT_DIR,
         per_device_train_batch_size=BATCH_SIZE,
         gradient_accumulation_steps=GRAD_ACCUM_STEPS,
