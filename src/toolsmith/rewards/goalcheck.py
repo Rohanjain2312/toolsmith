@@ -13,7 +13,10 @@ from toolsmith.data.taskspec import (
 )
 from toolsmith.env.state import EpisodeState
 
-_NUMBER_PATTERN = re.compile(r"-?\d+\.?\d*")
+# (?<![\w-]) rejects a match glued directly to a preceding letter/digit/hyphen, so an id-like
+# token such as "UTC-5" or "FL0001" isn't mistaken for the intended standalone number -- a
+# real negative number (preceded by whitespace/punctuation) still matches normally.
+_NUMBER_PATTERN = re.compile(r"(?<![\w-])-?\d+\.?\d*")
 
 
 def check_goal(goal_spec: list[GoalCondition], state: EpisodeState) -> bool:

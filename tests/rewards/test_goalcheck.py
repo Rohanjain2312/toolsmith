@@ -162,6 +162,36 @@ def test_numeric_within_tolerance_from_final_answer() -> None:
     assert check_goal([condition], state) is True
 
 
+def test_numeric_within_tolerance_from_final_answer_skips_hyphenated_id_prefix() -> None:
+    # Regression test for BUGFIX-T04: a UTC offset like "UTC-5" earlier in the text must not be
+    # mistaken for the intended numeric answer.
+    condition = NumericWithinToleranceCondition(
+        expected=200.0, tolerance=5.0, source="final_answer"
+    )
+    state = _state(final_answer="The timezone is UTC-5, and your flight costs 200 USD.")
+
+    assert check_goal([condition], state) is True
+
+
+def test_numeric_within_tolerance_from_final_answer_skips_digits_glued_to_letters() -> None:
+    # Same underlying defect, broader trigger: digits glued directly to a letter (e.g. a flight
+    # ID like "FL0001", this sandbox's actual ID format) must not be read as the answer either.
+    condition = NumericWithinToleranceCondition(
+        expected=200.0, tolerance=5.0, source="final_answer"
+    )
+    state = _state(final_answer="Your flight FL0001 costs 200 USD.")
+
+    assert check_goal([condition], state) is True
+
+
+def test_numeric_within_tolerance_from_final_answer_still_extracts_legitimate_negative() -> None:
+    # A real negative number (preceded by whitespace, not glued to a letter) must still work.
+    condition = NumericWithinToleranceCondition(expected=-5.0, tolerance=1.0, source="final_answer")
+    state = _state(final_answer="The temperature is -5 degrees.")
+
+    assert check_goal([condition], state) is True
+
+
 def test_numeric_within_tolerance_missing_source_fails() -> None:
     condition = NumericWithinToleranceCondition(
         expected=5.5, tolerance=0.5, source="tool_result",
