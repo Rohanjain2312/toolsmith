@@ -3,13 +3,18 @@
 from __future__ import annotations
 
 from scripts.generate_gold_trajectories_local import (
+    _decline_answer,
     _final_answer,
     build_gold_trajectories,
     build_scripted_responses,
 )
 
 import toolsmith.tools.sandbox  # noqa: F401  (registers all 12 sandbox tools)
-from toolsmith.data.taskspec import TaskSpec, ToolWasCalledWithCondition
+from toolsmith.data.taskspec import (
+    AnswerContainsFactCondition,
+    TaskSpec,
+    ToolWasCalledWithCondition,
+)
 from toolsmith.env.state import EpisodeStatus
 from toolsmith.tools.sandbox.geocode_city import GeocodeCityArgs
 from toolsmith.tools.sandbox.geocode_city import geocode_city as real_geocode_city
@@ -105,14 +110,30 @@ def test_build_scripted_responses_multi_step_chain() -> None:
     assert len(responses) == 3
 
 
+def test_decline_answer_contains_the_required_fact() -> None:
+    for fact in ("cannot", "don't have", "clarify"):
+        assert fact in _decline_answer(fact)
+
+
+def test_build_scripted_responses_for_trap_task_has_no_tool_call() -> None:
+    spec = _spec("t4", [AnswerContainsFactCondition(fact="cannot")])
+
+    responses = build_scripted_responses(spec)
+
+    assert len(responses) == 1
+    assert "cannot" in responses[0]
+    assert '"tool"' not in responses[0]
+
+
 def test_build_gold_trajectories_all_pass_goal_check(tmp_path) -> None:
     distance_args = {"lat1": 0, "lon1": 0, "lat2": 1, "lon2": 1}
     specs = [
         _spec("t1", [ToolWasCalledWithCondition(tool_name="geocode_city", args={"city": "Tokyo"})]),
         _spec("t2", [ToolWasCalledWithCondition(tool_name="distance_calc", args=distance_args)]),
+        _spec("t4", [AnswerContainsFactCondition(fact="cannot")]),
     ]
 
     states = build_gold_trajectories(specs, tmp_path)
 
-    assert len(states) == 2
+    assert len(states) == 3
     assert all(state.status == EpisodeStatus.FINAL_ANSWER for state in states)

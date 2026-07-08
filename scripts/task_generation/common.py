@@ -61,6 +61,55 @@ POI_CATEGORIES = ["landmark", "market", "museum", "park", "restaurant", "temple"
 PACKING_CLIMATES = ["tropical", "desert", "temperate", "cold", "alpine"]
 WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
+# Real-world cities NOT present in worlddata/cities.json's 50-city fixture -- for T4 "trap"
+# tasks where the correct behavior is to recognize the sandbox has no data, not to invent it.
+ABSENT_CITIES = [
+    "Barcelona",
+    "Munich",
+    "Miami",
+    "Boston",
+    "San Francisco",
+    "Osaka",
+    "Kyoto",
+    "Hanoi",
+    "Karachi",
+    "Riyadh",
+    "Doha",
+    "Tel Aviv",
+    "Havana",
+    "Montreal",
+    "Edinburgh",
+    "Prague",
+    "Budapest",
+    "Helsinki",
+    "Brussels",
+    "Geneva",
+]
+
+# Real-world countries NOT present in the country_info sandbox tool's 8-country fixture.
+ABSENT_COUNTRIES = [
+    "Germany",
+    "Italy",
+    "Spain",
+    "Canada",
+    "Mexico",
+    "India",
+    "China",
+    "Nigeria",
+    "Kenya",
+    "Turkey",
+    "Russia",
+    "Thailand",
+    "Singapore",
+    "Indonesia",
+    "New Zealand",
+    "Switzerland",
+    "Sweden",
+    "Poland",
+    "Greece",
+    "Chile",
+]
+
 
 def load_world() -> dict[str, object]:
     """Load the sandbox's fixed world-data fixtures used to ground generated tasks.
@@ -86,6 +135,11 @@ def load_world() -> dict[str, object]:
 def tool_cond(tool_name: str, args: dict) -> dict:
     """Build a `tool_was_called_with` goal-condition dict."""
     return {"type": "tool_was_called_with", "tool_name": tool_name, "args": args}
+
+
+def fact_cond(fact: str) -> dict:
+    """Build an `answer_contains_fact` goal-condition dict, for T4 trap tasks."""
+    return {"type": "answer_contains_fact", "fact": fact}
 
 
 def build_spec(tier: Tier, user_prompt: str, goal_spec: list[dict]) -> TaskSpec:

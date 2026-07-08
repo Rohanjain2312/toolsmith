@@ -27,7 +27,11 @@ from scripts.generate_gold_trajectories import (
     load_train_tasks,
     write_gold_sft_rows,
 )
-from toolsmith.data.taskspec import TaskSpec, ToolWasCalledWithCondition
+from toolsmith.data.taskspec import (
+    AnswerContainsFactCondition,
+    TaskSpec,
+    ToolWasCalledWithCondition,
+)
 from toolsmith.env.executor import execute_tool_call
 from toolsmith.env.model import StubModel
 from toolsmith.env.state import EpisodeState
@@ -92,13 +96,47 @@ def _final_answer(tool_name: str, result: dict) -> str:
     raise ValueError(f"no final-answer template for tool {tool_name!r}")
 
 
+_DECLINE_TEMPLATES = {
+    "cannot": (
+        "I'm sorry, but I cannot find that in my available data — "
+        "could you double-check the details?"
+    ),
+    "don't have": (
+        "I don't have that information in my system — is there anything else I can help with?"
+    ),
+    "clarify": (
+        "I'd need a bit more detail to help with that — could you clarify what "
+        "you're looking for?"
+    ),
+}
+
+
+def _decline_answer(fact: str) -> str:
+    """A short declining/clarifying final answer containing the goal's required fact substring.
+
+    For T4 "trap" tasks (goal_spec is a single answer_contains_fact condition): the correct
+    agent behavior is exactly this -- no tool call, a plain-text refusal or clarifying question.
+    """
+    template = _DECLINE_TEMPLATES.get(fact)
+    if template is None:
+        raise ValueError(f"no decline-answer template for fact {fact!r}")
+    return template
+
+
 def build_scripted_responses(spec: TaskSpec) -> list[str]:
     """Build the exact scripted turns a StubModel needs to satisfy spec's goal_spec.
 
-    One JSON tool-call turn per condition (executed for real to confirm it succeeds), then one
-    final-answer turn templated from the last tool's real result.
+    Two shapes, matching this repo's local task generator:
+    - tool_was_called_with conditions (T1-T3): one JSON tool-call turn per condition (executed
+      for real to confirm it succeeds), then one final-answer turn templated from the last
+      tool's real result.
+    - a single answer_contains_fact condition (T4 traps): no tool calls at all -- one
+      declining/clarifying final-answer turn containing the required fact substring.
     """
     import toolsmith.tools.sandbox  # noqa: F401  (registers all 12 sandbox tools)
+
+    if len(spec.goal_spec) == 1 and isinstance(spec.goal_spec[0], AnswerContainsFactCondition):
+        return [_decline_answer(spec.goal_spec[0].fact)]
 
     responses = []
     last_tool: str | None = None

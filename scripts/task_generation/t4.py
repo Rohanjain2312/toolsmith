@@ -1,144 +1,103 @@
-"""T4 archetypes: four-step chains, grounded via real sandbox tool execution."""
+"""T4 archetypes: traps -- requests the agent CANNOT satisfy by calling tools correctly
+(per data/prompts/t4.txt's tier spec). The correct behavior is to decline or ask for
+clarification, not to hallucinate a tool call with invented arguments, so every goal_spec here
+is a single `answer_contains_fact` condition (a short substring a correct declining/clarifying
+final answer must contain) -- never a tool_was_called_with condition.
+"""
 
 from __future__ import annotations
 
 import random
-from datetime import timedelta
 
-from scripts.task_generation.common import (
-    COUNTRY_CLIMATE,
-    COUNTRY_CURRENCY,
-    COUNTRY_FIXTURE_KEYS,
-    COUNTRY_TIMEZONE,
-    POI_CATEGORIES,
-    SANDBOX_TODAY,
-    build_spec,
-    tool_cond,
-)
+from scripts.task_generation.common import ABSENT_CITIES, ABSENT_COUNTRIES, build_spec, fact_cond
 from toolsmith.data.taskspec import TaskSpec
-from toolsmith.tools.sandbox.geocode_city import GeocodeCityArgs, geocode_city
 
 
-def full_trip_prep(rng: random.Random, cities: list[dict], n: int) -> list[TaskSpec]:
+def _trap(user_prompt: str, fact: str) -> TaskSpec:
+    return build_spec("T4", user_prompt, [fact_cond(fact)])
+
+
+def unknown_city(rng: random.Random, n: int) -> list[TaskSpec]:
+    """Ask about a real city absent from the sandbox's 50-city fixture."""
+    templates = [
+        "What's the weather like in {city} this week?",
+        "Can you find {city}'s coordinates for me?",
+        "What's the best way to get around {city}?",
+    ]
+    picks = rng.sample(ABSENT_CITIES, min(n, len(ABSENT_CITIES)))
+    return [_trap(rng.choice(templates).format(city=city), "cannot") for city in picks]
+
+
+def unknown_country(rng: random.Random, n: int) -> list[TaskSpec]:
+    """Ask about a real country absent from the country_info sandbox fixture."""
+    templates = [
+        "What currency does {country} use, and what plug type do I need?",
+        "Tell me about visiting {country} — currency and language.",
+    ]
+    picks = rng.sample(ABSENT_COUNTRIES, min(n, len(ABSENT_COUNTRIES)))
+    return [_trap(rng.choice(templates).format(country=c), "don't have") for c in picks]
+
+
+def missing_argument(rng: random.Random, cities: list[dict], n: int) -> list[TaskSpec]:
+    """Ask for something missing a required detail (amount, date, unit, title) -- city name
+    alone varies the phrasing without resolving the actual missing piece."""
+    templates = [
+        "Can you convert some money to euros for me?",
+        "Schedule a meeting for me sometime next week in {city}.",
+        "What's the weather going to be like on my trip to {city}?",
+        "Book me a flight to {city}.",
+        "Convert this measurement for me.",
+        "What should I pack for my trip to {city}?",
+    ]
     specs = []
     for _ in range(n):
         c = rng.choice(cities)
-        d = (SANDBOX_TODAY + timedelta(days=rng.randint(0, 13))).isoformat()
-        trip_days = rng.randint(3, 14)
-        category = rng.choice(POI_CATEGORIES)
-        real = geocode_city(GeocodeCityArgs(city=c["name"]))
-        specs.append(
-            build_spec(
-                "T4",
-                f"I'm planning a {trip_days}-day trip to {c['name']} starting {d}. Find its "
-                f"location, check the weather, find nearby {category}s, and tell me what to "
-                f"pack for its {c['climate']} climate.",
-                [
-                    tool_cond("geocode_city", {"city": c["name"]}),
-                    tool_cond("weather_lookup", {"lat": real.lat, "lon": real.lon, "date": d}),
-                    tool_cond(
-                        "poi_search",
-                        {"lat": real.lat, "lon": real.lon, "category": category, "radius_km": 5.0},
-                    ),
-                    tool_cond(
-                        "packing_rules", {"climate": c["climate"], "trip_length_days": trip_days}
-                    ),
-                ],
-            )
-        )
+        specs.append(_trap(rng.choice(templates).format(city=c["name"]), "clarify"))
     return specs
 
 
-def flight_currency_geocode_weather(
-    rng: random.Random, flights: list[dict], cities: list[dict], n: int
+def unroutable_flight(
+    rng: random.Random, cities: list[dict], flights: list[dict], n: int
 ) -> list[TaskSpec]:
-    city_by_code = {c["code"]: c for c in cities}
-    candidates = [f for f in flights if f["dest"] in city_by_code]
-    specs = []
-    for f in rng.sample(candidates, min(n, len(candidates))):
-        dest_city = city_by_code[f["dest"]]
-        d = f["depart"].split("T")[0]
-        real = geocode_city(GeocodeCityArgs(city=dest_city["name"]))
-        specs.append(
-            build_spec(
-                "T4",
-                f"Find a flight from {f['origin']} to {f['dest']} on {d}, convert the price to "
-                f"USD, then look up {dest_city['name']}'s location and weather that day.",
-                [
-                    tool_cond(
-                        "flight_search", {"origin": f["origin"], "dest": f["dest"], "date": d}
-                    ),
-                    tool_cond(
-                        "currency_convert",
-                        {
-                            "amount": f["price"],
-                            "from_currency": f["currency"],
-                            "to_currency": "USD",
-                        },
-                    ),
-                    tool_cond("geocode_city", {"city": dest_city["name"]}),
-                    tool_cond("weather_lookup", {"lat": real.lat, "lon": real.lon, "date": d}),
-                ],
-            )
-        )
-    return specs
+    """Ask for a flight between two real cities with no direct route in the sandbox data."""
+    routed = {(f["origin"], f["dest"]) for f in flights}
+    codes = [c["code"] for c in cities]
+    candidates: list[tuple[str, str]] = []
+    for _ in range(n * 20):
+        origin, dest = rng.sample(codes, 2)
+        if (origin, dest) not in routed:
+            candidates.append((origin, dest))
+        if len(candidates) >= n:
+            break
+    return [
+        _trap(f"Find me a direct flight from {origin} to {dest} next week.", "cannot")
+        for origin, dest in candidates
+    ]
 
 
-def country_currency_packing_calendar(
-    rng: random.Random, currencies: list[str], n: int
-) -> list[TaskSpec]:
+def no_data_capability(rng: random.Random, cities: list[dict], n: int) -> list[TaskSpec]:
+    """Ask for information no sandbox tool provides (ratings, reviews, historical data)."""
+    templates = [
+        "What's the best-rated restaurant in {city}?",
+        "What was the temperature in {city} last month?",
+        "Which hotel in {city} has the most 5-star reviews?",
+        "How crowded is the museum near {city} usually?",
+        "What's the exchange rate trend for USD to EUR over the past year?",
+    ]
     specs = []
-    for i in range(n):
-        country = COUNTRY_FIXTURE_KEYS[i % len(COUNTRY_FIXTURE_KEYS)]
-        my_currency = rng.choice([c for c in currencies if c != COUNTRY_CURRENCY[country]])
-        amount = round(rng.uniform(100, 3000), 2)
-        trip_days = rng.randint(3, 14)
-        d = SANDBOX_TODAY + timedelta(days=rng.randint(0, 13))
-        start_hour = rng.randint(8, 18)
-        start = f"{d.isoformat()}T{start_hour:02d}:00:00"
-        end = f"{d.isoformat()}T{start_hour + 1:02d}:00:00"
-        specs.append(
-            build_spec(
-                "T4",
-                f"I'm visiting {country} for {trip_days} days with {amount} {my_currency}. "
-                f"Look up the country, convert my money, tell me what to pack, and schedule "
-                f"an arrival check-in from {start_hour}:00 to {start_hour + 1}:00 on "
-                f"{d.isoformat()} local time.",
-                [
-                    tool_cond("country_info", {"country": country}),
-                    tool_cond(
-                        "currency_convert",
-                        {
-                            "amount": amount,
-                            "from_currency": my_currency,
-                            "to_currency": COUNTRY_CURRENCY[country],
-                        },
-                    ),
-                    tool_cond(
-                        "packing_rules",
-                        {"climate": COUNTRY_CLIMATE[country], "trip_length_days": trip_days},
-                    ),
-                    tool_cond(
-                        "calendar_create_event",
-                        {
-                            "title": "Arrival check-in",
-                            "start": start,
-                            "end": end,
-                            "timezone": COUNTRY_TIMEZONE[country],
-                        },
-                    ),
-                ],
-            )
-        )
+    for _ in range(n):
+        c = rng.choice(cities)
+        specs.append(_trap(rng.choice(templates).format(city=c["name"]), "don't have"))
     return specs
 
 
 def generate(rng: random.Random, world: dict, per_archetype: int) -> list[TaskSpec]:
-    """Generate T4 tasks across 3 four-step chain archetypes, ~per_archetype instances each."""
+    """Generate T4 trap tasks across 5 archetypes, ~per_archetype instances each."""
     cities, flights = world["cities"], world["flights"]
-    currencies = [*world["fx_rates"].keys(), "USD"]
     return [
-        *full_trip_prep(rng, cities, per_archetype),
-        *flight_currency_geocode_weather(rng, flights, cities, per_archetype),
-        *country_currency_packing_calendar(rng, currencies, per_archetype),
+        *unknown_city(rng, per_archetype),
+        *unknown_country(rng, per_archetype),
+        *missing_argument(rng, cities, per_archetype),
+        *unroutable_flight(rng, cities, flights, per_archetype),
+        *no_data_capability(rng, cities, per_archetype),
     ]

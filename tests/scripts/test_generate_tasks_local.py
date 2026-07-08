@@ -14,7 +14,7 @@ from scripts.generate_tasks_local import generate_all
 from scripts.task_generation import common, t1, t2, t3, t4
 
 import toolsmith.tools.sandbox  # noqa: F401  (registers all 12 sandbox tools)
-from toolsmith.data.taskspec import ToolWasCalledWithCondition
+from toolsmith.data.taskspec import AnswerContainsFactCondition, ToolWasCalledWithCondition
 from toolsmith.env.executor import execute_tool_call
 
 _ALL_TOOL_NAMES = {
@@ -92,18 +92,21 @@ def test_t3_generate_produces_valid_executable_tasks() -> None:
     specs = t3.generate(rng, world, 5)
 
     assert all(spec.tier == "T3" for spec in specs)
-    assert all(len(spec.goal_spec) == 3 for spec in specs)
+    assert all(4 <= len(spec.goal_spec) <= 6 for spec in specs)
     _assert_goal_spec_executes(specs)
 
 
-def test_t4_generate_produces_valid_executable_tasks() -> None:
+def test_t4_generate_produces_unsolvable_trap_tasks() -> None:
+    # T4 is "traps" (data/prompts/t4.txt): every goal_spec is a single answer_contains_fact
+    # condition, never a tool call -- the correct agent behavior is to decline/clarify, so
+    # min_steps must be 0 and there is nothing to execute against the sandbox.
     rng = random.Random(common.SEED)
     world = common.load_world()
     specs = t4.generate(rng, world, 5)
 
     assert all(spec.tier == "T4" for spec in specs)
-    assert all(len(spec.goal_spec) == 4 for spec in specs)
-    _assert_goal_spec_executes(specs)
+    assert all(len(spec.goal_spec) == 1 for spec in specs)
+    assert all(isinstance(spec.goal_spec[0], AnswerContainsFactCondition) for spec in specs)
 
 
 def test_generate_all_covers_all_four_tiers() -> None:
