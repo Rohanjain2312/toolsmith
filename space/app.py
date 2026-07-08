@@ -12,9 +12,11 @@ import gradio as gr
 try:
     # Flat layout: how this file actually runs once pushed as an HF Space repo root
     # (app.py, replay_tab.py, live_tab.py all sit side by side there, no "space" package).
+    from live_tab import build_live_tab
     from replay_tab import build_replay_tab
 except ImportError:
     # Package layout: how it runs inside THIS repo (pytest, `python -m space.app`).
+    from space.live_tab import build_live_tab
     from space.replay_tab import build_replay_tab
 
 COLAB_LINK = (
@@ -36,7 +38,7 @@ def build_app() -> gr.Blocks:
             with gr.Tab("Replay (instant)"):  # first tab = default landing tab
                 build_replay_tab()
             with gr.Tab("Live"):
-                gr.Markdown("Run a live task against the model (sandbox mode) — coming in P7-T06.")
+                build_live_tab()
 
     return demo
 
