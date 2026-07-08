@@ -1,0 +1,13 @@
+diff --git a/src/toolsmith/rewards/outcome_reward.py b/src/toolsmith/rewards/outcome_reward.py
+index b8d5878..9d6bc7f 100644
+--- a/src/toolsmith/rewards/outcome_reward.py
++++ b/src/toolsmith/rewards/outcome_reward.py
+@@ -23,7 +23,7 @@ from toolsmith.env.state import EpisodeState, EpisodeStatus, ToolCallLogEntry
+ from toolsmith.env.truncation import truncate_tool_result
+ from toolsmith.rewards.goalcheck import check_goal
+ 
+-R5_GOAL_SATISFIED = 3.0
++R5_GOAL_SATISFIED = 1.5  # intentional regression: was 3.0
+ DEFAULT_CACHE_PATH = Path("results/r5_cache.json")
+ 
+ 
