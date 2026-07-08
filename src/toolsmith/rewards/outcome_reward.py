@@ -77,12 +77,46 @@ class ContinuationCache:
         return self.hits / total if total else 0.0
 
 
+def _reconstruct_prior_tool_calls(prefix: list[dict[str, Any]]) -> list[ToolCallLogEntry]:
+    """Re-derive ToolCallLogEntry objects for every tool call already made earlier in `prefix`.
+
+    A decision point's prefix carries only raw messages (system/user/assistant/tool), not the
+    original episode's ToolCallLogEntry list, so a candidate rolled out from a prefix beyond
+    turn 0 would otherwise start from an empty tool_calls history. Sandbox determinism (same
+    input -> identical output, always) guarantees re-executing the same (tool, args) pair
+    reproduces the original ok/result/error exactly, so this recovers real values instead of
+    guessing them from the logged message text.
+
+    Every assistant message inside `prefix` is guaranteed to be a tool-call turn: a prefix is
+    always `state.messages[:index]` for some assistant-turn index (decision_points.py), and an
+    episode terminates immediately on its first final answer or parse failure, so no assistant
+    turn before the last one can be anything but a successful parse of a tool call.
+    """
+    entries: list[ToolCallLogEntry] = []
+    for turn, message in enumerate(m for m in prefix if m["role"] == "assistant"):
+        parsed = parse_model_output(message["content"])
+        assert isinstance(parsed, ParsedToolCall)
+        exec_result = execute_tool_call(parsed.name, parsed.args)
+        entries.append(
+            ToolCallLogEntry(
+                turn=turn,
+                tool_name=parsed.name,
+                args=parsed.args,
+                ok=exec_result.ok,
+                result=exec_result.result,
+                error=exec_result.error,
+            )
+        )
+    return entries
+
+
 def _build_continuation_state(
     task_id: str, prefix: list[dict[str, Any]], raw_text: str, frozen_model: Model
 ) -> EpisodeState:
     """Execute the candidate action, then roll the episode to completion with a frozen policy."""
     import toolsmith.tools.sandbox  # noqa: F401  (registers all 12 sandbox tools)
 
+    prior_tool_calls = _reconstruct_prior_tool_calls(prefix)
     elapsed_turns = sum(1 for m in prefix if m["role"] == "assistant")
     messages = [*prefix, {"role": "assistant", "content": raw_text}]
 
@@ -92,6 +126,7 @@ def _build_continuation_state(
         return EpisodeState(
             task_id=task_id,
             messages=messages,
+            tool_calls=prior_tool_calls,
             turn=elapsed_turns,
             status=EpisodeStatus.PARSE_FAILURE,
         )
@@ -100,6 +135,7 @@ def _build_continuation_state(
         return EpisodeState(
             task_id=task_id,
             messages=messages,
+            tool_calls=prior_tool_calls,
             turn=elapsed_turns,
             status=EpisodeStatus.FINAL_ANSWER,
             final_answer=parsed.text,
@@ -108,6 +144,7 @@ def _build_continuation_state(
     assert isinstance(parsed, ParsedToolCall)
     exec_result = execute_tool_call(parsed.name, parsed.args)
     tool_calls = [
+        *prior_tool_calls,
         ToolCallLogEntry(
             turn=elapsed_turns,
             tool_name=parsed.name,
@@ -115,7 +152,7 @@ def _build_continuation_state(
             ok=exec_result.ok,
             result=exec_result.result,
             error=exec_result.error,
-        )
+        ),
     ]
     tool_content = (
         truncate_tool_result(exec_result.result)
