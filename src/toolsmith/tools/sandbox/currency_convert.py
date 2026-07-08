@@ -70,6 +70,10 @@ def currency_convert(args: CurrencyConvertArgs) -> CurrencyConvertResult:
     )
 
 
+# Deferred: tools.real.currency_convert imports these Args/Result classes back from this
+# module, so importing it at the top would be circular.
+from toolsmith.tools.real.currency_convert import currency_convert_real  # noqa: E402
+
 registry.register(
     ToolSpec(
         name="currency_convert",
@@ -77,5 +81,6 @@ registry.register(
         args_model=CurrencyConvertArgs,
         returns_model=CurrencyConvertResult,
         sandbox_fn=currency_convert,
+        real_fn=currency_convert_real,
     )
 )

@@ -98,6 +98,10 @@ def country_info(args: CountryInfoArgs) -> CountryInfoResult:
     return CountryInfoResult(**entry)  # type: ignore[arg-type]
 
 
+# Deferred: tools.real.country_info imports these Args/Result classes back from this
+# module, so importing it at the top would be circular.
+from toolsmith.tools.real.country_info import country_info_real  # noqa: E402
+
 registry.register(
     ToolSpec(
         name="country_info",
@@ -105,5 +109,6 @@ registry.register(
         args_model=CountryInfoArgs,
         returns_model=CountryInfoResult,
         sandbox_fn=country_info,
+        real_fn=country_info_real,
     )
 )

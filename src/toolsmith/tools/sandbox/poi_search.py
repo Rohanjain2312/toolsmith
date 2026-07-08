@@ -82,6 +82,10 @@ def poi_search(args: PoiSearchArgs) -> PoiSearchResult:
     return PoiSearchResult(pois=matches)
 
 
+# Deferred: tools.real.poi_search imports these Args/Result classes back from this
+# module, so importing it at the top would be circular.
+from toolsmith.tools.real.poi_search import poi_search_real  # noqa: E402
+
 registry.register(
     ToolSpec(
         name="poi_search",
@@ -89,5 +93,6 @@ registry.register(
         args_model=PoiSearchArgs,
         returns_model=PoiSearchResult,
         sandbox_fn=poi_search,
+        real_fn=poi_search_real,
     )
 )

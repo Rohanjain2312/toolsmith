@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from pathlib import Path
+import os
 
 import gradio as gr
 import pytest
@@ -38,25 +38,23 @@ def test_run_live_task_final_answer_only_yields_once(monkeypatch: pytest.MonkeyP
     assert updates[0]["final_answer"] == "No tool needed, the answer is 42."
 
 
-def test_run_live_task_sandbox_mode_by_default(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-) -> None:
+def test_run_live_task_sandbox_mode_by_default(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(live_tab, "_build_model", lambda: StubModel(["ok"]))
+    # Establishes monkeypatch's ownership of this env var *before* run_live_task's own raw
+    # os.environ[...] = ... write, so pytest restores the true original at teardown either
+    # way — otherwise that write leaks TOOLSMITH_MODE into every later test in the session.
     monkeypatch.delenv("TOOLSMITH_MODE", raising=False)
 
     list(run_live_task("hi", real_mode=False))
-
-    import os
 
     assert os.environ["TOOLSMITH_MODE"] == "sandbox"
 
 
 def test_run_live_task_real_mode_sets_env_var(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(live_tab, "_build_model", lambda: StubModel(["ok"]))
+    monkeypatch.delenv("TOOLSMITH_MODE", raising=False)  # see comment above
 
     list(run_live_task("hi", real_mode=True))
-
-    import os
 
     assert os.environ["TOOLSMITH_MODE"] == "real"
 

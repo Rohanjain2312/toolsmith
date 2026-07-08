@@ -54,6 +54,10 @@ def calendar_create_event(args: CalendarCreateEventArgs) -> CalendarCreateEventR
     return CalendarCreateEventResult(event_id=event_id, status="confirmed")
 
 
+# Deferred: tools.real.calendar_create_event imports these Args/Result classes back from this
+# module, so importing it at the top would be circular.
+from toolsmith.tools.real.calendar_create_event import calendar_create_event_real  # noqa: E402
+
 registry.register(
     ToolSpec(
         name="calendar_create_event",
@@ -61,5 +65,6 @@ registry.register(
         args_model=CalendarCreateEventArgs,
         returns_model=CalendarCreateEventResult,
         sandbox_fn=calendar_create_event,
+        real_fn=calendar_create_event_real,
     )
 )

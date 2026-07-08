@@ -83,6 +83,10 @@ def weather_lookup(args: WeatherLookupArgs) -> WeatherLookupResult:
     )
 
 
+# Deferred: tools.real.weather_lookup imports these Args/Result classes back from this
+# module, so importing it at the top would be circular.
+from toolsmith.tools.real.weather_lookup import weather_lookup_real  # noqa: E402
+
 registry.register(
     ToolSpec(
         name="weather_lookup",
@@ -90,5 +94,6 @@ registry.register(
         args_model=WeatherLookupArgs,
         returns_model=WeatherLookupResult,
         sandbox_fn=weather_lookup,
+        real_fn=weather_lookup_real,
     )
 )

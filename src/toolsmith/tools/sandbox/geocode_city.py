@@ -55,6 +55,10 @@ def geocode_city(args: GeocodeCityArgs) -> GeocodeCityResult:
     )
 
 
+# Deferred: tools.real.geocode_city imports these Args/Result classes back from this
+# module, so importing it at the top would be circular.
+from toolsmith.tools.real.geocode_city import geocode_city_real  # noqa: E402
+
 registry.register(
     ToolSpec(
         name="geocode_city",
@@ -62,5 +66,6 @@ registry.register(
         args_model=GeocodeCityArgs,
         returns_model=GeocodeCityResult,
         sandbox_fn=geocode_city,
+        real_fn=geocode_city_real,
     )
 )

@@ -61,6 +61,10 @@ def flight_search(args: FlightSearchArgs) -> FlightSearchResult:
     return FlightSearchResult(flights=flights)
 
 
+# Deferred: tools.real.flight_search imports these Args/Result classes back from this
+# module, so importing it at the top would be circular.
+from toolsmith.tools.real.flight_search import flight_search_real  # noqa: E402
+
 registry.register(
     ToolSpec(
         name="flight_search",
@@ -68,5 +72,6 @@ registry.register(
         args_model=FlightSearchArgs,
         returns_model=FlightSearchResult,
         sandbox_fn=flight_search,
+        real_fn=flight_search_real,
     )
 )
