@@ -50,6 +50,14 @@ GRPO_CHECKPOINT_DIR = Path(
 GGUF_OUTPUT_DIR = Path("toolsmith_gguf")  # local scratch disk, not Drive (freed once pushed)
 
 # %%
+# Bridge Colab Secrets (key icon, left sidebar) into env vars the rest of this notebook reads
+# directly. Add HF_TOKEN there first, then grant this notebook access when prompted -- adding a
+# Colab secret does NOT auto-populate os.environ on its own.
+from google.colab import userdata  # noqa: E402 (Colab-only import, top-of-cell by design)
+
+os.environ["HF_TOKEN"] = userdata.get("HF_TOKEN")
+
+# %%
 # Mount Drive to read the GRPO checkpoint.
 from google.colab import drive  # noqa: E402 (Colab-only import, top-of-cell by design)
 

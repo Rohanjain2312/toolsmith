@@ -32,6 +32,15 @@
 # Colab secrets panel.
 
 # %%
+# Colab-only setup cell: clone the toolsmith repo and install it editable (matches README's
+# Quickstart install method) so later cells can `import toolsmith`, and so relative paths like
+# `results/tasks.jsonl` resolve against the cloned repo root. Skip if already cloned.
+# %cd /content
+# !git clone https://github.com/Rohanjain2312/toolsmith.git
+# %cd /content/toolsmith
+# %pip install -q -e .
+
+# %%
 # Colab-only install cell. Skip if the environment already has these.
 # %pip install -q "unsloth @ git+https://github.com/unslothai/unsloth.git" trl vllm wandb datasets
 
@@ -81,8 +90,21 @@ HF_MODEL_REPO = "rohanjain2312/toolsmith-qwen3-4b"
 
 DRIVE_CHECKPOINT_DIR = "/content/drive/MyDrive/toolsmith-checkpoints/grpo"
 R5_CACHE_PATH = Path("/content/drive/MyDrive/toolsmith-checkpoints/r5_cache.json")
-DECISION_POINTS_PATH = Path("results/decision_points.jsonl")
+# Matches where 01_sft_warmstart.py's final cell writes it
+# (f"{DRIVE_CHECKPOINT_DIR}/../decision_points.jsonl" there, with that notebook's own
+# sft_warmstart-specific DRIVE_CHECKPOINT_DIR) -- override to "results/decision_points.jsonl"
+# if you'd rather upload the file directly instead of reading it from Drive.
+DECISION_POINTS_PATH = Path("/content/drive/MyDrive/toolsmith-checkpoints/decision_points.jsonl")
 TASKS_PATH = Path("results/tasks.jsonl")
+
+# %%
+# Bridge Colab Secrets (key icon, left sidebar) into env vars the rest of this notebook reads
+# directly. Add HF_TOKEN and WANDB_API_KEY there first, then grant this notebook access when
+# prompted -- adding a Colab secret does NOT auto-populate os.environ on its own.
+from google.colab import userdata  # noqa: E402 (Colab-only import, top-of-cell by design)
+
+os.environ["HF_TOKEN"] = userdata.get("HF_TOKEN")
+os.environ["WANDB_API_KEY"] = userdata.get("WANDB_API_KEY")
 
 # %%
 # Mount Drive for checkpoint + R5-cache persistence across Colab sessions.

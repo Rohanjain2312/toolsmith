@@ -26,11 +26,21 @@
 # `HF_TOKEN` / `WANDB_API_KEY` in the Colab secrets panel.
 
 # %%
+# Colab-only setup cell: clone the toolsmith repo and install it editable (matches README's
+# Quickstart install method) so later cells can `import toolsmith`, and so relative paths like
+# `results/sft_public_data.jsonl` resolve against the cloned repo root. Skip if already cloned.
+# %cd /content
+# !git clone https://github.com/Rohanjain2312/toolsmith.git
+# %cd /content/toolsmith
+# %pip install -q -e .
+
+# %%
 # Colab-only install cell. Skip if the environment already has these.
 # %pip install -q "unsloth @ git+https://github.com/unslothai/unsloth.git" trl wandb datasets
 
 # %%
 import os
+from pathlib import Path
 
 import torch
 import wandb
@@ -59,6 +69,15 @@ HF_MODEL_REPO = "rohanjain2312/toolsmith-qwen3-4b"
 
 DRIVE_CHECKPOINT_DIR = "/content/drive/MyDrive/toolsmith-checkpoints/sft_warmstart"
 DATA_PATHS = ["results/sft_public_data.jsonl", "results/gold_trajectories.jsonl"]
+
+# %%
+# Bridge Colab Secrets (key icon, left sidebar) into env vars the rest of this notebook reads
+# directly. Add HF_TOKEN and WANDB_API_KEY there first, then grant this notebook access when
+# prompted -- adding a Colab secret does NOT auto-populate os.environ on its own.
+from google.colab import userdata  # noqa: E402 (Colab-only import, top-of-cell by design)
+
+os.environ["HF_TOKEN"] = userdata.get("HF_TOKEN")
+os.environ["WANDB_API_KEY"] = userdata.get("WANDB_API_KEY")
 
 # %%
 # Mount Drive for checkpoint persistence across Colab sessions.
@@ -160,3 +179,66 @@ model.save_pretrained(f"{DRIVE_CHECKPOINT_DIR}/lora_adapter")
 tokenizer.save_pretrained(f"{DRIVE_CHECKPOINT_DIR}/lora_adapter")
 model.push_to_hub(HF_MODEL_REPO, token=os.environ["HF_TOKEN"])
 tokenizer.push_to_hub(HF_MODEL_REPO, token=os.environ["HF_TOKEN"])
+
+# %%
+# --- Collect SFT-model trajectories + extract decision points, for 02_grpo_training.py ---
+# 02_grpo_training.py requires results/decision_points.jsonl, built from *SFT-model*
+# trajectories -- but the only other producer (scripts/collect_trajectories.py) needs a GGUF
+# file, and GGUF export (03_export_gguf.py) only happens after GRPO. Doing it here, right after
+# training while the model is still loaded, breaks that circular dependency: no GGUF needed.
+from toolsmith.data.decision_points import (  # noqa: E402 (Colab-only cell, top-of-cell by design)
+    extract_decision_points,
+    select_task_subset,
+    write_decision_points,
+)
+from toolsmith.data.taskspec import TaskSpec  # noqa: E402
+from toolsmith.env.model import Model  # noqa: E402
+from toolsmith.env.runner import run_episode  # noqa: E402
+
+
+class SftInferenceModel(Model):
+    """Adapts the just-trained SFT model as a Model, via plain transformers .generate()
+    (greedy) -- not Unsloth's fast_generate/for_inference helpers, since this cell runs once
+    and correctness matters more than speed here; see notebook 02's FastGenerateFrozenModel for
+    the vLLM-backed equivalent used during actual GRPO rollouts."""
+
+    def generate(self, messages: list[dict], tools: list[dict]) -> str:
+        prompt_text = tokenizer.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True
+        )
+        inputs = tokenizer(prompt_text, return_tensors="pt").to(model.device)
+        with torch.no_grad():
+            output_ids = model.generate(**inputs, max_new_tokens=512, do_sample=False)
+        return tokenizer.decode(
+            output_ids[0][inputs["input_ids"].shape[1] :], skip_special_tokens=True
+        )
+
+
+# Smaller than select_task_subset's 700-task default: this runs one episode at a time (no vLLM
+# batching) on a free T4, so 700 would be slow. Raise it if your time budget allows -- same kind
+# of tunable dial as NUM_EPOCHS/NUM_GENERATIONS above.
+DECISION_POINT_TASK_COUNT = 200
+DECISION_POINTS_OUTPUT = Path(f"{DRIVE_CHECKPOINT_DIR}/../decision_points.jsonl")
+
+train_specs = [
+    spec
+    for line in Path("results/tasks.jsonl").read_text().splitlines()
+    if line.strip()
+    for spec in [TaskSpec.model_validate_json(line)]
+    if spec.split == "train"
+]
+subset = select_task_subset(train_specs, count=DECISION_POINT_TASK_COUNT)
+
+sft_policy = SftInferenceModel()
+states = [
+    run_episode(
+        spec.id, spec.user_prompt, sft_policy, trajectory_dir=Path("/tmp/sft_trajectories")
+    )
+    for spec in subset
+]
+points = extract_decision_points(states)
+write_decision_points(points, DECISION_POINTS_OUTPUT)
+print(
+    f"wrote {len(points)} decision points from {len(states)} trajectories "
+    f"to {DECISION_POINTS_OUTPUT}"
+)
