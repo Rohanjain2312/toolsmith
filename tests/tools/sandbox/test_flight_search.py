@@ -1,7 +1,7 @@
 """Tests for the flight_search sandbox tool."""
 
 import json
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 import pytest
@@ -13,13 +13,15 @@ from toolsmith.tools.sandbox.flight_search import (
 )
 
 _WORLDDATA_DIR = Path("src/toolsmith/tools/sandbox/worlddata")
-_FIRST_FLIGHT = json.loads((_WORLDDATA_DIR / "flights.json").read_text())[0]
+_ALL_FLIGHTS = json.loads((_WORLDDATA_DIR / "flights.json").read_text())
+_FIRST_FLIGHT = _ALL_FLIGHTS[0]
+_FIRST_FLIGHT_DATE = datetime.fromisoformat(_FIRST_FLIGHT["depart"]).date()
 
 
 def test_known_route_returns_expected_flights() -> None:
     result = flight_search(
         FlightSearchArgs(
-            origin=_FIRST_FLIGHT["origin"], dest=_FIRST_FLIGHT["dest"], date=date(2026, 9, 10)
+            origin=_FIRST_FLIGHT["origin"], dest=_FIRST_FLIGHT["dest"], date=_FIRST_FLIGHT_DATE
         )
     )
     assert len(result.flights) >= 1
@@ -27,6 +29,37 @@ def test_known_route_returns_expected_flights() -> None:
     assert flight.price > 0
     assert len(flight.currency) == 3
     assert flight.arrive > flight.depart
+
+
+def test_date_filters_out_flights_on_other_dates() -> None:
+    # TOK->AUC has two flights in the fixture data on genuinely different dates
+    # (FL0008 on 2026-09-08, FL0043 on 2026-09-11); querying one date must not
+    # return the other route's flight.
+    same_route = [
+        f for f in _ALL_FLIGHTS if f["origin"] == "TOK" and f["dest"] == "AUC"
+    ]
+    assert len(same_route) == 2
+    first, second = same_route
+    first_date = datetime.fromisoformat(first["depart"]).date()
+    second_date = datetime.fromisoformat(second["depart"]).date()
+    assert first_date != second_date
+
+    result = flight_search(FlightSearchArgs(origin="TOK", dest="AUC", date=first_date))
+    assert [f.id for f in result.flights] == [first["id"]]
+
+    result = flight_search(FlightSearchArgs(origin="TOK", dest="AUC", date=second_date))
+    assert [f.id for f in result.flights] == [second["id"]]
+
+
+def test_date_with_no_matching_flight_returns_empty_list() -> None:
+    result = flight_search(
+        FlightSearchArgs(
+            origin=_FIRST_FLIGHT["origin"],
+            dest=_FIRST_FLIGHT["dest"],
+            date=date(1999, 1, 1),
+        )
+    )
+    assert result.flights == []
 
 
 def test_unmapped_route_returns_empty_list_not_error() -> None:

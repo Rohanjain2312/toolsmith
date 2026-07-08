@@ -46,7 +46,7 @@ def _load_flights() -> list[dict[str, str | float]]:
 
 
 def flight_search(args: FlightSearchArgs) -> FlightSearchResult:
-    """Return world-data flights matching the exact origin+dest route (empty list if none match)."""
+    """Return world-data flights matching the exact origin+dest route and depart date."""
     flights = [
         FlightOption(
             id=str(entry["id"]),
@@ -56,7 +56,9 @@ def flight_search(args: FlightSearchArgs) -> FlightSearchResult:
             currency=str(entry["currency"]),
         )
         for entry in _load_flights()
-        if entry["origin"] == args.origin and entry["dest"] == args.dest
+        if entry["origin"] == args.origin
+        and entry["dest"] == args.dest
+        and datetime.fromisoformat(str(entry["depart"])).date() == args.date
     ]
     return FlightSearchResult(flights=flights)
 
