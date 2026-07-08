@@ -16,6 +16,9 @@ dependencies = [
     "pydantic>=2.7",
 ]
 
+[project.scripts]
+toolsmith = "toolsmith.cli:main"
+
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "pytest-socket>=0.7", "ruff>=0.6"]
 
