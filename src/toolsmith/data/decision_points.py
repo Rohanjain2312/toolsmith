@@ -1,4 +1,10 @@
-"""Extract per-turn decision points (conversation prefixes) from logged SFT-model trajectories."""
+"""Extract per-turn decision points (conversation prefixes) from logged SFT-model trajectories.
+
+`load_trajectories` reads EpisodeState.to_json() lines; the default path
+(results/sft_trajectories.jsonl) is produced by running scripts/collect_trajectories.py against
+the SFT checkpoint (see that script's docstring for BUGFIX-T02 context -- this file previously
+had no producer anywhere in the repo).
+"""
 
 from __future__ import annotations
 

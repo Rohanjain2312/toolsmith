@@ -1,4 +1,8 @@
-"""Sample and pretty-print trajectories for human audit, flagging reward-hacking patterns."""
+"""Sample and pretty-print trajectories for human audit, flagging reward-hacking patterns.
+
+`load_trajectories` reads EpisodeState.to_json() lines; the default path
+(results/sft_trajectories.jsonl) is produced by scripts/collect_trajectories.py.
+"""
 
 from __future__ import annotations
 

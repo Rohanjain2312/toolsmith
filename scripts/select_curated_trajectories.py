@@ -1,4 +1,9 @@
-"""Select curated SFT-vs-GRPO trajectory pairs from full runs, for the Space's replay tab."""
+"""Select curated SFT-vs-GRPO trajectory pairs from full runs, for the Space's replay tab.
+
+`load_trajectories` reads EpisodeState.to_json() lines; the default paths
+(results/sft_trajectories.jsonl, results/grpo_trajectories.jsonl) are produced by running
+scripts/collect_trajectories.py once against each checkpoint.
+"""
 
 from __future__ import annotations
 
