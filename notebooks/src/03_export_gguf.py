@@ -75,6 +75,8 @@ model.push_to_hub_merged(
 # Deliberately two steps (not save+push combined): several linked Unsloth GitHub issues report
 # "quantization failed mid-push, lost everything" — saving locally and verifying the file
 # exists before pushing is cheap insurance against wasting a GPU session on a failed push.
+# NOTE: this call triggers Unsloth's llama.cpp build on a fresh Colab session (first call
+# only) — budget ~3 min beyond normal export time; not a hang or a failure.
 model.save_pretrained_gguf(
     str(GGUF_OUTPUT_DIR), tokenizer, quantization_method=QUANTIZATION_METHOD
 )
