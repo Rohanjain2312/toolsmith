@@ -98,6 +98,8 @@ def build_scripted_responses(spec: TaskSpec) -> list[str]:
     One JSON tool-call turn per condition (executed for real to confirm it succeeds), then one
     final-answer turn templated from the last tool's real result.
     """
+    import toolsmith.tools.sandbox  # noqa: F401  (registers all 12 sandbox tools)
+
     responses = []
     last_tool: str | None = None
     last_result: dict | None = None
