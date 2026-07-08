@@ -24,7 +24,9 @@ def _build_model() -> Model:
     return LlamaCppModel(model_path=model_path)
 
 
-def run_live_task(prompt: str, real_mode: bool) -> Iterator[dict[str, Any]]:
+def run_live_task(
+    prompt: str, real_mode: bool, trajectory_dir: Path = LIVE_TRAJECTORY_DIR
+) -> Iterator[dict[str, Any]]:
     """Run one task through the episode runner, yielding the trajectory summary progressively
     (one more tool call revealed per yield) so the UI updates step by step as it runs.
 
@@ -34,7 +36,7 @@ def run_live_task(prompt: str, real_mode: bool) -> Iterator[dict[str, Any]]:
     doesn't have configured, so they stay limited even in real mode.
     """
     os.environ["TOOLSMITH_MODE"] = "real" if real_mode else "sandbox"
-    state = run_episode("space-live", prompt, _build_model(), trajectory_dir=LIVE_TRAJECTORY_DIR)
+    state = run_episode("space-live", prompt, _build_model(), trajectory_dir=trajectory_dir)
 
     revealed: list[dict[str, Any]] = []
     for entry in state.tool_calls:

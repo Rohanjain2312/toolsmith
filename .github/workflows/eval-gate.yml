@@ -1,0 +1,25 @@
+name: Eval Gate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  eval-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Install dependencies
+        run: uv sync --extra dev
+
+      - name: Replay cached reward-pipeline cases + validate tool schema exports
+        run: PYTHONPATH=src uv run python scripts/eval_gate.py
