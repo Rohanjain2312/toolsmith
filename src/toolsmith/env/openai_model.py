@@ -89,5 +89,15 @@ class OpenAIModel(Model):
         tool_calls = message.get("tool_calls")
         if tool_calls:
             call = tool_calls[0]["function"]
-            return json.dumps({"tool": call["name"], "args": json.loads(call["arguments"])})
+            raw_args = call["arguments"]
+            try:
+                args = json.loads(raw_args)
+            except json.JSONDecodeError:
+                # DEFAULT_MAX_TOKENS bounds the whole completion, so a long-argument tool call
+                # can be cut off mid-JSON. Return text that still contains '"tool"' but fails to
+                # parse as a valid call, so parse_model_output raises ToolCallParseError and the
+                # episode loop degrades to PARSE_FAILURE -- the same outcome every other
+                # malformed-output path produces -- instead of generate() itself crashing.
+                return f'{{"tool": {json.dumps(call["name"])}, "args": {raw_args}}}'
+            return json.dumps({"tool": call["name"], "args": args})
         return message.get("content") or ""

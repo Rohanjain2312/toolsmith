@@ -6,6 +6,7 @@ import pytest
 
 from toolsmith.env import openai_model as openai_model_module
 from toolsmith.env.openai_model import OpenAIModel, OpenAIRequestError, _to_openai_messages
+from toolsmith.env.parser import ToolCallParseError, parse_model_output
 
 SAMPLE_TOOLS = [
     {
@@ -97,6 +98,45 @@ def test_generate_missing_api_key_raises(monkeypatch: pytest.MonkeyPatch) -> Non
     model = OpenAIModel()
     with pytest.raises(OpenAIRequestError):
         model.generate([{"role": "user", "content": "hi"}], SAMPLE_TOOLS)
+
+
+def test_generate_truncated_tool_call_arguments_do_not_crash(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    # Regression test for BUGFIX-T07: DEFAULT_MAX_TOKENS bounds the whole completion, including
+    # tool_calls[].function.arguments, so a long-argument call can be cut off mid-JSON. generate()
+    # must not raise json.JSONDecodeError itself -- every other malformed-output path in the
+    # episode loop degrades to a PARSE_FAILURE via parse_model_output, not a crash inside
+    # model.generate().
+    monkeypatch.setenv("OPENAI_API_KEY", "sk-test")
+    monkeypatch.setattr(
+        openai_model_module,
+        "_post_openai",
+        lambda body, api_key: {
+            "choices": [
+                {
+                    "message": {
+                        "content": None,
+                        "tool_calls": [
+                            {
+                                "function": {
+                                    "name": "flight_search",
+                                    "arguments": '{"origin": "JFK", "dest": "LHR", "date": "2026-0',
+                                }
+                            }
+                        ],
+                    }
+                }
+            ]
+        },
+    )
+
+    model = OpenAIModel()
+    result = model.generate([{"role": "user", "content": "find a flight"}], SAMPLE_TOOLS)
+
+    assert isinstance(result, str)
+    with pytest.raises(ToolCallParseError):
+        parse_model_output(result)
 
 
 def test_generate_unexpected_response_shape_raises(monkeypatch: pytest.MonkeyPatch) -> None:
