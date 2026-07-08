@@ -2,13 +2,10 @@
 
 from __future__ import annotations
 
-import math
-
 from pydantic import BaseModel, Field
 
 from toolsmith.tools.schemas import ToolSpec, registry
-
-_EARTH_RADIUS_KM = 6371.0
+from toolsmith.utils import haversine_km
 
 
 class DistanceCalcArgs(BaseModel):
@@ -28,21 +25,7 @@ class DistanceCalcResult(BaseModel):
 
 def distance_calc(args: DistanceCalcArgs) -> DistanceCalcResult:
     """Compute the great-circle distance in km between two lat/lon points via haversine."""
-    lat1_rad = math.radians(args.lat1)
-    lon1_rad = math.radians(args.lon1)
-    lat2_rad = math.radians(args.lat2)
-    lon2_rad = math.radians(args.lon2)
-
-    delta_lat = lat2_rad - lat1_rad
-    delta_lon = lon2_rad - lon1_rad
-
-    a = (
-        math.sin(delta_lat / 2) ** 2
-        + math.cos(lat1_rad) * math.cos(lat2_rad) * math.sin(delta_lon / 2) ** 2
-    )
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
-    distance_km = _EARTH_RADIUS_KM * c
-
+    distance_km = haversine_km(args.lat1, args.lon1, args.lat2, args.lon2)
     return DistanceCalcResult(distance_km=distance_km)
 
 

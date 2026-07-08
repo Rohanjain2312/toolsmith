@@ -4,14 +4,13 @@ from __future__ import annotations
 
 import functools
 import json
-import math
 from pathlib import Path
 
 from pydantic import BaseModel, Field
 
 from toolsmith.tools.schemas import ToolSpec, registry
+from toolsmith.utils import haversine_km
 
-EARTH_RADIUS_KM = 6371.0
 _WORLDDATA_DIR = Path(__file__).parent / "worlddata"
 
 
@@ -40,19 +39,6 @@ class PoiSearchResult(BaseModel):
     pois: list[Poi]
 
 
-def _haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
-    """Return the great-circle distance in km between two lat/lon points."""
-    phi1, phi2 = math.radians(lat1), math.radians(lat2)
-    d_phi = math.radians(lat2 - lat1)
-    d_lambda = math.radians(lon2 - lon1)
-    a = (
-        math.sin(d_phi / 2) ** 2
-        + math.cos(phi1) * math.cos(phi2) * math.sin(d_lambda / 2) ** 2
-    )
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
-    return EARTH_RADIUS_KM * c
-
-
 @functools.cache
 def _load_pois() -> list[dict[str, object]]:
     """Load and cache the generated POI list."""
@@ -66,7 +52,7 @@ def poi_search(args: PoiSearchArgs) -> PoiSearchResult:
         if str(entry["category"]).lower() != args.category.lower():
             continue
         lat, lon = float(entry["lat"]), float(entry["lon"])
-        distance_km = _haversine_km(args.lat, args.lon, lat, lon)
+        distance_km = haversine_km(args.lat, args.lon, lat, lon)
         if distance_km <= args.radius_km:
             matches.append(
                 Poi(

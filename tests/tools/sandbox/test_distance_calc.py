@@ -35,3 +35,17 @@ def test_deterministic_repeated_calls_match() -> None:
     result_a = distance_calc(args)
     result_b = distance_calc(args)
     assert result_a == result_b
+
+
+def test_near_antipodal_points_do_not_raise() -> None:
+    # Regression test for BUGFIX-T05: floating-point error can push haversine's intermediate
+    # `a` term fractionally above 1.0 for near-antipodal points, which raised ValueError
+    # ("math domain error") from math.sqrt(1 - a) before this fix.
+    args = DistanceCalcArgs(
+        lat1=40.628064952348524,
+        lon1=144.24374679103528,
+        lat2=-40.62806495144124,
+        lon2=-35.75625320896472,
+    )
+    result = distance_calc(args)
+    assert result.distance_km == pytest.approx(20015.09, rel=1e-3)

@@ -4,17 +4,16 @@ from __future__ import annotations
 
 import functools
 import json
-import math
 from datetime import date, timedelta
 from pathlib import Path
 
 from pydantic import BaseModel, Field
 
 from toolsmith.tools.schemas import ToolSpec, registry
+from toolsmith.utils import haversine_km
 
 SANDBOX_TODAY = date(2026, 9, 1)
 FORECAST_WINDOW_DAYS = 13
-_EARTH_RADIUS_KM = 6371.0
 _WORLDDATA_DIR = Path(__file__).parent / "worlddata"
 
 
@@ -48,16 +47,8 @@ def _load_world() -> tuple[list[dict[str, object]], dict[str, list[dict[str, obj
     return cities, weather
 
 
-def _haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
-    phi1, phi2 = math.radians(lat1), math.radians(lat2)
-    d_phi = math.radians(lat2 - lat1)
-    d_lambda = math.radians(lon2 - lon1)
-    a = math.sin(d_phi / 2) ** 2 + math.cos(phi1) * math.cos(phi2) * math.sin(d_lambda / 2) ** 2
-    return 2 * _EARTH_RADIUS_KM * math.atan2(math.sqrt(a), math.sqrt(1 - a))
-
-
 def _nearest_city(lat: float, lon: float, cities: list[dict[str, object]]) -> dict[str, object]:
-    return min(cities, key=lambda c: _haversine_km(lat, lon, c["lat"], c["lon"]))
+    return min(cities, key=lambda c: haversine_km(lat, lon, c["lat"], c["lon"]))
 
 
 def weather_lookup(args: WeatherLookupArgs) -> WeatherLookupResult:

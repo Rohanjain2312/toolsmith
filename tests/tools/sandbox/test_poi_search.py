@@ -7,11 +7,8 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from toolsmith.tools.sandbox.poi_search import (
-    PoiSearchArgs,
-    _haversine_km,
-    poi_search,
-)
+from toolsmith.tools.sandbox.poi_search import PoiSearchArgs, poi_search
+from toolsmith.utils import haversine_km
 
 _POIS = json.loads(Path("src/toolsmith/tools/sandbox/worlddata/pois.json").read_text())
 
@@ -50,7 +47,7 @@ def test_category_filter_excludes_non_matching_pois() -> None:
 
 
 def test_boundary_poi_just_outside_radius_excluded() -> None:
-    distance = _haversine_km(POI_A["lat"], POI_A["lon"], POI_B["lat"], POI_B["lon"])
+    distance = haversine_km(POI_A["lat"], POI_A["lon"], POI_B["lat"], POI_B["lon"])
     args = PoiSearchArgs(
         lat=POI_A["lat"], lon=POI_A["lon"], category=POI_A["category"], radius_km=distance - 0.5
     )
@@ -61,7 +58,7 @@ def test_boundary_poi_just_outside_radius_excluded() -> None:
 
 
 def test_boundary_poi_just_inside_radius_included() -> None:
-    distance = _haversine_km(POI_A["lat"], POI_A["lon"], POI_B["lat"], POI_B["lon"])
+    distance = haversine_km(POI_A["lat"], POI_A["lon"], POI_B["lat"], POI_B["lon"])
     args = PoiSearchArgs(
         lat=POI_A["lat"], lon=POI_A["lon"], category=POI_A["category"], radius_km=distance + 0.5
     )
@@ -94,3 +91,15 @@ def test_deterministic_repeated_calls_match() -> None:
     result_b = poi_search(args)
     assert result_a == result_b
     assert [poi.name for poi in result_a.pois] == [poi.name for poi in result_b.pois]
+
+
+def test_near_antipodal_query_point_does_not_raise() -> None:
+    # Regression test for BUGFIX-T05: see test_distance_calc.py's equivalent test for the
+    # underlying haversine floating-point domain-error mechanism.
+    args = PoiSearchArgs(
+        lat=40.628064952348524, lon=144.24374679103528, category="museum", radius_km=1.0
+    )
+
+    result = poi_search(args)
+
+    assert result.pois == []

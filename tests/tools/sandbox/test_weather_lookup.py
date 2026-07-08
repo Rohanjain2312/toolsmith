@@ -48,3 +48,16 @@ def test_deterministic_repeated_calls_match() -> None:
     result_a = weather_lookup(args)
     result_b = weather_lookup(args)
     assert result_a == result_b
+
+
+def test_near_antipodal_query_point_does_not_raise() -> None:
+    # Regression test for BUGFIX-T05: see test_distance_calc.py's equivalent test for the
+    # underlying haversine floating-point domain-error mechanism (here, inside _nearest_city's
+    # min() comparator).
+    args = WeatherLookupArgs(
+        lat=40.628064952348524, lon=144.24374679103528, date=SANDBOX_TODAY + timedelta(days=3)
+    )
+
+    result = weather_lookup(args)
+
+    assert isinstance(result.summary, str) and result.summary
