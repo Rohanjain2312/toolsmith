@@ -46,6 +46,7 @@ from trl import GRPOConfig, GRPOTrainer
 from unsloth import FastLanguageModel
 from vllm import SamplingParams
 
+from toolsmith.data.decision_points import extract_decision_points, select_task_subset
 from toolsmith.data.taskspec import TaskSpec
 from toolsmith.env.model import Model
 from toolsmith.env.runner import run_episode
@@ -118,12 +119,14 @@ model = FastLanguageModel.get_peft_model(
 
 # %%
 class FastGenerateFrozenModel(Model):
-    """Adapts Unsloth's fast_generate (vLLM) as a frozen, greedy Model for R5 rollouts.
+    """Adapts Unsloth's fast_generate (vLLM) as a greedy Model, for two distinct uses:
 
-    Loads one LoRA snapshot ONCE and never updates it. The R5 continuation cache is only
-    correct as long as this policy stays fixed for the whole run — if it tracked the live
-    training weights, the same cached (prefix, action) entry would go stale as training
-    progressed.
+    1. R5 rollouts: constructed once with a FIXED `lora_request` snapshot (the SFT
+       checkpoint) and never updated — the R5 continuation cache is only correct as long as
+       this policy stays fixed for the whole run, or the same cached (prefix, action) entry
+       would go stale as training progressed.
+    2. Decision-point refresh (below): constructed with `lora_request=None` to sample from
+       the model's CURRENT (live, in-training) adapter weights instead of a frozen snapshot.
     """
 
     def __init__(self, fast_model, lora_request, sampling_params: SamplingParams) -> None:
@@ -226,6 +229,32 @@ def run_val_gate(val_specs: list[TaskSpec], policy: Model) -> float:
 val_specs = [s for s in train_specs.values() if s.split == "val"]
 SFT_BASELINE_COMPLETION_PCT = 0.0  # human fills in: measured via scripts/sanity_eval.py post-SFT
 
+
+def refresh_decision_points() -> Dataset:
+    """Re-run the CURRENT (live, in-training) policy over a fresh T1/T2-weighted task subset
+    and rebuild the decision-point dataset from its trajectories.
+
+    Costs a full generation pass over the subset — not free — which is why
+    DECISION_POINT_REFRESH defaults to False (see plan §7): only called when the reward has
+    plateaued below the exit gate, so the training loop below gates this behind that flag.
+    """
+    live_policy = FastGenerateFrozenModel(
+        model, None, SamplingParams(temperature=0.0, max_tokens=MAX_COMPLETION_LENGTH)
+    )
+    curriculum_pool = [
+        spec
+        for spec in train_specs.values()
+        if spec.split == "train" and spec.tier in CURRICULUM_TIERS
+    ]
+    subset = select_task_subset(curriculum_pool)
+    states = [
+        run_episode(spec.id, spec.user_prompt, live_policy, trajectory_dir=Path("/tmp/refresh"))
+        for spec in subset
+    ]
+    points = extract_decision_points(states)
+    rows = [{"prompt": point.prefix, "task_ids": point.task_id} for point in points]
+    return Dataset.from_list(rows)
+
 # %%
 # --- Train in CHECKPOINT_STEPS-sized chunks; evaluate + early-stop between chunks ---
 # A chunked outer loop (rather than an internal TRL callback) keeps the exit-gate logic in
@@ -257,6 +286,8 @@ while step < MAX_STEPS_CEILING and consecutive_gate_passes < 2:
         consecutive_gate_passes += 1
     else:
         consecutive_gate_passes = 0
+        if DECISION_POINT_REFRESH:
+            trainer.train_dataset = refresh_decision_points()
 
 # %%
 # --- Save LoRA adapter + push to HF Hub ---
