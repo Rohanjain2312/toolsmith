@@ -35,3 +35,8 @@ src = ["src", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.156.2",
+]
