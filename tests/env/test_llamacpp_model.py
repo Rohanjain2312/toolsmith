@@ -40,6 +40,28 @@ def test_generate_passes_messages_through() -> None:
     assert engine.calls[0]["messages"] == messages
 
 
+def test_generate_folds_tool_role_messages_into_user_turns() -> None:
+    # Regression test for BUGFIX-T08: unlike anthropic_model.py and openai_model.py, this
+    # adapter used to pass our internal "tool" role (plus its non-standard "tool_name" key)
+    # straight through to the GGUF chat template, which is built for system/user/assistant
+    # turns. Fold it into a user turn like the other two adapters do.
+    engine = _FakeEngine("ok")
+    model = LlamaCppModel(engine=engine)
+    messages = [
+        {"role": "system", "content": "sys"},
+        {"role": "user", "content": "geocode paris"},
+        {"role": "assistant", "content": '{"tool": "geocode_city", "args": {"city": "Paris"}}'},
+        {"role": "tool", "tool_name": "geocode_city", "content": '{"lat": 48.8}'},
+    ]
+
+    model.generate(messages, [])
+
+    sent = engine.calls[0]["messages"]
+    assert [m["role"] for m in sent] == ["system", "user", "assistant", "user"]
+    assert "tool_name" not in sent[-1]
+    assert "lat" in sent[-1]["content"]
+
+
 def test_generate_uses_greedy_temperature_by_default() -> None:
     engine = _FakeEngine("ok")
     model = LlamaCppModel(engine=engine)

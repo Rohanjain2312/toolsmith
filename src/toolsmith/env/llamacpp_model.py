@@ -11,6 +11,24 @@ DEFAULT_MAX_TOKENS = 512
 DEFAULT_TEMPERATURE = 0.0  # greedy: this adapter backs eval + the demo, not exploration
 
 
+def _to_llamacpp_messages(messages: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Convert our internal message log to plain system/user/assistant chat-template turns.
+
+    Folds "tool" role turns (which also carry a non-standard "tool_name" key) into a user turn,
+    matching env/anthropic_model.py and env/openai_model.py: GGUF chat templates are built for
+    system/user/assistant roles, not our internal "tool" role.
+    """
+    converted = []
+    for message in messages:
+        role = message["role"]
+        content = message["content"]
+        if role == "tool":
+            converted.append({"role": "user", "content": f"Tool result: {content}"})
+        else:
+            converted.append({"role": role, "content": content})
+    return converted
+
+
 class LlamaCppModel(Model):
     """Model adapter over llama-cpp-python, loading a local GGUF file for CPU inference.
 
@@ -44,6 +62,8 @@ class LlamaCppModel(Model):
         as plain text in the system prompt (see env/runner.py's build_system_prompt).
         """
         response = self._engine.create_chat_completion(
-            messages=messages, max_tokens=self._max_tokens, temperature=self._temperature
+            messages=_to_llamacpp_messages(messages),
+            max_tokens=self._max_tokens,
+            temperature=self._temperature,
         )
         return response["choices"][0]["message"]["content"] or ""
