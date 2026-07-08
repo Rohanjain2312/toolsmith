@@ -1,0 +1,4 @@
+# ToolSmith package + demo deps (gradio[mcp], llama-cpp-python, fastmcp, etc.) all resolve
+# transitively from pyproject.toml. Swap this for `toolsmith-agent` once it's published to
+# PyPI — the git install works today without that step.
+git+https://github.com/Rohanjain2312/toolsmith.git

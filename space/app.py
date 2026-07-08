@@ -43,7 +43,17 @@ def build_app() -> gr.Blocks:
     return demo
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Build and launch the Space app.
+
+    mcp_server=True auto-converts every function wired to a component (via .click(), etc.)
+    into an MCP tool, using its docstring + type hints for the schema — so live_tab.py's
+    run_live_task doubles as both the UI handler and the Space's public MCP tool, with no
+    separate registration needed (same mechanism as serve/mcp_server.py's @mcp.tool).
+    """
     app = build_app()
-    # mcp_server=True lands in P7-T07 alongside the rest of Space packaging.
-    app.launch(theme=gr.themes.Soft())
+    app.launch(theme=gr.themes.Soft(), mcp_server=True)
+
+
+if __name__ == "__main__":
+    main()

@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import gradio as gr
+import pytest
 from space.app import build_app
+
+from space import app as app_module
 
 
 def test_build_app_returns_blocks() -> None:
@@ -30,3 +33,17 @@ def test_app_shows_expectation_banner() -> None:
     )
 
     assert "CPU demo" in markdown_text
+
+
+def test_main_launches_with_mcp_server_enabled(monkeypatch: pytest.MonkeyPatch) -> None:
+    captured: dict = {}
+
+    class _FakeApp:
+        def launch(self, **kwargs: object) -> None:
+            captured.update(kwargs)
+
+    monkeypatch.setattr(app_module, "build_app", lambda: _FakeApp())
+
+    app_module.main()
+
+    assert captured["mcp_server"] is True
