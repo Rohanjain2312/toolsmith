@@ -73,6 +73,29 @@
 # !uv pip install --system --reinstall vllm --torch-backend=cu129
 
 # %%
+# Colab's kernel has numpy already imported (and its C extension loaded into the process) before
+# any of our cells run -- some Colab-internal machinery pulls it in at kernel startup. The vllm
+# reinstall above then upgrades numpy ON DISK as a transitive dependency, but the already-loaded
+# copy in this process can't be swapped (numpy is a C extension; Python can't hot-reload one), so
+# the next `import numpy` anywhere just returns the stale cached module -- except unsloth_zoo's
+# own consistency check (unsloth_zoo/temporary_patches/utils.py, hit via `from unsloth import
+# FastLanguageModel`) compares the loaded version against the on-disk one and raises rather than
+# silently running with a mismatch. Re-pinning numpy back to exactly what's already loaded (not a
+# hardcoded version -- Colab's pre-loaded numpy version isn't guaranteed stable across kernel
+# snapshots) satisfies that check without needing a restart: the loaded copy keeps working
+# exactly as it already was, this just makes the on-disk metadata agree with it.
+import subprocess  # noqa: E402
+import sys  # noqa: E402
+
+if "numpy" in sys.modules:
+    _loaded_numpy_version = sys.modules["numpy"].__version__
+    _numpy_pin = f"numpy=={_loaded_numpy_version}"
+    subprocess.run(
+        ["pip", "install", "-q", _numpy_pin, "--force-reinstall", "--no-deps"],
+        check=True,
+    )
+
+# %%
 # `pip install -e .`'s editable-install finder isn't reliable for direct (non-pytest) imports in
 # this repo -- see CLAUDE.md's "Known environment quirks" for the macOS Gatekeeper .pth case.
 # Insert the clone's src/ directly so `toolsmith.*` resolves regardless of that, and to guard
