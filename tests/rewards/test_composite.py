@@ -89,6 +89,26 @@ def test_make_reward_func_returns_totals_aligned_with_completions(tmp_path: Path
     assert rewards[1] == 3.5
 
 
+def test_make_reward_func_accepts_conversational_completions(tmp_path: Path) -> None:
+    """TRL hands completions to the reward func as [{"role": "assistant", "content": ...}] for
+    conversational (message-list) prompts -- which this project's decision-point prefixes are --
+    not as plain strings. The reward func must accept that shape and score it identically to the
+    equivalent string; the mismatch silently zeroed a live GRPO run at step 0
+    ('list' object has no attribute 'strip')."""
+    cache = _cache(tmp_path)
+    task_lookup = {"t1": (GOAL_SPEC, 1)}
+    model = StubModel(["Paris, at 48.8N."])
+    reward_func = make_reward_func(task_lookup, model, cache)
+
+    rewards = reward_func(
+        prompts=[PREFIX],
+        completions=[[{"role": "assistant", "content": GOOD_CALL}]],
+        task_ids=["t1"],
+    )
+
+    assert rewards == [6.5]  # identical to the plain-string GOOD_CALL result
+
+
 def test_make_reward_func_logs_per_component_values(tmp_path: Path) -> None:
     cache = _cache(tmp_path)
     task_lookup = {"t1": (GOAL_SPEC, 1)}

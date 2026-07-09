@@ -25,6 +25,20 @@ from toolsmith.rewards.outcome_reward import (
 )
 
 
+def _completion_to_text(completion: str | list[dict[str, Any]]) -> str:
+    """Normalize a TRL reward-func completion to the raw assistant text the R1-R6 scorers expect.
+
+    TRL passes completions as plain strings for standard datasets, but for conversational
+    (message-list) prompts -- which this project's decision-point prefixes are -- it wraps each
+    completion as a list of assistant message dicts, [{"role": "assistant", "content": ...}]
+    (grpo_trainer.py). Collapse that back to the assistant text so the downstream parser, which
+    takes a str, works in both cases.
+    """
+    if isinstance(completion, str):
+        return completion
+    return "".join(msg["content"] for msg in completion if msg.get("role") == "assistant")
+
+
 def score_completion(
     task_id: str,
     prefix: list[dict[str, Any]],
@@ -57,7 +71,7 @@ class RewardFunc(Protocol):
     last_component_log: list[dict[str, float]]
 
     def __call__(
-        self, prompts: list[Any], completions: list[str], **kwargs: Any
+        self, prompts: list[Any], completions: list[Any], **kwargs: Any
     ) -> list[float]: ...
 
 
@@ -75,14 +89,20 @@ def make_reward_func(
     the training loop can log R1-R6 separately to W&B.
     """
 
-    def reward_func(prompts: list[Any], completions: list[str], **kwargs: Any) -> list[float]:
+    def reward_func(prompts: list[Any], completions: list[Any], **kwargs: Any) -> list[float]:
         task_ids = kwargs["task_ids"]
         rewards = []
         component_log = []
         for prompt, completion, task_id in zip(prompts, completions, task_ids, strict=True):
             goal_spec, min_steps = task_lookup[task_id]
             scored = score_completion(
-                task_id, prompt, completion, goal_spec, min_steps, frozen_model, cache
+                task_id,
+                prompt,
+                _completion_to_text(completion),
+                goal_spec,
+                min_steps,
+                frozen_model,
+                cache,
             )
             component_log.append(scored)
             rewards.append(scored["total"])
