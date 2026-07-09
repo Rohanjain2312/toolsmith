@@ -400,50 +400,31 @@ trainer = GRPOTrainer(
 #    module-level SamplingParams binding it can reference (unsloth generator bug).
 type(trainer)._generate_single_turn.__globals__["SamplingParams"] = SamplingParams
 
-# 2) unsloth_zoo vendors its own LoRARequest (vllm_lora_request.py, from vllm PR #12609) so it
-#    can carry lora_tensors (in-memory weights, not a checkpoint path), and tries to monkeypatch
-#    it plus its own WorkerLoRAManager/LRUCacheWorkerLoRAManager over vllm's stock classes
+# 2) The GRPO policy adapter's weights live in memory (lora_tensors, refreshed every step), not
+#    on disk. unsloth_zoo handles this with its own WorkerLoRAManager whose _load_adapter has a
+#    `lora_request.lora_tensors is not None -> LoRAModel.from_lora_tensors(...)` branch, and it
+#    tries to monkeypatch that manager over vllm's stock classes
 #    (unsloth/models/_utils.py::fast_inference_setup -> patch_vllm_lora_load_tensors). That
-#    monkeypatch reassigns some module names (e.g. vllm.lora.worker_manager.WorkerLoRAManager)
-#    but silently fails (bare except) to reach vllm.v1.worker.lora_model_runner_mixin, the module
-#    vllm's V1 engine actually instantiates its LoRA manager from -- so at runtime the engine ends
-#    up using vllm's STOCK WorkerLoRAManager, whose _load_adapter (vllm==0.24.0) reads
-#    tensorizer_config_dict and is_3d_lora_weight, two fields unsloth_zoo's vendored LoRARequest
-#    never defines -> AttributeError. Patching the LoRARequest class can't fix this (the manager
-#    instance is already built from the stock class), and patching the module-name WorkerLoRAManager
-#    hits unsloth's vendored class, not the stock one the engine uses. So shim the method on the
-#    class the LIVE manager instance actually belongs to: find it via gc (ground truth), plus the
-#    class references the engine may still instantiate from, walk each MRO to the _load_adapter
-#    owner, and wrap it to fall back to vllm's own stock defaults for whichever field is missing.
+#    monkeypatch silently fails (bare except) to reach vllm.v1.worker.lora_model_runner_mixin,
+#    the module vllm's V1 engine actually instantiates its LoRA manager from -- so the engine
+#    runs vllm's STOCK WorkerLoRAManager instead, whose _load_adapter (vllm==0.24.0) only knows
+#    how to load a LoRA from a disk path (PEFTHelper.from_local_dir / from_local_checkpoint) and
+#    has no tensors branch -> for the pathless in-memory policy adapter it raises first
+#    AttributeError on the vendored request's missing fields, then FileNotFoundError /
+#    LoRAAdapterNotFoundError looking for a nonexistent adapter_config.json. Fix: graft
+#    unsloth_zoo's own tensor-aware _load_adapter onto the class the LIVE manager instance belongs
+#    to. Grab the function via __dict__ (unbound) so its __globals__ stay bound to the unsloth_zoo
+#    module where PEFTHelper / LoRAModel / get_adapter_absolute_path resolve; every instance attr
+#    it reads (_adapter_manager, _lora_model_cls, vocab_size, lora_config, max_position_embeddings)
+#    is also set by vllm's stock __init__, so it runs correctly on the stock instance. Locate that
+#    instance's class via gc (ground truth) plus the engine's class references, and patch the
+#    _load_adapter owner in each MRO (idempotent: skip if already the vendored function).
 import gc  # noqa: E402
 
+import unsloth_zoo.vllm_lora_worker_manager as _uz_lora_wm  # noqa: E402
 import vllm.lora.worker_manager  # noqa: E402
 
-_STOCK_LORA_DEFAULTS = {"tensorizer_config_dict": None, "is_3d_lora_weight": False}
-
-
-class _LoRARequestShim:
-    def __init__(self, wrapped) -> None:
-        self._wrapped = wrapped
-
-    def __getattr__(self, name):
-        try:
-            return getattr(self._wrapped, name)
-        except AttributeError:
-            if name in _STOCK_LORA_DEFAULTS:
-                return _STOCK_LORA_DEFAULTS[name]
-            raise
-
-
-def _make_patched_load_adapter(orig):
-    def _patched(self, lora_request):
-        if any(not hasattr(lora_request, f) for f in _STOCK_LORA_DEFAULTS):
-            lora_request = _LoRARequestShim(lora_request)
-        return orig(self, lora_request)
-
-    _patched._unsloth_lora_shim = True  # idempotency marker: never double-wrap
-    return _patched
-
+_vendored_load_adapter = _uz_lora_wm.WorkerLoRAManager.__dict__["_load_adapter"]
 
 _lora_mgr_targets = []
 for _obj in gc.get_objects():
@@ -469,9 +450,8 @@ for _cls in _lora_mgr_targets:
         continue
     for _owner in _cls.__mro__:
         if "_load_adapter" in vars(_owner):
-            _orig = vars(_owner)["_load_adapter"]
-            if not getattr(_orig, "_unsloth_lora_shim", False):
-                _owner._load_adapter = _make_patched_load_adapter(_orig)
+            if vars(_owner)["_load_adapter"] is not _vendored_load_adapter:
+                _owner._load_adapter = _vendored_load_adapter
             break
 
 
