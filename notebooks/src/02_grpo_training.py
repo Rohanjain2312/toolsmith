@@ -317,8 +317,14 @@ class FastGenerateFrozenModel(Model):
 
 
 # The frozen snapshot is the SFT checkpoint's LoRA, loaded once, independent of the live
-# GRPO-training `model` object above.
-frozen_lora_request = model.load_lora(SFT_LORA_REPO)
+# GRPO-training `model` object above. unsloth_zoo's load_lora() takes a local filesystem path
+# only -- it checks os.path.exists() and has no Hub-download logic of its own (confirmed by
+# reading unsloth_zoo/vllm_utils.py directly: passing a bare repo id raised "LoRA filepath =
+# rohanjain2312/... does not exist!") -- so the adapter has to be pulled down explicitly first.
+from huggingface_hub import snapshot_download  # noqa: E402
+
+sft_lora_local_path = snapshot_download(repo_id=SFT_LORA_REPO)
+frozen_lora_request = model.load_lora(sft_lora_local_path)
 frozen_model = FastGenerateFrozenModel(
     model, frozen_lora_request, SamplingParams(temperature=0.0, max_tokens=MAX_COMPLETION_LENGTH)
 )
