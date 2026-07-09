@@ -390,6 +390,36 @@ trainer = GRPOTrainer(
     train_dataset=decision_point_dataset,
 )
 
+# %%
+# --- unsloth/unsloth_zoo codegen fixes for this trl/vllm pairing ---
+# Both reproduce on a clean run (not just this kernel's history) so they're patched here rather
+# than left as a one-off workaround.
+
+# 1) unsloth/models/rl.py's codegen inserts a SamplingParams helper as a function whose own
+#    import is locally scoped, so unsloth_zoo's compiled _generate_single_turn never gets a
+#    module-level SamplingParams binding it can reference (unsloth generator bug).
+type(trainer)._generate_single_turn.__globals__["SamplingParams"] = SamplingParams
+
+# 2) unsloth_zoo vendors its own LoRARequest (vllm_lora_request.py, from vllm PR #12609) and
+#    monkeypatches it over vllm.lora.request.LoRARequest / vllm.lora.worker_manager.LoRARequest
+#    so it can carry lora_tensors (in-memory weights, not a checkpoint path). That vendored copy
+#    predates vllm's tensorizer_config_dict field, but vllm==0.24.0's
+#    lora/worker_manager.py::_load_adapter unconditionally reads it -> AttributeError. Subclass
+#    with the missing field (msgspec Structs support inheritance; the field is appended last so
+#    array_like positional (de)serialization stays compatible) and re-patch both references.
+import vllm.lora.request  # noqa: E402
+import vllm.lora.worker_manager  # noqa: E402
+
+
+class _PatchedLoRARequest(
+    vllm.lora.request.LoRARequest, array_like=True, omit_defaults=True
+):
+    tensorizer_config_dict: dict | None = None
+
+
+vllm.lora.request.LoRARequest = _PatchedLoRARequest
+vllm.lora.worker_manager.LoRARequest = _PatchedLoRARequest
+
 
 # %%
 def run_val_gate(val_specs: list[TaskSpec], policy: Model) -> float:
