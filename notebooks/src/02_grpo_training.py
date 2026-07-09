@@ -84,6 +84,16 @@
 # outright. Confirmed via uv's own error message on a live run, not guessed.
 # %pip install -q uv
 # !uv pip install --system --reinstall --index-strategy unsafe-best-match https://github.com/vllm-project/vllm/releases/download/v0.24.0/vllm-0.24.0+cu129-cp38-abi3-manylinux_2_28_x86_64.whl --extra-index-url https://download.pytorch.org/whl/cu129  # noqa: E501
+# The vllm reinstall above bumps Pillow's Python package as a transitive dependency but leaves
+# Colab's older compiled _imaging.so in place (uv --system replaces the Python files, not the
+# stale C extension), so the install ends internally inconsistent -- e.g. Python package 12.3.0
+# against a 11.3.0 _imaging.so. unsloth_zoo's import-time check
+# (temporary_patches/utils.py) then aborts the `from unsloth import ...` with "The _imaging
+# extension was built for another version of Pillow". A plain-pip force-reinstall replaces BOTH
+# halves (wheel bundles the .so) so they agree again; must run AFTER the vllm install that causes
+# the drift and BEFORE the unsloth import below. This is the remedy unsloth_zoo's own error
+# message prescribes.
+# %pip install -q --upgrade --force-reinstall Pillow
 
 # %%
 # Colab's kernel has numpy already imported (and its C extension loaded into the process) before
