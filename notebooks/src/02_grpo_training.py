@@ -47,26 +47,23 @@
 # install could silently drift to a trl version where that stub's assumptions don't hold.
 # %pip install -q "unsloth @ git+https://github.com/unslothai/unsloth.git" unsloth_zoo
 # %pip install -q "trl==0.24.0" wandb datasets bitsandbytes
-# Plain `pip install vllm` (and even `uv pip install vllm --torch-backend=auto`, which only
-# steers torch's own index, not vllm's) resolve to the PyPI default wheel, which is compiled
-# against CUDA 13 (needs libcudart.so.13). Colab's actual T4 runtime is CUDA 12.8 -- that .so
-# doesn't exist there, so vllm's compiled extension (vllm._C_stable_libtorch) fails to load, and
-# unsloth permanently disables all vllm imports for the rest of the kernel session the first time
-# that happens (so reinstalling afterward, in the same session, does nothing -- the wheel has to
-# be right on the FIRST install). No published vllm release has a cu128-tagged asset (confirmed
-# against the GitHub releases API across several recent versions) -- but cu129 does exist, and
-# since only the .so's MAJOR version has to match (CUDA's own minor-version compatibility
-# guarantee), a cu129 build's libcudart.so.12 is satisfied by Colab's CUDA 12.8 install, unlike
-# the default build's libcudart.so.13. Verified this exact wheel URL resolves (not 404) before
-# using it -- the previous fix (commit 2514095) trusted a URL straight from unsloth's own error
-# message without checking, and it turned out not to exist for that release at all.
-# Installed together with a matching torch build (not just the vllm wheel alone): vllm's compiled
-# kernels are tightly ABI-coupled to the exact torch/CUDA build they were compiled against, per
-# vLLM's own install docs pattern (https://docs.vllm.ai/en/latest/getting_started/installation/
-# gpu.html, "Set up using Python" -> per-CUDA-version install example), not just to whether
-# libcudart happens to load.
+# Plain `pip install vllm` resolves to the PyPI default wheel, compiled against CUDA 13 (needs
+# libcudart.so.13) -- but the already-installed torch stays on whatever CUDA build it already
+# had (cu128 on this Colab image), since pip/uv won't reinstall a dependency that already
+# satisfies vllm's version constraint. vllm's compiled extension then fails to load against the
+# mismatched torch/CUDA, and unsloth permanently disables all vllm imports for the rest of the
+# kernel session the first time that happens (so reinstalling afterward, in the same session,
+# does nothing -- both packages have to be right on the FIRST install).
+#
+# GPU-tier-dependent: on a G4 (RTX PRO 6000 Blackwell, compute capability sm_120), FlashInfer
+# additionally requires CUDA >= 12.9 to recognize that architecture at all -- so here, CUDA 13
+# is not just acceptable but necessary, and the fix is to force torch itself up to a matching
+# cu130 build before installing vllm's own CUDA-13 default. (On a T4, sm_75, this constraint
+# doesn't apply -- if running on T4, torch/vllm just need to agree on *some* matching CUDA major
+# version, e.g. both cu129, and neither needs to be CUDA 13 specifically.)
 # %pip install -q uv
-# !uv pip install --system https://github.com/vllm-project/vllm/releases/download/v0.24.0/vllm-0.24.0+cu129-cp38-abi3-manylinux_2_28_x86_64.whl --extra-index-url https://download.pytorch.org/whl/cu129  # noqa: E501
+# !uv pip install --system torch torchvision torchaudio --torch-backend=cu130
+# !uv pip install --system vllm
 
 # %%
 # `pip install -e .`'s editable-install finder isn't reliable for direct (non-pytest) imports in
