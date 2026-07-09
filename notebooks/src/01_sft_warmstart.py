@@ -44,9 +44,15 @@
 # this repo -- see CLAUDE.md's "Known environment quirks" for the macOS Gatekeeper .pth case.
 # Insert the clone's src/ directly so `toolsmith.*` resolves regardless of that, and to guard
 # against a same-named-but-unrelated PyPI package ("toolsmith", not this project) ever shadowing
-# it if one ends up pulled in transitively.
+# it if one ends up pulled in transitively. Also drop any toolsmith.* entries already cached in
+# sys.modules from an earlier broken import attempt in this kernel -- re-running this cell after
+# a failure (e.g. while iterating on a Colab error) leaves the parent `toolsmith` module cached
+# with the wrong __path__, and inserting into sys.path alone can't fix an already-cached parent.
 import sys  # noqa: E402 (Colab-only cell, top-of-cell by design)
 
+for _name in list(sys.modules):
+    if _name == "toolsmith" or _name.startswith("toolsmith."):
+        del sys.modules[_name]
 sys.path.insert(0, "/content/toolsmith/src")
 
 # %%
@@ -55,17 +61,17 @@ sys.path.insert(0, "/content/toolsmith/src")
 # then raises "the specified eos_token ('<EOS_TOKEN>') is not found in the vocabulary" because the
 # placeholder default never gets superseded by the tokenizer's real eos token (confirmed root
 # cause + fix from an unsloth maintainer: https://github.com/unslothai/unsloth/issues/2797).
-from unsloth import FastLanguageModel
-from unsloth.chat_templates import get_chat_template, train_on_responses_only
+from unsloth import FastLanguageModel  # noqa: E402
+from unsloth.chat_templates import get_chat_template, train_on_responses_only  # noqa: E402
 
 # isort: split
-import os
-from pathlib import Path
+import os  # noqa: E402
+from pathlib import Path  # noqa: E402
 
-import torch
-import wandb
-from datasets import Dataset, Features, List, Value, load_dataset
-from trl import SFTConfig, SFTTrainer
+import torch  # noqa: E402
+import wandb  # noqa: E402
+from datasets import Dataset, Features, List, Value, load_dataset  # noqa: E402
+from trl import SFTConfig, SFTTrainer  # noqa: E402
 
 # %%
 # --- Config ---

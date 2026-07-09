@@ -50,9 +50,15 @@
 # this repo -- see CLAUDE.md's "Known environment quirks" for the macOS Gatekeeper .pth case.
 # Insert the clone's src/ directly so `toolsmith.*` resolves regardless of that, and to guard
 # against a same-named-but-unrelated PyPI package ("toolsmith", not this project) ever shadowing
-# it if one ends up pulled in transitively.
+# it if one ends up pulled in transitively. Also drop any toolsmith.* entries already cached in
+# sys.modules from an earlier broken import attempt in this kernel -- re-running this cell after
+# a failure (e.g. while iterating on a Colab error) leaves the parent `toolsmith` module cached
+# with the wrong __path__, and inserting into sys.path alone can't fix an already-cached parent.
 import sys  # noqa: E402 (Colab-only cell, top-of-cell by design)
 
+for _name in list(sys.modules):
+    if _name == "toolsmith" or _name.startswith("toolsmith."):
+        del sys.modules[_name]
 sys.path.insert(0, "/content/toolsmith/src")
 
 # %%
@@ -61,25 +67,25 @@ sys.path.insert(0, "/content/toolsmith/src")
 # defaults like eos_token/pad_token (confirmed root cause + fix from an unsloth maintainer:
 # https://github.com/unslothai/unsloth/issues/2797 -- filed against SFTTrainer, but the patch is
 # applied generically across every trl {X}Trainer/{X}Config pair, GRPOTrainer included).
-from unsloth import FastLanguageModel
+from unsloth import FastLanguageModel  # noqa: E402
 
 # isort: split
-import json
-import os
-from pathlib import Path
+import json  # noqa: E402
+import os  # noqa: E402
+from pathlib import Path  # noqa: E402
 
-import wandb
-from datasets import Dataset
-from trl import GRPOConfig, GRPOTrainer
-from vllm import SamplingParams
+import wandb  # noqa: E402
+from datasets import Dataset  # noqa: E402
+from trl import GRPOConfig, GRPOTrainer  # noqa: E402
+from vllm import SamplingParams  # noqa: E402
 
-from toolsmith.data.decision_points import extract_decision_points, select_task_subset
-from toolsmith.data.taskspec import TaskSpec
-from toolsmith.env.model import Model
-from toolsmith.env.runner import run_episode
-from toolsmith.rewards.composite import make_reward_func
-from toolsmith.rewards.goalcheck import check_goal
-from toolsmith.rewards.outcome_reward import ContinuationCache
+from toolsmith.data.decision_points import extract_decision_points, select_task_subset  # noqa: E402
+from toolsmith.data.taskspec import TaskSpec  # noqa: E402
+from toolsmith.env.model import Model  # noqa: E402
+from toolsmith.env.runner import run_episode  # noqa: E402
+from toolsmith.rewards.composite import make_reward_func  # noqa: E402
+from toolsmith.rewards.goalcheck import check_goal  # noqa: E402
+from toolsmith.rewards.outcome_reward import ContinuationCache  # noqa: E402
 
 # %%
 # --- Config ---
