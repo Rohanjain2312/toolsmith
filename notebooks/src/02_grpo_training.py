@@ -125,6 +125,17 @@ for _name in list(sys.modules):
 sys.path.insert(0, "/content/toolsmith/src")
 
 # %%
+# On a ~14.5GB T4 the vLLM rollout engine and the training model share one GPU with very little
+# slack. Enable expandable CUDA allocator segments so a small late allocation (e.g. the training
+# forward's attention buffers) can reuse reserved-but-unallocated blocks instead of OOMing on
+# fragmentation. PYTORCH_CUDA_ALLOC_CONF is read once when torch first initializes its caching
+# allocator (first CUDA allocation, during model load), so it must be set before the unsloth
+# (torch) import below -- setting it later has no effect.
+import os  # noqa: E402
+
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+
+# %%
 # unsloth must be imported before trl -- at import time it monkeypatches trl's trainer configs
 # (SFTConfig, GRPOConfig, ...), and importing trl first leaves that patch half-applied, corrupting
 # defaults like eos_token/pad_token (confirmed root cause + fix from an unsloth maintainer:
@@ -199,7 +210,12 @@ MAX_PROMPT_LENGTH = 1536
 MAX_COMPLETION_LENGTH = 256  # single action, not a full episode; 1536 + 256 <= MAX_SEQ_LENGTH
 LORA_R = 16
 LORA_ALPHA = 32
-NUM_GENERATIONS = 4  # G=4 default per plan; drop to 3 if OOM or hours run long (documented dial)
+# G=4 default per plan. TRL requires generation_batch_size (= per_device_batch * grad_accum = 4
+# here) to be divisible by num_generations, so the only valid dials are 4, 2, 1 -- NOT 3. Note
+# num_generations does not change the training-forward memory peak (that runs at
+# per_device_train_batch_size=1 regardless); use gpu_memory_utilization above for OOM, this dial
+# for wall-clock / group-size.
+NUM_GENERATIONS = 4
 KL_BETA = 0.04
 LEARNING_RATE = 5e-6
 CHECKPOINT_STEPS = 50  # also the val-gate evaluation cadence
@@ -272,7 +288,12 @@ model, tokenizer = FastLanguageModel.from_pretrained(
     max_seq_length=MAX_SEQ_LENGTH,
     load_in_4bit=True,
     fast_inference=True,  # vLLM-backed generation for rollouts
-    gpu_memory_utilization=0.6,  # lower if OOM; leaves room for training + the frozen-policy copy
+    # vLLM reserves this fraction of the ~14.5GB T4 up front; the rest holds the 4-bit training
+    # model + gradient-checkpointed activations + 8-bit optimizer state. 0.6 OOM'd the training
+    # forward by ~120MB on a live T4 run, so 0.5 (frees ~1.4GB more for training) is the T4-safe
+    # default; vLLM still fits the 4-bit 4B weights + KV cache in the remaining ~7.3GB. Raise back
+    # toward 0.6 only on a larger-VRAM GPU.
+    gpu_memory_utilization=0.5,
 )
 
 model = FastLanguageModel.get_peft_model(
