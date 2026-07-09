@@ -48,36 +48,29 @@
 # %pip install -q "unsloth @ git+https://github.com/unslothai/unsloth.git" unsloth_zoo
 # %pip install -q "trl==0.24.0" wandb datasets bitsandbytes
 # Plain `pip install vllm` resolves to the PyPI default wheel, compiled against CUDA 13 (needs
-# libcudart.so.13) -- but the already-installed torch stays on whatever CUDA build it already
-# had (cu128 on this Colab image), since pip/uv won't reinstall a dependency that already
-# satisfies vllm's version constraint. vllm's compiled extension then fails to load against the
-# mismatched torch/CUDA, and unsloth permanently disables all vllm imports for the rest of the
-# kernel session the first time that happens (so reinstalling afterward, in the same session,
-# does nothing -- both packages have to be right on the FIRST install).
+# libcudart.so.13). Colab's T4 tier reports CUDA 12.8 system-wide -- that .so doesn't exist
+# there, so vllm's compiled extension fails to load, and unsloth permanently disables all vllm
+# imports for the rest of the kernel session the first time that happens (so reinstalling
+# afterward, in the same session, does nothing -- both packages have to be right on the FIRST
+# install). No published vllm release has a cu128-tagged asset (checked the GitHub releases API
+# directly across several recent versions), but cu129 does -- and since only the .so's MAJOR
+# version has to match (CUDA's own minor-version compatibility guarantee), a cu129 build's
+# libcudart.so.12 is satisfied by a CUDA 12.8 system, unlike the default build's libcudart.so.13.
 #
-# GPU-tier-dependent: on a G4 (RTX PRO 6000 Blackwell, compute capability sm_120), FlashInfer
-# additionally requires CUDA >= 12.9 to recognize that architecture at all -- so here, CUDA 13
-# is not just acceptable but necessary, and the fix is to force torch itself up to a matching
-# cu130 build before installing vllm's own CUDA-13 default. (On a T4, sm_75, this constraint
-# doesn't apply -- if running on T4, torch/vllm just need to agree on *some* matching CUDA major
-# version, e.g. both cu129, and neither needs to be CUDA 13 specifically.)
+# T4-specific: unlike a G4 (RTX PRO 6000 Blackwell, sm_120), T4 (sm_75) doesn't need CUDA 13 at
+# all -- FlashInfer's ">=12.9 to recognize Blackwell" requirement doesn't apply to this
+# architecture, so there's no reason to chase CUDA 13 here the way the G4 path had to.
 #
-# `--torch-backend=cu130` alone does NOT force a reinstall: uv only consults that index when it
-# decides a package needs (re)installing, and since some torch was already present and nominally
-# satisfied vllm's version constraint, uv left it untouched -- confirmed on a live run: installing
-# torch and vllm as two SEPARATE commands left torch's line entirely absent from the install diff
-# (only vllm and its transitive nvidia-cuda-* 13.x packages showed up), and unsloth's own check
-# (which reads torch.version.cuda, not the transitively-installed nvidia-cuda-* packages) still
-# reported "this system has CUDA 12.8" afterward. `--reinstall` forces uv to actually replace an
-# already-installed package rather than treating it as satisfied.
-#
-# Also resolving vllm and torch together in ONE command, not two sequential ones: vllm's compiled
-# kernels are built against a specific torch version, and installing torch first in its own
-# command (even matched on CUDA major version) risks uv picking a torch release vllm's own
-# resolution wouldn't have chosen -- matches vLLM's own documented pattern of resolving `vllm`
-# and its torch dependency together via a single `--torch-backend` invocation.
+# `--torch-backend=cu129` alone does NOT force a reinstall of an already-present torch (uv only
+# consults that index when deciding whether a package needs installing) -- confirmed this
+# empirically while chasing the equivalent G4/cu130 case, where torch was left on its old build
+# entirely untouched across two separate install commands. `--reinstall`, combined with
+# resolving vllm and torch together in ONE command (not two sequential ones, since vllm's
+# compiled kernels are ABI-coupled to a specific torch build), avoids both problems -- same
+# pattern verified to correctly pull matching-CUDA-tagged torch versions during dependency
+# resolution as the G4/cu130 fix, just pointed at cu129 instead of cu130 here.
 # %pip install -q uv
-# !uv pip install --system --reinstall vllm --torch-backend=cu130
+# !uv pip install --system --reinstall vllm --torch-backend=cu129
 
 # %%
 # `pip install -e .`'s editable-install finder isn't reliable for direct (non-pytest) imports in
