@@ -243,6 +243,19 @@ drive.mount("/content/drive")
 os.makedirs(DRIVE_CHECKPOINT_DIR, exist_ok=True)
 
 # %%
+# unsloth_zoo's own FlashInfer-sampler heuristic (vllm_utils.py: `if major_version >= 8: ...
+# elif Version(vllm_version) >= Version("0.11.0"): os.environ["VLLM_USE_FLASHINFER_SAMPLER"] =
+# "1"`) assumes vLLM>=0.11.0 extends FlashInfer sampler support to compute capability 7.x GPUs
+# (T4 is 7.5) -- confirmed on a live T4 run that it doesn't: `RuntimeError: FlashInfer top-p/top-k
+# sampling unavailable: unsupported compute capability 7.5. Unset VLLM_USE_FLASHINFER_SAMPLER=1.`
+# UNSLOTH_VLLM_NO_FLASHINFER=1 is the intended escape hatch already built into that same code
+# path (gates the entire `if find_spec("flashinfer") and not NO_FLASHINFER:` block, not just a
+# warning as its own comment implies) -- read directly from unsloth_zoo's source before using it,
+# not guessed. Falls back to vLLM's default PyTorch sampler, which unsloth_zoo's own comment notes
+# "seems lower throughput" than FlashInfer for bitsandbytes anyway, so this isn't purely a
+# workaround -- it may be the better default for this notebook's quantized setup regardless of GPU.
+os.environ["UNSLOTH_VLLM_NO_FLASHINFER"] = "1"
+
 # --- Load model with vLLM fast inference enabled ---
 # Swap point: once the SFT LoRA is pushed (01_sft_warmstart.py -> SFT_LORA_REPO), load that
 # adapter here as the GRPO starting policy instead of a fresh get_peft_model() init below.
