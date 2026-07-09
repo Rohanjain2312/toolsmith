@@ -404,14 +404,19 @@ type(trainer)._generate_single_turn.__globals__["SamplingParams"] = SamplingPara
 #    can carry lora_tensors (in-memory weights, not a checkpoint path), and tries to monkeypatch
 #    it plus its own WorkerLoRAManager/LRUCacheWorkerLoRAManager over vllm's stock classes
 #    (unsloth/models/_utils.py::fast_inference_setup -> patch_vllm_lora_load_tensors). That
-#    monkeypatch silently fails to reach vllm.v1.worker.lora_model_runner_mixin, the module vllm's
-#    V1 engine actually instantiates its LoRA manager from -- so at runtime the engine ends up
-#    using vllm's STOCK WorkerLoRAManager, whose _load_adapter (vllm==0.24.0) reads
+#    monkeypatch reassigns some module names (e.g. vllm.lora.worker_manager.WorkerLoRAManager)
+#    but silently fails (bare except) to reach vllm.v1.worker.lora_model_runner_mixin, the module
+#    vllm's V1 engine actually instantiates its LoRA manager from -- so at runtime the engine ends
+#    up using vllm's STOCK WorkerLoRAManager, whose _load_adapter (vllm==0.24.0) reads
 #    tensorizer_config_dict and is_3d_lora_weight, two fields unsloth_zoo's vendored LoRARequest
-#    never defines -> AttributeError. Patching the LoRARequest class alone can't fix this (the
-#    manager instance is already built from the stock class by the time any of our code runs), so
-#    shim the method itself: fall back to vllm's own stock defaults for whichever of those two
-#    fields the live request object is missing.
+#    never defines -> AttributeError. Patching the LoRARequest class can't fix this (the manager
+#    instance is already built from the stock class), and patching the module-name WorkerLoRAManager
+#    hits unsloth's vendored class, not the stock one the engine uses. So shim the method on the
+#    class the LIVE manager instance actually belongs to: find it via gc (ground truth), plus the
+#    class references the engine may still instantiate from, walk each MRO to the _load_adapter
+#    owner, and wrap it to fall back to vllm's own stock defaults for whichever field is missing.
+import gc  # noqa: E402
+
 import vllm.lora.worker_manager  # noqa: E402
 
 _STOCK_LORA_DEFAULTS = {"tensorizer_config_dict": None, "is_3d_lora_weight": False}
@@ -430,16 +435,44 @@ class _LoRARequestShim:
             raise
 
 
-_orig_load_adapter = vllm.lora.worker_manager.WorkerLoRAManager._load_adapter
+def _make_patched_load_adapter(orig):
+    def _patched(self, lora_request):
+        if any(not hasattr(lora_request, f) for f in _STOCK_LORA_DEFAULTS):
+            lora_request = _LoRARequestShim(lora_request)
+        return orig(self, lora_request)
+
+    _patched._unsloth_lora_shim = True  # idempotency marker: never double-wrap
+    return _patched
 
 
-def _patched_load_adapter(self, lora_request):
-    if any(not hasattr(lora_request, f) for f in _STOCK_LORA_DEFAULTS):
-        lora_request = _LoRARequestShim(lora_request)
-    return _orig_load_adapter(self, lora_request)
+_lora_mgr_targets = []
+for _obj in gc.get_objects():
+    try:
+        _t = type(_obj)
+        if "WorkerLoRAManager" in _t.__name__ and hasattr(_t, "_load_adapter"):
+            _lora_mgr_targets.append(_t)
+    except Exception:
+        pass
+try:
+    import vllm.v1.worker.lora_model_runner_mixin as _lora_mixin
 
+    _lora_mgr_targets.append(getattr(_lora_mixin, "LRUCacheWorkerLoRAManager", None))
+except Exception:
+    pass
+_lora_mgr_targets += [
+    getattr(vllm.lora.worker_manager, "WorkerLoRAManager", None),
+    getattr(vllm.lora.worker_manager, "LRUCacheWorkerLoRAManager", None),
+]
 
-vllm.lora.worker_manager.WorkerLoRAManager._load_adapter = _patched_load_adapter
+for _cls in _lora_mgr_targets:
+    if _cls is None:
+        continue
+    for _owner in _cls.__mro__:
+        if "_load_adapter" in vars(_owner):
+            _orig = vars(_owner)["_load_adapter"]
+            if not getattr(_orig, "_unsloth_lora_shim", False):
+                _owner._load_adapter = _make_patched_load_adapter(_orig)
+            break
 
 
 # %%
