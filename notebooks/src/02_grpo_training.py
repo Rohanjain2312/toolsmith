@@ -400,25 +400,46 @@ trainer = GRPOTrainer(
 #    module-level SamplingParams binding it can reference (unsloth generator bug).
 type(trainer)._generate_single_turn.__globals__["SamplingParams"] = SamplingParams
 
-# 2) unsloth_zoo vendors its own LoRARequest (vllm_lora_request.py, from vllm PR #12609) and
-#    monkeypatches it over vllm.lora.request.LoRARequest / vllm.lora.worker_manager.LoRARequest
-#    so it can carry lora_tensors (in-memory weights, not a checkpoint path). That vendored copy
-#    predates vllm's tensorizer_config_dict field, but vllm==0.24.0's
-#    lora/worker_manager.py::_load_adapter unconditionally reads it -> AttributeError. Subclass
-#    with the missing field (msgspec Structs support inheritance; the field is appended last so
-#    array_like positional (de)serialization stays compatible) and re-patch both references.
-import vllm.lora.request  # noqa: E402
+# 2) unsloth_zoo vendors its own LoRARequest (vllm_lora_request.py, from vllm PR #12609) so it
+#    can carry lora_tensors (in-memory weights, not a checkpoint path), and tries to monkeypatch
+#    it plus its own WorkerLoRAManager/LRUCacheWorkerLoRAManager over vllm's stock classes
+#    (unsloth/models/_utils.py::fast_inference_setup -> patch_vllm_lora_load_tensors). That
+#    monkeypatch silently fails to reach vllm.v1.worker.lora_model_runner_mixin, the module vllm's
+#    V1 engine actually instantiates its LoRA manager from -- so at runtime the engine ends up
+#    using vllm's STOCK WorkerLoRAManager, whose _load_adapter (vllm==0.24.0) reads
+#    tensorizer_config_dict and is_3d_lora_weight, two fields unsloth_zoo's vendored LoRARequest
+#    never defines -> AttributeError. Patching the LoRARequest class alone can't fix this (the
+#    manager instance is already built from the stock class by the time any of our code runs), so
+#    shim the method itself: fall back to vllm's own stock defaults for whichever of those two
+#    fields the live request object is missing.
 import vllm.lora.worker_manager  # noqa: E402
 
-
-class _PatchedLoRARequest(
-    vllm.lora.request.LoRARequest, array_like=True, omit_defaults=True
-):
-    tensorizer_config_dict: dict | None = None
+_STOCK_LORA_DEFAULTS = {"tensorizer_config_dict": None, "is_3d_lora_weight": False}
 
 
-vllm.lora.request.LoRARequest = _PatchedLoRARequest
-vllm.lora.worker_manager.LoRARequest = _PatchedLoRARequest
+class _LoRARequestShim:
+    def __init__(self, wrapped) -> None:
+        self._wrapped = wrapped
+
+    def __getattr__(self, name):
+        try:
+            return getattr(self._wrapped, name)
+        except AttributeError:
+            if name in _STOCK_LORA_DEFAULTS:
+                return _STOCK_LORA_DEFAULTS[name]
+            raise
+
+
+_orig_load_adapter = vllm.lora.worker_manager.WorkerLoRAManager._load_adapter
+
+
+def _patched_load_adapter(self, lora_request):
+    if any(not hasattr(lora_request, f) for f in _STOCK_LORA_DEFAULTS):
+        lora_request = _LoRARequestShim(lora_request)
+    return _orig_load_adapter(self, lora_request)
+
+
+vllm.lora.worker_manager.WorkerLoRAManager._load_adapter = _patched_load_adapter
 
 
 # %%
