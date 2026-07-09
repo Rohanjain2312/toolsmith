@@ -69,6 +69,48 @@ sys.path.insert(0, "/content/toolsmith/src")
 # applied generically across every trl {X}Trainer/{X}Config pair, GRPOTrainer included).
 from unsloth import FastLanguageModel  # noqa: E402
 
+# %%
+# trl==0.24.0's GRPOTrainer import chain unconditionally imports two optional, heavy deps this
+# notebook never uses: trl/trainer/callbacks.py has bare top-level `from ..mergekit_utils import
+# ...` (needs the `mergekit` package) and `from .judges import BasePairwiseJudge` (needs
+# `llm_blender`) -- neither import is gated behind an availability check in this trl version, so
+# pip-installing them would be the only way to satisfy them for real. That's not viable here:
+# `llm_blender` itself is broken against current transformers (imports the since-removed
+# TRANSFORMERS_CACHE symbol). Neither MergeConfig/merge_models nor BasePairwiseJudge are actually
+# used by anything below -- both are referenced only inside MergeModelCallback/WinRateCallback,
+# optional callback classes this notebook never instantiates -- so stub both packages instead of
+# installing them; the stubs are never touched at runtime, only satisfy the module-level import.
+# Also coerce trl.import_utils's `_vllm_ascend_available` flag: transformers>=4.48's
+# `_is_package_available()` returns a (bool, version) tuple, and trl assigns that tuple directly
+# to the flag without unpacking it, so a non-empty tuple is truthy even when the package is
+# absent. This is the same bug class unsloth's own import_fixes.py documents (fix_trl_vllm_ascend)
+# for this exact flag, but that fix doesn't reach mergekit/judges since those two imports aren't
+# flag-gated at all in this trl version -- hence the stubs above, not just a flag coercion.
+# isort: split
+import importlib.machinery  # noqa: E402
+import sys  # noqa: E402
+import types  # noqa: E402
+
+
+def _stub_module(name: str) -> types.ModuleType:
+    module = types.ModuleType(name)
+    module.__spec__ = importlib.machinery.ModuleSpec(name, loader=None)
+    sys.modules[name] = module
+    return module
+
+
+_mergekit = _stub_module("mergekit")
+_mergekit_config = _stub_module("mergekit.config")
+_mergekit_config.MergeConfiguration = type("MergeConfiguration", (), {})
+_mergekit.config = _mergekit_config
+
+_llm_blender = _stub_module("llm_blender")
+_llm_blender.Blender = type("Blender", (), {})
+
+import trl.import_utils as _trl_import_utils  # noqa: E402
+
+_trl_import_utils._vllm_ascend_available = False
+
 # isort: split
 import json  # noqa: E402
 import os  # noqa: E402
