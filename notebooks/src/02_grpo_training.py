@@ -254,7 +254,15 @@ os.makedirs(DRIVE_CHECKPOINT_DIR, exist_ok=True)
 # not guessed. Falls back to vLLM's default PyTorch sampler, which unsloth_zoo's own comment notes
 # "seems lower throughput" than FlashInfer for bitsandbytes anyway, so this isn't purely a
 # workaround -- it may be the better default for this notebook's quantized setup regardless of GPU.
+# Setting the escape hatch alone isn't enough if this cell is ever re-run after an earlier failed
+# attempt in the same kernel (e.g. while iterating on a Colab error): the escape hatch prevents
+# VLLM_USE_FLASHINFER_SAMPLER from being set again, but skipping unsloth_zoo's block also skips
+# its own cleanup of a value a PRIOR call already set -- os.environ persists across cell re-runs
+# within one kernel, so a stale "1" from before this fix existed would otherwise stick around
+# unnoticed. Clear it explicitly rather than relying on unsloth_zoo to have never set it.
 os.environ["UNSLOTH_VLLM_NO_FLASHINFER"] = "1"
+os.environ.pop("VLLM_USE_FLASHINFER_SAMPLER", None)
+os.environ.pop("VLLM_ATTENTION_BACKEND", None)
 
 # --- Load model with vLLM fast inference enabled ---
 # Swap point: once the SFT LoRA is pushed (01_sft_warmstart.py -> SFT_LORA_REPO), load that
