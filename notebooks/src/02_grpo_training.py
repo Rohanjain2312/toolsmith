@@ -61,9 +61,23 @@
 # cu130 build before installing vllm's own CUDA-13 default. (On a T4, sm_75, this constraint
 # doesn't apply -- if running on T4, torch/vllm just need to agree on *some* matching CUDA major
 # version, e.g. both cu129, and neither needs to be CUDA 13 specifically.)
+#
+# `--torch-backend=cu130` alone does NOT force a reinstall: uv only consults that index when it
+# decides a package needs (re)installing, and since some torch was already present and nominally
+# satisfied vllm's version constraint, uv left it untouched -- confirmed on a live run: installing
+# torch and vllm as two SEPARATE commands left torch's line entirely absent from the install diff
+# (only vllm and its transitive nvidia-cuda-* 13.x packages showed up), and unsloth's own check
+# (which reads torch.version.cuda, not the transitively-installed nvidia-cuda-* packages) still
+# reported "this system has CUDA 12.8" afterward. `--reinstall` forces uv to actually replace an
+# already-installed package rather than treating it as satisfied.
+#
+# Also resolving vllm and torch together in ONE command, not two sequential ones: vllm's compiled
+# kernels are built against a specific torch version, and installing torch first in its own
+# command (even matched on CUDA major version) risks uv picking a torch release vllm's own
+# resolution wouldn't have chosen -- matches vLLM's own documented pattern of resolving `vllm`
+# and its torch dependency together via a single `--torch-backend` invocation.
 # %pip install -q uv
-# !uv pip install --system torch torchvision torchaudio --torch-backend=cu130
-# !uv pip install --system vllm
+# !uv pip install --system --reinstall vllm --torch-backend=cu130
 
 # %%
 # `pip install -e .`'s editable-install finder isn't reliable for direct (non-pytest) imports in
