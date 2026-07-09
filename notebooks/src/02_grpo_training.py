@@ -75,8 +75,15 @@
 # satisfies a constraint), and vllm + its torch dependency are still resolved together in one
 # command (vllm's compiled kernels are ABI-coupled to a specific torch build) -- just installing
 # the actual cu129 wheel this time instead of trusting --torch-backend to pick it.
+#
+# --index-strategy unsafe-best-match is required: `packaging` exists on both the PyTorch cu129
+# index and PyPI, and flashinfer-python (a vllm dependency) needs a newer `packaging` than what's
+# published on the cu129 index. uv's default index-strategy only considers the first index that
+# has ANY version of a given package (a deliberate anti-dependency-confusion default), so without
+# this flag it refuses to fall through to PyPI for a newer `packaging` and the resolution fails
+# outright. Confirmed via uv's own error message on a live run, not guessed.
 # %pip install -q uv
-# !uv pip install --system --reinstall https://github.com/vllm-project/vllm/releases/download/v0.24.0/vllm-0.24.0+cu129-cp38-abi3-manylinux_2_28_x86_64.whl --extra-index-url https://download.pytorch.org/whl/cu129  # noqa: E501
+# !uv pip install --system --reinstall --index-strategy unsafe-best-match https://github.com/vllm-project/vllm/releases/download/v0.24.0/vllm-0.24.0+cu129-cp38-abi3-manylinux_2_28_x86_64.whl --extra-index-url https://download.pytorch.org/whl/cu129  # noqa: E501
 
 # %%
 # Colab's kernel has numpy already imported (and its C extension loaded into the process) before
