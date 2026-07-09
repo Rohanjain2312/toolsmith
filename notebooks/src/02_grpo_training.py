@@ -341,8 +341,22 @@ class FastGenerateFrozenModel(Model):
         prompt_text = tokenizer.apply_chat_template(
             messages, tokenize=False, add_generation_prompt=True
         )
+        # A deep episode's rolled-out prompt (system + several tool-call turns + tool results,
+        # each <=512 tokens) can exceed the model's MAX_SEQ_LENGTH context, which vLLM rejects
+        # outright ("maximum context length is 2048 tokens ... prompt contains at least 2049").
+        # TRL truncates the *policy* prompt to max_prompt_length for exactly this reason; do the
+        # same here for the frozen rollout. In vllm 0.24.0 truncate_prompt_tokens is a render-time
+        # param (not a SamplingParams field), passed via tokenization_kwargs on LLM.generate
+        # (== unsloth's fast_generate). truncation_side="left" keeps the LAST N tokens -- the
+        # recent context and the trailing generation prompt -- which is what generation needs.
         output = self._model.fast_generate(
-            [prompt_text], sampling_params=self._sampling_params, lora_request=self._lora_request
+            [prompt_text],
+            sampling_params=self._sampling_params,
+            lora_request=self._lora_request,
+            tokenization_kwargs={
+                "truncate_prompt_tokens": MAX_PROMPT_LENGTH,
+                "truncation_side": "left",
+            },
         )
         return output[0].outputs[0].text
 
