@@ -407,52 +407,52 @@ type(trainer)._generate_single_turn.__globals__["SamplingParams"] = SamplingPara
 #    (unsloth/models/_utils.py::fast_inference_setup -> patch_vllm_lora_load_tensors). That
 #    monkeypatch silently fails (bare except) to reach vllm.v1.worker.lora_model_runner_mixin,
 #    the module vllm's V1 engine actually instantiates its LoRA manager from -- so the engine
-#    runs vllm's STOCK WorkerLoRAManager instead, whose _load_adapter (vllm==0.24.0) only knows
-#    how to load a LoRA from a disk path (PEFTHelper.from_local_dir / from_local_checkpoint) and
-#    has no tensors branch -> for the pathless in-memory policy adapter it raises first
-#    AttributeError on the vendored request's missing fields, then FileNotFoundError /
-#    LoRAAdapterNotFoundError looking for a nonexistent adapter_config.json. Fix: graft
-#    unsloth_zoo's own tensor-aware _load_adapter onto the class the LIVE manager instance belongs
-#    to. Grab the function via __dict__ (unbound) so its __globals__ stay bound to the unsloth_zoo
-#    module where PEFTHelper / LoRAModel / get_adapter_absolute_path resolve; every instance attr
-#    it reads (_adapter_manager, _lora_model_cls, vocab_size, lora_config, max_position_embeddings)
-#    is also set by vllm's stock __init__, so it runs correctly on the stock instance. Locate that
-#    instance's class via gc (ground truth) plus the engine's class references, and patch the
-#    _load_adapter owner in each MRO (idempotent: skip if already the vendored function).
+#    runs vllm's STOCK LRUCacheWorkerLoRAManager instead. Two of its methods misbehave for the
+#    pathless in-memory policy adapter: _load_adapter (vllm==0.24.0) reads request fields
+#    tensorizer_config_dict + is_3d_lora_weight (which unsloth_zoo's vendored LoRARequest never
+#    defines) and can only load from a disk path (PEFTHelper.from_local_dir /
+#    from_local_checkpoint, no tensors branch) -> AttributeError then FileNotFoundError on a
+#    nonexistent adapter_config.json; and add_adapter reads request field load_inplace (also
+#    undefined) -> AttributeError. Those are the ONLY two stock methods that touch the three
+#    fields the vendored request lacks. Fix: graft unsloth_zoo's own vendored _load_adapter (loads
+#    from lora_tensors) and add_adapter (drops the load_inplace clause; unsloth forces the reload
+#    via a fresh lora_int_id per step instead) onto the class the LIVE manager instance belongs
+#    to. Grab each via __dict__ (unbound) so its __globals__ stay bound to the unsloth_zoo module
+#    where PEFTHelper / LoRAModel / get_adapter_absolute_path resolve; every instance attr they
+#    read (_adapter_manager, _lora_model_cls, vocab_size, lora_config, max_position_embeddings,
+#    list_adapters) is also set/defined by vllm's stock manager, so they run on the stock instance.
+#    Locate that instance's exact class via gc (ground truth) plus the engine's class reference,
+#    and set both methods directly on it (idempotent: skip if already the vendored function).
 import gc  # noqa: E402
 
 import unsloth_zoo.vllm_lora_worker_manager as _uz_lora_wm  # noqa: E402
-import vllm.lora.worker_manager  # noqa: E402
 
-_vendored_load_adapter = _uz_lora_wm.WorkerLoRAManager.__dict__["_load_adapter"]
+_vendored_lora_methods = {
+    "_load_adapter": _uz_lora_wm.WorkerLoRAManager.__dict__["_load_adapter"],
+    "add_adapter": _uz_lora_wm.LRUCacheWorkerLoRAManager.__dict__["add_adapter"],
+}
 
-_lora_mgr_targets = []
+_lora_mgr_classes = []
 for _obj in gc.get_objects():
     try:
         _t = type(_obj)
         if "WorkerLoRAManager" in _t.__name__ and hasattr(_t, "_load_adapter"):
-            _lora_mgr_targets.append(_t)
+            _lora_mgr_classes.append(_t)
     except Exception:
         pass
 try:
     import vllm.v1.worker.lora_model_runner_mixin as _lora_mixin
 
-    _lora_mgr_targets.append(getattr(_lora_mixin, "LRUCacheWorkerLoRAManager", None))
+    _mixin_cls = getattr(_lora_mixin, "LRUCacheWorkerLoRAManager", None)
+    if _mixin_cls is not None:
+        _lora_mgr_classes.append(_mixin_cls)
 except Exception:
     pass
-_lora_mgr_targets += [
-    getattr(vllm.lora.worker_manager, "WorkerLoRAManager", None),
-    getattr(vllm.lora.worker_manager, "LRUCacheWorkerLoRAManager", None),
-]
 
-for _cls in _lora_mgr_targets:
-    if _cls is None:
-        continue
-    for _owner in _cls.__mro__:
-        if "_load_adapter" in vars(_owner):
-            if vars(_owner)["_load_adapter"] is not _vendored_load_adapter:
-                _owner._load_adapter = _vendored_load_adapter
-            break
+for _cls in dict.fromkeys(_lora_mgr_classes):
+    for _name, _fn in _vendored_lora_methods.items():
+        if getattr(_cls, _name, None) is not _fn:
+            setattr(_cls, _name, _fn)
 
 
 # %%
