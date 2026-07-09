@@ -61,16 +61,22 @@
 # all -- FlashInfer's ">=12.9 to recognize Blackwell" requirement doesn't apply to this
 # architecture, so there's no reason to chase CUDA 13 here the way the G4 path had to.
 #
-# `--torch-backend=cu129` alone does NOT force a reinstall of an already-present torch (uv only
-# consults that index when deciding whether a package needs installing) -- confirmed this
-# empirically while chasing the equivalent G4/cu130 case, where torch was left on its old build
-# entirely untouched across two separate install commands. `--reinstall`, combined with
-# resolving vllm and torch together in ONE command (not two sequential ones, since vllm's
-# compiled kernels are ABI-coupled to a specific torch build), avoids both problems -- same
-# pattern verified to correctly pull matching-CUDA-tagged torch versions during dependency
-# resolution as the G4/cu130 fix, just pointed at cu129 instead of cu130 here.
+# `--torch-backend` only steers which index TORCH resolves against -- it does NOT redirect which
+# CUDA-variant of vllm itself gets installed. `vllm` (bare, no wheel pin) always resolves to its
+# plain PyPI default, which targets CUDA 13 regardless of --torch-backend. The G4/Blackwell fix
+# (a previous version of this cell) appeared to work with `--torch-backend=cu130` alone only
+# because vllm's plain default ALREADY targets CUDA 13 -- torch was the only piece that needed
+# steering there. On T4, that coincidence doesn't hold: vllm needs to actually be cu129, and the
+# only way to get that is a specific wheel, not a --torch-backend flag. Confirmed on a live T4
+# run: `--torch-backend=cu129` alone still produced "vLLM was built for CUDA 13" (the exact same
+# warning as before any of this was fixed) -- vllm's own wheel was never actually redirected.
+#
+# `--reinstall` is still needed (uv won't replace an already-installed package that nominally
+# satisfies a constraint), and vllm + its torch dependency are still resolved together in one
+# command (vllm's compiled kernels are ABI-coupled to a specific torch build) -- just installing
+# the actual cu129 wheel this time instead of trusting --torch-backend to pick it.
 # %pip install -q uv
-# !uv pip install --system --reinstall vllm --torch-backend=cu129
+# !uv pip install --system --reinstall https://github.com/vllm-project/vllm/releases/download/v0.24.0/vllm-0.24.0+cu129-cp38-abi3-manylinux_2_28_x86_64.whl --extra-index-url https://download.pytorch.org/whl/cu129  # noqa: E501
 
 # %%
 # Colab's kernel has numpy already imported (and its C extension loaded into the process) before
