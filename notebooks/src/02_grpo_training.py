@@ -47,19 +47,26 @@
 # install could silently drift to a trl version where that stub's assumptions don't hold.
 # %pip install -q "unsloth @ git+https://github.com/unslothai/unsloth.git" unsloth_zoo
 # %pip install -q "trl==0.24.0" wandb datasets bitsandbytes
-# Plain `pip install vllm` grabs whatever CUDA build happens to be the current PyPI default,
-# which doesn't necessarily match Colab's actual T4 runtime CUDA version -- vllm's compiled
-# extension (vllm._C, a .so file) then fails to load, and unsloth detects that failure and
-# permanently disables all vllm imports for the rest of the kernel session (so a bare reinstall
-# afterward, in the same session, does nothing -- the wheel has to be right on the FIRST install;
-# a hand-picked wheel URL is also fragile -- confirmed one recommended by unsloth's own error
-# message 404'd, since that vllm release didn't publish a matching CUDA-variant asset at all).
-# `uv`'s --torch-backend=auto is vLLM's own officially documented fix for exactly this: it
-# inspects the actual installed CUDA driver and selects a matching build automatically, instead
-# of guessing a version number ahead of time. See https://docs.vllm.ai/en/latest/getting_started/
-# installation/gpu.html ("Set up using Python") for the current canonical instructions.
+# Plain `pip install vllm` (and even `uv pip install vllm --torch-backend=auto`, which only
+# steers torch's own index, not vllm's) resolve to the PyPI default wheel, which is compiled
+# against CUDA 13 (needs libcudart.so.13). Colab's actual T4 runtime is CUDA 12.8 -- that .so
+# doesn't exist there, so vllm's compiled extension (vllm._C_stable_libtorch) fails to load, and
+# unsloth permanently disables all vllm imports for the rest of the kernel session the first time
+# that happens (so reinstalling afterward, in the same session, does nothing -- the wheel has to
+# be right on the FIRST install). No published vllm release has a cu128-tagged asset (confirmed
+# against the GitHub releases API across several recent versions) -- but cu129 does exist, and
+# since only the .so's MAJOR version has to match (CUDA's own minor-version compatibility
+# guarantee), a cu129 build's libcudart.so.12 is satisfied by Colab's CUDA 12.8 install, unlike
+# the default build's libcudart.so.13. Verified this exact wheel URL resolves (not 404) before
+# using it -- the previous fix (commit 2514095) trusted a URL straight from unsloth's own error
+# message without checking, and it turned out not to exist for that release at all.
+# Installed together with a matching torch build (not just the vllm wheel alone): vllm's compiled
+# kernels are tightly ABI-coupled to the exact torch/CUDA build they were compiled against, per
+# vLLM's own install docs pattern (https://docs.vllm.ai/en/latest/getting_started/installation/
+# gpu.html, "Set up using Python" -> per-CUDA-version install example), not just to whether
+# libcudart happens to load.
 # %pip install -q uv
-# !uv pip install --system --torch-backend=auto vllm
+# !uv pip install --system https://github.com/vllm-project/vllm/releases/download/v0.24.0/vllm-0.24.0+cu129-cp38-abi3-manylinux_2_28_x86_64.whl --extra-index-url https://download.pytorch.org/whl/cu129  # noqa: E501
 
 # %%
 # `pip install -e .`'s editable-install finder isn't reliable for direct (non-pytest) imports in
