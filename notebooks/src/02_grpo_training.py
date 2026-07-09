@@ -42,8 +42,19 @@
 
 # %%
 # Colab-only install cell. Skip if the environment already has these.
+# trl pinned to 0.24.0 (top of unsloth's own declared compatible range) to match what the
+# mergekit/llm_blender import-chain stub fix below was actually verified against -- an unpinned
+# install could silently drift to a trl version where that stub's assumptions don't hold.
 # %pip install -q "unsloth @ git+https://github.com/unslothai/unsloth.git" unsloth_zoo
-# %pip install -q trl vllm wandb datasets bitsandbytes
+# %pip install -q "trl==0.24.0" wandb datasets bitsandbytes
+# vllm pinned to a CUDA-12.8-matched wheel: plain `pip install vllm` grabs a CUDA-13 build that
+# doesn't match Colab's T4 runtime (CUDA 12.8 as of this writing), which fails to load its
+# compiled extension -- unsloth detects that failure and permanently disables vllm imports for
+# the rest of the kernel session, so a bare reinstall afterward doesn't help; the wheel must be
+# right on the FIRST install. If Colab's CUDA version changes in the future, re-derive this URL
+# from the "Please reinstall vLLM with the correct CUDA version" message unsloth logs when it
+# first tries `import vllm` (visible in this cell's own output, or the next cell's, as a WARNING).
+# %pip install -q https://github.com/vllm-project/vllm/releases/download/v0.24.0/vllm-0.24.0+cu128-cp38-abi3-manylinux_2_35_x86_64.whl  # noqa: E501
 
 # %%
 # `pip install -e .`'s editable-install finder isn't reliable for direct (non-pytest) imports in
