@@ -40,6 +40,25 @@
 # %pip install -q "trl==0.24.0" wandb datasets bitsandbytes
 
 # %%
+# `pip install -e .`'s editable-install finder isn't reliable for direct (non-pytest) imports in
+# this repo -- see CLAUDE.md's "Known environment quirks" for the macOS Gatekeeper .pth case.
+# Insert the clone's src/ directly so `toolsmith.*` resolves regardless of that, and to guard
+# against a same-named-but-unrelated PyPI package ("toolsmith", not this project) ever shadowing
+# it if one ends up pulled in transitively.
+import sys  # noqa: E402 (Colab-only cell, top-of-cell by design)
+
+sys.path.insert(0, "/content/toolsmith/src")
+
+# %%
+# unsloth must be imported before trl -- at import time it monkeypatches trl.SFTConfig's
+# eos_token/pad_token handling, and importing trl first leaves that patch half-applied: SFTTrainer
+# then raises "the specified eos_token ('<EOS_TOKEN>') is not found in the vocabulary" because the
+# placeholder default never gets superseded by the tokenizer's real eos token (confirmed root
+# cause + fix from an unsloth maintainer: https://github.com/unslothai/unsloth/issues/2797).
+from unsloth import FastLanguageModel
+from unsloth.chat_templates import get_chat_template, train_on_responses_only
+
+# isort: split
 import os
 from pathlib import Path
 
@@ -47,8 +66,6 @@ import torch
 import wandb
 from datasets import Dataset, Features, List, Value, load_dataset
 from trl import SFTConfig, SFTTrainer
-from unsloth import FastLanguageModel
-from unsloth.chat_templates import get_chat_template, train_on_responses_only
 
 # %%
 # --- Config ---

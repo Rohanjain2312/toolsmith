@@ -46,6 +46,24 @@
 # %pip install -q trl vllm wandb datasets bitsandbytes
 
 # %%
+# `pip install -e .`'s editable-install finder isn't reliable for direct (non-pytest) imports in
+# this repo -- see CLAUDE.md's "Known environment quirks" for the macOS Gatekeeper .pth case.
+# Insert the clone's src/ directly so `toolsmith.*` resolves regardless of that, and to guard
+# against a same-named-but-unrelated PyPI package ("toolsmith", not this project) ever shadowing
+# it if one ends up pulled in transitively.
+import sys  # noqa: E402 (Colab-only cell, top-of-cell by design)
+
+sys.path.insert(0, "/content/toolsmith/src")
+
+# %%
+# unsloth must be imported before trl -- at import time it monkeypatches trl's trainer configs
+# (SFTConfig, GRPOConfig, ...), and importing trl first leaves that patch half-applied, corrupting
+# defaults like eos_token/pad_token (confirmed root cause + fix from an unsloth maintainer:
+# https://github.com/unslothai/unsloth/issues/2797 -- filed against SFTTrainer, but the patch is
+# applied generically across every trl {X}Trainer/{X}Config pair, GRPOTrainer included).
+from unsloth import FastLanguageModel
+
+# isort: split
 import json
 import os
 from pathlib import Path
@@ -53,7 +71,6 @@ from pathlib import Path
 import wandb
 from datasets import Dataset
 from trl import GRPOConfig, GRPOTrainer
-from unsloth import FastLanguageModel
 from vllm import SamplingParams
 
 from toolsmith.data.decision_points import extract_decision_points, select_task_subset
