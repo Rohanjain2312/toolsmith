@@ -485,6 +485,41 @@ for _cls in dict.fromkeys(_lora_mgr_classes):
         if getattr(_cls, _name, None) is not _fn:
             setattr(_cls, _name, _fn)
 
+# 3) TRL renders each GRPO prompt with trl.data_utils.apply_chat_template, which only knows
+#    "user" / "assistant" as the prompt's last message role and raises
+#    ValueError("Invalid role in the last message: tool") otherwise. But step-level decision
+#    points mid-episode legitimately end in a tool-result message (their prefix is
+#    state.messages[:assistant_turn], and every assistant turn after the first is preceded by a
+#    tool result), so most prompts hit this. A tool-terminated prompt should generate the NEXT
+#    assistant turn -- exactly what a user-terminated prompt does (add_generation_prompt=True) --
+#    and that render is already known-good (the R5 continuation rollouts tokenize tool-terminated
+#    message lists through this same tokenizer every step). Wrap apply_chat_template to handle the
+#    tool case; maybe_apply_chat_template (which GRPO calls) dispatches to it via the module global,
+#    so patching the module attribute is enough.
+import trl.data_utils as _trl_data_utils  # noqa: E402
+
+_orig_apply_chat_template = _trl_data_utils.apply_chat_template
+
+
+def _apply_chat_template_tool_ok(example, tokenizer, tools=None, **template_kwargs):
+    prompt = example.get("prompt")
+    if isinstance(prompt, list) and prompt and prompt[-1].get("role") == "tool":
+        rendered = tokenizer.apply_chat_template(
+            prompt,
+            tools=tools,
+            tokenize=False,
+            add_generation_prompt=True,
+            **example.get("chat_template_kwargs", {}),
+            **template_kwargs,
+        )
+        output = {k: v for k, v in example.items() if k != "prompt"}
+        output["prompt"] = rendered
+        return output
+    return _orig_apply_chat_template(example, tokenizer, tools=tools, **template_kwargs)
+
+
+_trl_data_utils.apply_chat_template = _apply_chat_template_tool_ok
+
 
 # %%
 def run_val_gate(val_specs: list[TaskSpec], policy: Model) -> float:
